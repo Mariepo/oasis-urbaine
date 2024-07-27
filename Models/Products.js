@@ -10,7 +10,7 @@ Products.init({
     id : {
         type : DataTypes.INTEGER,
         primaryKey : true,
-        autoIncrement : ture
+        autoIncrement : true
     },
     title : {
         type : DataTypes.STRING,
@@ -57,7 +57,7 @@ Products.init({
         allowNull : true,
         references : {
             model : "product_types",
-            key : id
+            key : "id"
         }
     },
     created_at : {
@@ -75,7 +75,7 @@ Products.init({
     }
 )
 
-ProductTypes.hasMany(Products, {as : "products", foreignKey : id_product_type});
-Products.belongsTo(ProductTypes, {as : "product_types", foreignKey : id});
+ProductTypes.hasMany(Products, {as : "products", foreignKey : "id_product_type"});
+Products.belongsTo(ProductTypes, {as : "product_types", foreignKey : "id"});
 
 module.exports = Products;
