@@ -1,6 +1,4 @@
 const express = require('express');
-const productsRoutes = require('./Routes/ProductsRoutes');
-const productTypesRoutes = require('./Routes/ProductTypesRoutes');
 const app = express();
 const port = 3301;
 
@@ -8,6 +6,8 @@ const port = 3301;
 app.use(express.json());
 
 // Routes
+const productsRoutes = require('./Routes/ProductsRoutes');
+const productTypesRoutes = require('./Routes/ProductTypesRoutes');
 app.use('/products', productsRoutes);
 app.use('/product-types', productTypesRoutes);
 

@@ -9,7 +9,17 @@ class ProductsController {
 
         } catch (error) {
             result.status(500);
-            console.json({error : "Une erreur est survenue lors de la récupération des produits"});
+            result.json({error : "Une erreur est survenue lors de la récupération des produits"});
+        }
+    }
+
+    async getProductById(request, result) {
+        try {
+            const product = await ProductsService.getProductById(request.params.productId);
+            result.json(product);
+        } catch (error) {
+            result.status(500);
+            result.json({error : "Une erreur est survenue lors de la récupération du produit"});
         }
     }
 }
