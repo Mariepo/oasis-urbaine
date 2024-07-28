@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3301;
+const port = 3001;
 
 // L'API fonctionne avec json
 app.use(express.json());

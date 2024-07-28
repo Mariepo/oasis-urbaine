@@ -9,6 +9,11 @@ class ProductsService {
         async getProductById(productId){
             return await Products.findByPk(productId);
         }
+
+        async addProduct(product) {
+            return await Products.create(product);
+        }
+
 }
 
 module.exports = new ProductsService();
