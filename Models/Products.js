@@ -70,7 +70,7 @@ Products.init({
     }}, {
         sequelize,
         modelName : "Products",
-        tableName : "Products",
+        tableName : "products",
         timestamps : false
     }
 )
