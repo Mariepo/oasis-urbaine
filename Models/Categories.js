@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require('../Config/Sequelize');
-const ProductTypes = require('./ProductTypes');
+const Products = require('./Products');
+const ProductsCategory = require('./ProductCategory');
 
 class Categories extends Model {
 
@@ -27,5 +28,8 @@ Categories.init({
         timestamps : false
     }
 )
+
+// Categories.belongsToMany(Products, {as : 'products', foreignKey : 'id_product', through: ProductsCategory});
+// Products.belongsToMany(Categories, {as : 'categories', foreignKey: "id_category", through: ProductsCategory});
 
 module.exports = Categories;

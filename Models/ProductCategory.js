@@ -1,5 +1,5 @@
-const { Model } = require("sequelize");
-const sequelize = require("../Config/Sequelize")
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../Config/Sequelize");
 
 class ProductCategory extends Model {
 
@@ -24,7 +24,11 @@ ProductCategory.init({
             model : "Categories",
             key : "id"
         }
-    }   
-})
+    }}, {
+        sequelize,
+        modelName : "ProductCategory",
+        tableName : "product_category",
+        timestamps : false
+    })
 
 module.exports = ProductCategory;
