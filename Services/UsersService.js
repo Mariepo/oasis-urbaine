@@ -13,6 +13,22 @@ class UsersService {
     async addUser(user){
         return await Users.create(user);
     }
+
+    async updateUser(id, user){
+        return await Users.update(user, {
+            where : {
+                id : id
+            }
+        })
+    }
+
+    async deleteUser(id) {
+        return await Users.destroy({
+            where : {
+                id : id
+            }
+        })
+    }
 }
 
 module.exports = new UsersService();
