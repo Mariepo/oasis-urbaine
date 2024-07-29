@@ -1,4 +1,5 @@
 const Categories = require("../Models/Categories");
+const Products = require("../Models/Products");
 
 class CategoriesService {
     async getAllCategories() {
@@ -27,6 +28,15 @@ class CategoriesService {
                 id : id
             }
         })
+    }
+    
+    async getProductsByCategoryId(id) {
+        return await Categories.findByPk(id, {
+            include: [{
+                model: Products,
+                as: 'products',
+            }]
+        });
     }
 
 }

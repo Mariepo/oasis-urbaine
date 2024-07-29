@@ -9,5 +9,6 @@ router.get("/:id", (request, result) => {CategoriesController.getCategoryById(re
 router.post("/", (request, result) => {CategoriesController.addCategory(request, result)});
 router.patch("/:id", (request, result) => {CategoriesController.updateCategory(request, result)});
 router.delete("/:id", (request, result) => {CategoriesController.deleteCategory(request, result)});
+router.get("/:id/products", (request, result) => { CategoriesController.getProductsByCategoryId(request, result) });
 
 module.exports = router;

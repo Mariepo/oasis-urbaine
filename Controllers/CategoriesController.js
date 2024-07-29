@@ -50,6 +50,16 @@ class CategoriesController {
             result.json({error : "Une erreur est survenue lors de la suppression de la catégorie"});
         }              
     }
+
+    async getProductsByCategoryId(request, result) {
+        try {
+            const products = await CategoriesService.getProductsByCategoryId(request.params.id);
+            result.json(products);
+        } catch (error) {
+            result.status(500);
+            result.json({ error: "Une erreur est survenue lors de la récupération des produits pour la catégorie" });
+        }
+    }
 }
 
 module.exports = new CategoriesController();
