@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require('../Config/Sequelize');
 const ProductTypes = require('./ProductTypes');
+const Categories = require("./Categories");
+const ProductCategory = require("./ProductCategory");
 
 class Products extends Model {
 
@@ -10,7 +12,7 @@ Products.init({
     id : {
         type : DataTypes.INTEGER,
         primaryKey : true,
-        autoIncrement : ture
+        autoIncrement : true
     },
     title : {
         type : DataTypes.STRING,
@@ -57,25 +59,38 @@ Products.init({
         allowNull : true,
         references : {
             model : "product_types",
-            key : id
+            key : "id"
         }
     },
     created_at : {
         type : DataTypes.DATE,
-        allowNull : false
+        allowNull : true
     },
     updated_at : {
         type : DataTypes.DATE,
-        allowNull : false
+        allowNull : true
     }}, {
         sequelize,
-        modelName : "Products",
-        tableName : "Products",
+        modelName : "products",
+        tableName : "products",
         timestamps : false
     }
 )
 
-ProductTypes.hasMany(Products, {as : "products", foreignKey : id_product_type});
-Products.belongsTo(ProductTypes, {as : "product_types", foreignKey : id});
+
+Products.belongsToMany(Categories, {
+    through: ProductCategory,
+    as: 'categories',
+    foreignKey: 'id_product',  
+    otherKey: 'id_category' 
+});
+
+Categories.belongsToMany(Products, {
+    through: ProductCategory,
+    as: 'products',
+    foreignKey: 'id_category', 
+    otherKey: 'id_product'     
+});
 
 module.exports = Products;
+
