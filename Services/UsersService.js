@@ -30,6 +30,14 @@ class UsersService {
             }
         })
     }
+
+    async loginUser(email, password) {
+        const user = await Users.findOne({where : { email : email}})
+        if (!user || !await user.validatePassword(password)){
+            throw new Error("Email ou mot de passe incorrect");
+        }
+        return user;
+    }
 }
 
 module.exports = new UsersService();

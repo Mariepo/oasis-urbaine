@@ -52,6 +52,17 @@ class UsersController {
         }
     }
 
+    async loginUser(request, result) {
+        try {
+            const {email, password} = request.body;
+            const user = await UsersService.loginUser(email, password);
+            result.json(user);
+        } catch (error) {
+            result.status(500);
+            result.json({error : "Une erreur est survenue lors de la connexion"});            
+        }
+    }
+
 }
 
 module.exports = new UsersController();
