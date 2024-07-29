@@ -18,7 +18,8 @@ class UsersService {
         return await Users.update(user, {
             where : {
                 id : id
-            }
+            },
+            individualHooks : true
         })
     }
 
