@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import {Container, Nav, Navbar} from 'react-bootstrap';
 
 function NavbarComponent() {
   const navigate = useNavigate();
@@ -22,10 +20,10 @@ function NavbarComponent() {
               </Nav>
               <Nav>
                 <Nav.Link href="">
-                  <i class="bi bi-person-circle"></i>
+                  <i className="bi bi-person-circle"></i>
                 </Nav.Link>
                 <Nav.Link href="">
-                  <i class="bi bi-basket"></i>
+                  <i className="bi bi-basket"></i>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
