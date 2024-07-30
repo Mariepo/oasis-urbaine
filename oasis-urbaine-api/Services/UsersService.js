@@ -18,7 +18,8 @@ class UsersService {
         return await Users.update(user, {
             where : {
                 id : id
-            }
+            },
+            individualHooks : true
         })
     }
 
@@ -28,6 +29,14 @@ class UsersService {
                 id : id
             }
         })
+    }
+
+    async loginUser(email, password) {
+        const user = await Users.findOne({where : { email : email}})
+        if (!user || !await user.validatePassword(password)){
+            throw new Error("Email ou mot de passe incorrect");
+        }
+        return user;
     }
 }
 
