@@ -13,7 +13,7 @@ function ProductCard({product}) {
 
   return (
             <Card>
-                <Card.Img variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrVqdXk8Sc2iwbm_b3qmxA34x1LgbOxinaoA&s"/>
+                <Card.Img variant="top" src={product.image_thumbnail}/>
                 <Card.Body>
                     <Card.Title className='d-flex justify-content-between'>
                         <div>{product.title}</div>
