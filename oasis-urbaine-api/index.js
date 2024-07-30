@@ -1,9 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3001;
 
-// L'API fonctionne avec json
 app.use(express.json());
+app.use(cors());
 
 // Routes
 const productsRoutes = require('./Routes/ProductsRoutes');
