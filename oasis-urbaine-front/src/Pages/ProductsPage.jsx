@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ProductsService from '../Services/ProductsService';
+// Bootstrap
 import ProductCard from '../Components/ProductCard';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 function ProductsPage() {
     const [products, setProducts] = useState([]);
@@ -19,11 +24,15 @@ function ProductsPage() {
     }, []);
 
     return <>
-        <div>
-            {products.map((product) => {
-                return <ProductCard product={product} key={product.id}/>
-            })}
-        </div>
+        <Container>
+            <Row className="g-4">
+                {products.map((product) => (
+                    <Col xs={12} sm={6} md={6} lg={3}  key={product.id} >
+                        <ProductCard product={product}/>
+                    </Col>
+                ))}
+            </Row>
+        </Container>
     </>
 }
 
