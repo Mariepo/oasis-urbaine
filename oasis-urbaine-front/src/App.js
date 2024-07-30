@@ -7,10 +7,12 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import ProductsPage from "./Pages/ProductsPage";
 import Homepage from "./Pages/Homepage";
 import NavbarComponent from './Components/NavbarComponent';
+import Headerbanner from './Components/Headerbanner';
 
 function App() {
   return (
     <BrowserRouter>
+    <Headerbanner></Headerbanner>
     <NavbarComponent></NavbarComponent>
       <Routes>
         <Route path='/' element={<Homepage />} />

@@ -1,12 +1,17 @@
 
 /*  Variables */
 :root {
+    --primary-color : #0F8277;
     --background-green : #E9FAE8;
 }
 
 /* Homepage */
 header {
     background-color: var(--background-green);
+}
+.header-banner {
+    background-color: var(--primary-color);
+    color: white;
 }
 .header-image-container {
     max-height: 100vh;
