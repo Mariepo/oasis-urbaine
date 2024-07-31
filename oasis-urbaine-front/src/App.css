@@ -16,7 +16,7 @@ footer {
 }
 
 /* Homepage */
-header {
+.header-home {
     background-color: var(--background-green);
     height: 100%;
     overflow-x: hidden;
@@ -43,7 +43,7 @@ header {
 }
 /* md - tablette */
 @media screen and (max-width: 768px){
-    header {
+    .header-home {
         height: 100%;
     }
     .header-image-container {
@@ -53,3 +53,16 @@ header {
         width: 100%;
     }
 }
+
+/* Products page */
+.header-products {
+    background-image: url('./assets/header-products.png');
+    background-size: cover;
+    background-position: center right;
+    color: white;
+    min-height: 64vh;
+    display: flex;
+    align-items: center;
+}
+
+

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProductsService from '../Services/ProductsService';
 import ProductCard from '../Components/ProductCard';
 import { Container, Row, Col } from 'react-bootstrap';
+import HeaderProducts from '../Components/HeaderProducts';
 
 
 function ProductsPage() {
@@ -21,7 +22,8 @@ function ProductsPage() {
     }, []);
 
     return <>
-        <Container>
+        <HeaderProducts></HeaderProducts>
+        <Container className='pt-5'>
             <Row className="g-4">
                 {products.map((product) => (
                     <Col xs={12} sm={6} md={6} lg={3}  key={product.id} >
