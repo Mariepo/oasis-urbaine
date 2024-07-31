@@ -13,6 +13,7 @@ function ProductsPage() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
+
     const fetchProducts = async () => {
         try {
             const response = await ProductsService.fetchProducts();
@@ -31,7 +32,6 @@ function ProductsPage() {
         }
     }
 
-
     useEffect(() => {
         fetchProducts();
         fetchCategories();
@@ -41,8 +41,8 @@ function ProductsPage() {
         <HeaderProducts></HeaderProducts>
         <Container className='pt-3'>
             <Stack direction="horizontal" gap={2} className='pb-3'>
-                {categories.map((categorie) => (
-                    <CategorieBadge name={categorie.name} key={categorie.id}></CategorieBadge>
+                {categories.map((category) => (
+                    <CategorieBadge id={category.id} name={category.name} key={category.id}></CategorieBadge>
                 ))}
             </Stack>
             <Row className="g-4">
