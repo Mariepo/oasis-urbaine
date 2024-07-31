@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
 
 
 function ProductCard({product}) {
@@ -11,8 +12,13 @@ function ProductCard({product}) {
     ? `${parseFloat(price).toFixed(0)}` 
     : `${price}`;
 
+  const navigate = useNavigate();
+  const navigateToProductDetails = () => {
+    navigate('/products/'+product.id)
+}
+
   return (
-            <Card>
+            <Card onClick={navigateToProductDetails}>
                 <Card.Img variant="top" src={product.image_thumbnail}/>
                 <Card.Body>
                     <Card.Title className='d-flex justify-content-between'>
