@@ -8,16 +8,18 @@ import ProductsPage from "./Pages/ProductsPage";
 import Homepage from "./Pages/Homepage";
 import NavbarComponent from './Components/NavbarComponent';
 import Headerbanner from './Components/Headerbanner';
+import FooterComponent from './Components/FooterComponent';
 
 function App() {
   return (
     <BrowserRouter>
-    <Headerbanner></Headerbanner>
-    <NavbarComponent></NavbarComponent>
+      <Headerbanner></Headerbanner>
+      <NavbarComponent></NavbarComponent>
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/products' element={<ProductsPage />} />
       </Routes>
+      <FooterComponent></FooterComponent>
     </BrowserRouter>
   );
 }
