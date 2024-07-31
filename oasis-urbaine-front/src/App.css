@@ -4,12 +4,22 @@
     --primary-color : #0F8277;
     --background-green : #E9FAE8;
     --background-orange : #FAF4E8;
+    --background-grey : #F8F8F8;
+    --background-dark-grey : #F3F3F3;
+}
+
+/* Global */
+footer {
+    background-color: var(--background-dark-grey);
+    padding: 3.75rem 0;
+    margin-top : 5rem;
 }
 
 /* Homepage */
 header {
     background-color: var(--background-green);
     height: 100%;
+    overflow-x: hidden;
 }
 .header-banner {
     background-color: var(--primary-color);
