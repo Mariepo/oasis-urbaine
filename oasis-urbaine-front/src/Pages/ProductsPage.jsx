@@ -5,6 +5,7 @@ import { Container, Row, Col, Stack } from 'react-bootstrap';
 import CategoriesService from '../Services/CategoriesService';
 import CategorieBadge from '../Components/CategorieBadge';
 
+import HeaderProducts from '../Components/HeaderProducts';
 
 
 function ProductsPage() {
@@ -35,7 +36,7 @@ function ProductsPage() {
     }, []);
 
     return <>
-        <Container>
+        <HeaderProducts></HeaderProducts>
             <Stack direction="horizontal" gap={2}>
                 {categories.map((categorie) => (
                     <CategorieBadge name={categorie.name}></CategorieBadge>
@@ -48,7 +49,6 @@ function ProductsPage() {
                     </Col>
                 ))}
             </Row>
-        </Container>
     </>
 }
 
