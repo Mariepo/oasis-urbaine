@@ -65,7 +65,7 @@ function HomePage() {
         <img src='assets/images/gifted-product-homepage.png' alt='illustration de plante' className='promotional-image-container'/>
         <p className='text-center mb-0 py-2'>Un produit offert avec chaque commande</p>
     </Container>
-    <Container className='company-values'>
+    <Container className='company-values mb-5'>
         <Row className='d-flex justify-content-between mb-5'>
             <h2 className='mt-5 text-center'>Des plantes en bonne santé</h2>
         </Row>

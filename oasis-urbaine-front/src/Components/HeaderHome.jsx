@@ -11,8 +11,8 @@ function HeaderHome() {
 
   return (
     <header>
-        <Container fluid className='pe-0'>
-            <Row className='d-flex flex-column flex-md-row align-items-center  ms-md-5'>
+        <Container fluid className='pe-0 ps-0'>
+            <Row className='d-flex flex-column flex-md-row align-items-center ms-md-5'>
                 <Col className='col-12 col-md-6 order-2 order-md-1'>
                     <h1>Une oasis de verdure et de sérénité</h1>
                     <p>Nos arbres fruitiers vous permettent de profiter de récoltes savoureuses tout en respectant l'environnement. </p>
@@ -26,7 +26,7 @@ function HeaderHome() {
             </Row>
         </Container>
     </header>
-  )
+    )
 }
 
 export default HeaderHome
