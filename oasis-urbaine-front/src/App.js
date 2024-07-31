@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/products' element={<ProductsPage />} />
+        <Route path='/categories' element={<ProductsPage />} />
       </Routes>
       <FooterComponent></FooterComponent>
     </BrowserRouter>
