@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ProductsService from '../Services/ProductsService';
-import ProductCard from '../Components/ProductCard';
-import { Container, Row, Col, Stack } from 'react-bootstrap';
 import CategoriesService from '../Services/CategoriesService';
-import CategorieBadge from '../Components/CategorieBadge';
 
+// Components
+import { Container, Row, Col, Stack } from 'react-bootstrap';
+import ProductCard from '../Components/ProductCard';
+import CategorieBadge from '../Components/CategorieBadge';
 import HeaderProducts from '../Components/HeaderProducts';
 
 
@@ -30,6 +31,7 @@ function ProductsPage() {
         }
     }
 
+
     useEffect(() => {
         fetchProducts();
         fetchCategories();
@@ -37,9 +39,10 @@ function ProductsPage() {
 
     return <>
         <HeaderProducts></HeaderProducts>
-            <Stack direction="horizontal" gap={2}>
+        <Container className='pt-3'>
+            <Stack direction="horizontal" gap={2} className='pb-3'>
                 {categories.map((categorie) => (
-                    <CategorieBadge name={categorie.name}></CategorieBadge>
+                    <CategorieBadge name={categorie.name} key={categorie.id}></CategorieBadge>
                 ))}
             </Stack>
             <Row className="g-4">
@@ -49,6 +52,7 @@ function ProductsPage() {
                     </Col>
                 ))}
             </Row>
+        </Container>
     </>
 }
 

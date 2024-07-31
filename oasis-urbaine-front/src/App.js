@@ -19,6 +19,7 @@ function App() {
         <Route path='/' element={<Homepage />} />
         <Route path='/products' element={<ProductsPage />} />
         <Route path='/categories' element={<ProductsPage />} />
+        <Route path='/categories/:id/products' element={<ProductsPage />} />
       </Routes>
       <FooterComponent></FooterComponent>
     </BrowserRouter>
