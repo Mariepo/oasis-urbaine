@@ -6,6 +6,7 @@ function NavbarComponent() {
   const navigate = useNavigate();
   const navigateTo = (route) => {
     navigate(route);
+    window.scrollTo(0, 0);
   }
     return <>
         <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
