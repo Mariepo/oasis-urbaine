@@ -25,7 +25,8 @@ function HomePage() {
 
     const navigate = useNavigate();
     const navigateTo = (route) => {
-    navigate(route);
+        navigate(route);
+        window.scrollTo(0, 0);
     }
 
     const featuredProducts = products.slice(0, 8);
