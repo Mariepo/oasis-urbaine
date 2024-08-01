@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';4
 import ProductsService from "../Services/ProductsService";
 import { Button, Col, Container, Row } from "react-bootstrap";
 
@@ -7,7 +7,7 @@ function ProductDetailsPage(){
   const { id } = useParams();
   const [product, setProduct] = useState({});
 
-   async function fetchProductsById () {
+  async function fetchProductsById () {
     try {
       const response = await ProductsService.fetchProductsById(id);
       setProduct(response.data);
