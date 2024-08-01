@@ -9,6 +9,7 @@ import Homepage from "./Pages/Homepage";
 import NavbarComponent from './Components/NavbarComponent';
 import Headerbanner from './Components/Headerbanner';
 import FooterComponent from './Components/FooterComponent';
+import FilteredProductsPage from './Pages/FilteredProductsPage';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/products' element={<ProductsPage />} />
+        <Route path='/categories' element={<ProductsPage />} />
+        <Route path='/categories/:id/products' element={<ProductsPage />} />
       </Routes>
       <FooterComponent></FooterComponent>
     </BrowserRouter>
