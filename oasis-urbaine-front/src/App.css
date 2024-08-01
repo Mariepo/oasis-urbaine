@@ -71,5 +71,13 @@ footer {
     border: 3px solid var(--primary-color);
 }
 
-
-
+/* Products details page */
+.product-details-image-container {
+    max-width: 100%;
+}
+.product-details-image-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}

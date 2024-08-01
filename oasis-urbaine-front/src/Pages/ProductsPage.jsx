@@ -16,7 +16,10 @@ function ProductsPage() {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
     const navigateTo = (route) => {
-      navigate(route);
+        navigate(route);
+        if (!route.includes('/categories/')) {
+            window.scrollTo(0, 0);
+        }
     }
 
     const fetchProducts = async () => {
