@@ -7,6 +7,7 @@ function HeaderHome() {
     const navigate = useNavigate();
     const navigateTo = (route) => {
       navigate(route);
+      window.scrollTo(0, 0);
     }
 
   return (

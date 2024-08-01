@@ -13,7 +13,7 @@ import ProductDetailsPage from './Pages/ProductDetailsPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter> 
       <Headerbanner></Headerbanner>
       <NavbarComponent></NavbarComponent>
       <Routes>
