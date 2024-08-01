@@ -10,6 +10,7 @@ import NavbarComponent from './Components/NavbarComponent';
 import Headerbanner from './Components/Headerbanner';
 import FooterComponent from './Components/FooterComponent';
 import ProductDetailsPage from './Pages/ProductDetailsPage';
+import LoginPage from './Pages/LoginPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/products/:id' element={<ProductDetailsPage />} />
         <Route path='/categories' element={<ProductsPage />} />
         <Route path='/categories/:id/products' element={<ProductsPage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
       <FooterComponent></FooterComponent>
     </BrowserRouter>

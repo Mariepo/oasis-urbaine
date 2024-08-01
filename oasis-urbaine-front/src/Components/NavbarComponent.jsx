@@ -20,7 +20,7 @@ function NavbarComponent() {
                 <Nav.Link onClick={() => {navigateTo('/products')}}>Arbres fruitiers d’intérieur 🍊</Nav.Link>
               </Nav>
               <Nav>
-                <Nav.Link href="">
+                <Nav.Link onClick={() => {navigateTo('/login')}}>
                   <i className="bi bi-person-circle"></i>
                 </Nav.Link>
                 <Nav.Link href="">
