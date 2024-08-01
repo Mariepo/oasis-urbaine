@@ -9,6 +9,7 @@ import Homepage from "./Pages/Homepage";
 import NavbarComponent from './Components/NavbarComponent';
 import Headerbanner from './Components/Headerbanner';
 import FooterComponent from './Components/FooterComponent';
+import FilteredProductsPage from './Pages/FilteredProductsPage';
 
 function App() {
   return (

@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import ProductsService from '../Services/ProductsService';
 import CategoriesService from '../Services/CategoriesService';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // Components
 import { Container, Row, Col, Stack } from 'react-bootstrap';
 import ProductCard from '../Components/ProductCard';
-import CategorieBadge from '../Components/CategorieBadge';
+import CategoryBadge from '../Components/CategoryBadge';
 import HeaderProducts from '../Components/HeaderProducts';
 
 
 function ProductsPage() {
+    const { id } = useParams();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-
+    const navigate = useNavigate();
+    const navigateTo = (route) => {
+      navigate(route);
+    }
 
     const fetchProducts = async () => {
         try {
-            const response = await ProductsService.fetchProducts();
-            setProducts(response.data);
+            const response = id ? await ProductsService.fetchProductsByCategory(id) : await ProductsService.fetchProducts();
+            const productsData = id ? response.data.products : response.data;
+            setProducts(productsData);
         } catch (error) {
             console.log(error);
         }
@@ -35,14 +41,26 @@ function ProductsPage() {
     useEffect(() => {
         fetchProducts();
         fetchCategories();
-    }, []);
+    }, [id]);
+
+    function displaySelectedComponent(event){
+        const target = event.currentTarget;
+        document.querySelectorAll('.selected-badge').forEach(element => {
+            if (element !== target) {
+                element.classList.remove('selected-badge');
+            }
+        });
+        target.classList.toggle('selected-badge');
+    }
+    
 
     return <>
         <HeaderProducts></HeaderProducts>
         <Container className='pt-3'>
-            <Stack direction="horizontal" gap={2} className='pb-3'>
+            <Stack direction="horizontal" gap={2} className='pb-3 flex-wrap'>
+                <CategoryBadge name={"Tous"} onClick={(event) => {navigate('/products'); displaySelectedComponent(event);}} />
                 {categories.map((category) => (
-                    <CategorieBadge id={category.id} name={category.name} key={category.id}></CategorieBadge>
+                    <CategoryBadge id={category.id} name={category.name} onClick={(event) => {navigateTo('/categories/'+category.id+'/products/'); displaySelectedComponent(event);}} key={category.id}/>
                 ))}
             </Stack>
             <Row className="g-4">
