@@ -14,8 +14,9 @@ function ProductCard({product}) {
 
   const navigate = useNavigate();
   const navigateToProductDetails = () => {
-    navigate('/products/'+product.id)
-}
+    navigate('/products/'+product.id);
+    window.scrollTo(0, 0);
+  }
 
   return (
             <Card onClick={navigateToProductDetails}>

@@ -9,16 +9,17 @@ import Homepage from "./Pages/Homepage";
 import NavbarComponent from './Components/NavbarComponent';
 import Headerbanner from './Components/Headerbanner';
 import FooterComponent from './Components/FooterComponent';
-import FilteredProductsPage from './Pages/FilteredProductsPage';
+import ProductDetailsPage from './Pages/ProductDetailsPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter> 
       <Headerbanner></Headerbanner>
       <NavbarComponent></NavbarComponent>
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/products' element={<ProductsPage />} />
+        <Route path='/products/:id' element={<ProductDetailsPage />} />
         <Route path='/categories' element={<ProductsPage />} />
         <Route path='/categories/:id/products' element={<ProductsPage />} />
       </Routes>
