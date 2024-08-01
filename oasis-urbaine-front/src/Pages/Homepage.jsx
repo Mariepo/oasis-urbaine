@@ -51,7 +51,7 @@ function HomePage() {
     <Container className='mt-5 mb-5'>
         <div className='d-flex justify-content-between mb-5'>
             <h2 className='mt-5'>Des fruits toutes l’année</h2>
-            <Button variant="link" onClick={() => {navigateTo('/products')}}>Tout voir <i className="bi bi-arrow-right"></i></Button>
+            <Button variant="link" onClick={() => {navigateTo('/categories/5/products/')}}>Tout voir <i className="bi bi-arrow-right"></i></Button>
         </div>
     <Row className="g-4">
         {featuredProducts.map((product) => (
