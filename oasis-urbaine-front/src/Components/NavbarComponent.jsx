@@ -26,6 +26,7 @@ function NavbarComponent() {
                 <>
                   <Nav.Link onClick={() => {navigateTo('/account')}}>
                     <i className="bi bi-person-circle"></i>
+                    <p>mon compte</p>
                   </Nav.Link>
                 </> : 
                 <>

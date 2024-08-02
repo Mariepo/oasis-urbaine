@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import AuthContext from '../Context/AuthContext';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import UserService from '../Services/UserService';
 
 function AccountPage() {
     const navigate = useNavigate();
@@ -10,8 +10,8 @@ function AccountPage() {
     const logout = () => {
         setIsAuthenticated(false);
         setToken(null);
-        axios.defaults.headers.common['Authorization'] = null;
-        navigate('/');
+        UserService.logout();
+        navigate('/login');
         toast.success("Vous êtes déconnecté")
     }
 
