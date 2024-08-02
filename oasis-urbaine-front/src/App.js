@@ -21,6 +21,7 @@ import { useState } from 'react';
 import AccountPage from './Pages/AccountPage';
 import ErrorPage from './Pages/ErrorPage';
 import UserService from './Services/UserService';
+import SignupPage from './Pages/SignupPage';
 
 function App() {
   UserService.checkToken();
@@ -39,6 +40,7 @@ function App() {
         <Route path='/categories/:id/products' element={<ProductsPage />} />
         {isAuthenticated && <Route path='/account' element={<AccountPage />} />}
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignupPage />} />
         <Route path='/*' element={<ErrorPage />} />
       </Routes>
       <FooterComponent></FooterComponent>
