@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import UserService from '../Services/UserService';
+import UsersService from '../Services/UsersService';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AuthContext from '../Context/AuthContext';
@@ -18,9 +18,9 @@ const LoginPage = () => {
     const loginUser = async (event) => {
         event.preventDefault();
         try {
-            const token = await UserService.loginUser(user);
+            const token = await UsersService.loginUser(user);
             if (token.data.token) {
-                UserService.setAxiosToken(token.data.token);
+                UsersService.setAxiosToken(token.data.token);
                 window.localStorage.setItem('authToken', token.data.token);
                 setIsAuthenticated(true);
                 setToken(token.data.token);
