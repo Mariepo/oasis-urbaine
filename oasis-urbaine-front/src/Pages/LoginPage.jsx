@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import UserService from '../Services/UserService';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import AuthContext from '../Context/AuthContext';
 
 
-function LoginPage () {
-    const [user, setUser] = useState({ email: '', password: '' });    
+const LoginPage = () => {
+    const [user, setUser] = useState({ email: '', password: '' });   
+    const {setIsAuthenticated, setToken} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -14,14 +16,16 @@ function LoginPage () {
         setUser({...user, [name] : value})
     }
 
-    async function loginUser (e) {
+    const loginUser = async (e) => {
         e.preventDefault();
         try {
             const token = await UserService.loginUser(user);
             if (token.data.token) {
                 axios.defaults.headers.common['Authorization'] = "Bearer "+token.data.token;
-                navigate('/');
+                setIsAuthenticated(true);
+                setToken(token.data.token);
                 toast.success("Vous êtes bien connecté");
+                navigate('/');
             } 
         } catch (error) {
             toast.error("Identifiants incorrects");
