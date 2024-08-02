@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
-class UserService {
+class UsersService {
 
     static loginUser(user){
         return axios.post('http://127.0.0.1:3001/users/login', user);
@@ -11,6 +11,24 @@ class UserService {
         return axios.post(`http://127.0.0.1:3001/users/signup`, user)
     }
     
+    static getUserId() {
+        const token = window.localStorage.getItem("authToken");
+        if (token) {
+            try {
+                const tokenData = jwtDecode(token);
+                return tokenData.id; 
+            } catch (error) {
+                console.error("Erreur lors du décodage du token", error);
+                return null;
+            }
+        }
+        return null;
+    }
+
+    static getUserInfos(id){
+        return axios.get(`http://127.0.0.1:3001/users/${id}`)
+    }
+
     static setAxiosToken(token) {
         axios.defaults.headers["Authorization"] = "Bearer " + token;
     }
@@ -20,14 +38,14 @@ class UserService {
         if (token) {
             const {exp: expiration} = jwtDecode(token);
             if(expiration * 1000 > new Date().getTime()) {
-                UserService.setAxiosToken(token);
+                UsersService.setAxiosToken(token);
             } else {
-                UserService.logout();
+                UsersService.logout();
             }
         } else {
-            UserService.logout();
+            UsersService.logout();
         }
-    }
+    }  
 
     static isAuthenticated() {
         const token = window.localStorage.getItem("authToken");
@@ -47,8 +65,9 @@ class UserService {
         window.localStorage.removeItem("authToken");
         delete axios.defaults.headers["Authorization"];
     }
+    
 }
 
 
 
-export default UserService
+export default UsersService

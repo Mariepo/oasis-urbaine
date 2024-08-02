@@ -20,12 +20,12 @@ import AuthContext from './Context/AuthContext';
 import { useState } from 'react';
 import AccountPage from './Pages/AccountPage';
 import ErrorPage from './Pages/ErrorPage';
-import UserService from './Services/UserService';
+import UsersService from './Services/UsersService';
 import SignupPage from './Pages/SignupPage';
 
 function App() {
-  UserService.checkToken();
-  const [isAuthenticated, setIsAuthenticated] = useState(UserService.isAuthenticated)
+  UsersService.checkToken();
+  const [isAuthenticated, setIsAuthenticated] = useState(UsersService.isAuthenticated)
   const [token, setToken] = useState(window.localStorage.getItem('authToken') ? window.localStorage.getItem('authToken') : null);
   return <>
     <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, token, setToken}}>
