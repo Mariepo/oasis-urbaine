@@ -1,18 +1,31 @@
+// CSS
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Dom router
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 // Components and pages
+import { ToastContainer } from 'react-toastify';
 import ProductsPage from "./Pages/ProductsPage";
 import Homepage from "./Pages/Homepage";
 import NavbarComponent from './Components/NavbarComponent';
 import Headerbanner from './Components/Headerbanner';
 import FooterComponent from './Components/FooterComponent';
 import ProductDetailsPage from './Pages/ProductDetailsPage';
+import LoginPage from './Pages/LoginPage';
+import AuthContext from './Context/AuthContext';
+import { useState } from 'react';
+import AccountPage from './Pages/AccountPage';
+import ErrorPage from './Pages/ErrorPage';
 
 function App() {
-  return (
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [token, setToken] = useState(null)
+  return <>
+    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, token, setToken}}>
     <BrowserRouter> 
       <Headerbanner></Headerbanner>
       <NavbarComponent></NavbarComponent>
@@ -22,10 +35,15 @@ function App() {
         <Route path='/products/:id' element={<ProductDetailsPage />} />
         <Route path='/categories' element={<ProductsPage />} />
         <Route path='/categories/:id/products' element={<ProductsPage />} />
+        {isAuthenticated && <Route path='/account' element={<AccountPage />} />}
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/*' element={<ErrorPage />} />
       </Routes>
       <FooterComponent></FooterComponent>
+      <ToastContainer autoClose={10000} />
     </BrowserRouter>
-  );
+    </AuthContext.Provider>
+  </>;
 }
 
 export default App;
