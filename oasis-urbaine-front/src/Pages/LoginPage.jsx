@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import UserService from '../Services/UserService';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const LoginPage = () => {
-    const [user, setUser] = useState({});
 
+function LoginPage () {
+    const [user, setUser] = useState({ email: '', password: '' });    
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -13,25 +14,24 @@ const LoginPage = () => {
         setUser({...user, [name] : value})
     }
 
-    const loginUser = async (e) => {
+    async function loginUser (e) {
         e.preventDefault();
         try {
             const token = await UserService.loginUser(user);
             if (token.data.token) {
                 axios.defaults.headers.common['Authorization'] = "Bearer "+token.data.token;
-                console.log("Vous êtes bien connectés");
                 navigate('/');
-            } else {
-                console.log("Identifiants incorrects");
-            }
+                toast.success("Vous êtes bien connecté");
+            } 
         } catch (error) {
+            toast.error("Identifiants incorrects");
             console.log(error);
         }
     }
 
 
     return <>
-        <form onSubmit={loginUser}>
+        <form onSubmit={loginUser} method='get'>
             <h1>Login</h1>
             <input type="text" name="email" id="email" placeholder='Votre email' onChange={handleChange} value={user.email} />
             <input type="password" name="password" id="password" placeholder='Votre mot de passe' onChange={handleChange} value={user.password} />

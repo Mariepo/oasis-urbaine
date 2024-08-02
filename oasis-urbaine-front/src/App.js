@@ -1,9 +1,14 @@
+// CSS
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Dom router
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 // Components and pages
+import { ToastContainer } from 'react-toastify';
 import ProductsPage from "./Pages/ProductsPage";
 import Homepage from "./Pages/Homepage";
 import NavbarComponent from './Components/NavbarComponent';
@@ -26,6 +31,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
       </Routes>
       <FooterComponent></FooterComponent>
+      <ToastContainer autoClose={10000} />
     </BrowserRouter>
   );
 }
