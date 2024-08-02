@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import UserService from '../Services/UserService';
+import UsersService from '../Services/UsersService';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../Context/AuthContext';
@@ -17,8 +17,8 @@ function SignupPage() {
   const signup = async (event) => {
     event.preventDefault();
     try {
-      await UserService.signupUser(user);
-      const token = await UserService.loginUser(user);
+      await UsersService.signupUser(user);
+      const token = await UsersService.loginUser(user);
       toast.success(`Compte créé avec succès ! Bienvenue ${user.firstname} 🌿`);
       window.localStorage.setItem('authToken', token.data.token);
       setIsAuthenticated(true);
