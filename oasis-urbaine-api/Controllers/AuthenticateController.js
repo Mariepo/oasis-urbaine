@@ -11,14 +11,23 @@ class AuthenticateController {
 
         if (!token) {
             result.status(401); 
-            result.json({error : "Vous n'avez pas accès à cette fonctionnalité"});
+            return result.json({error : "Vous n'avez pas accès à cette fonctionnalité"});
         }
 
         jwt.verify(token, config.SECRET, (error, user) => {
             if (error) {
                 result.status(401); 
-                result.json({error : "Vous token n'est pas valide"});                
+                return result.json({error : "Vous token n'est pas valide"});                
             }
+
+            // const userData = UsersService.getUserById(request.params.id);
+
+            // if (userData.token != token) {
+            //     console.log(userData.token);
+            //     console.log(token);
+            //     result.status(403); 
+            //     return result.json({error : "Token invalide"});
+            // }
             request.user = user;
             next();
         })

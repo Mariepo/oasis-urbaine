@@ -59,6 +59,10 @@ class UsersController {
             const user = await UsersService.loginUser(email, password);
             // Générer le token à la connexion
             result.json({token : AuthenticateController.generateToken(user)});
+            // const newToken = AuthenticateController.generateToken(user)
+            // result.json({token : newToken});
+
+            // const toto = await UsersService.updateUser(user.id, {"token": newToken});
         } catch (error) {
             result.status(500);
             result.json({error : "Une erreur est survenue lors de la connexion"});            
