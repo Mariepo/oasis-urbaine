@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import UserService from '../Services/UserService';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AuthContext from '../Context/AuthContext';
@@ -21,7 +20,8 @@ const LoginPage = () => {
         try {
             const token = await UserService.loginUser(user);
             if (token.data.token) {
-                axios.defaults.headers.common['Authorization'] = "Bearer "+token.data.token;
+                UserService.setAxiosToken(token.data.token);
+                window.localStorage.setItem('authToken', token.data.token);
                 setIsAuthenticated(true);
                 setToken(token.data.token);
                 toast.success("Vous êtes bien connecté");
