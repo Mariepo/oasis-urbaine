@@ -15,8 +15,8 @@ const LoginPage = () => {
         setUser({...user, [name] : value})
     }
 
-    const loginUser = async (e) => {
-        e.preventDefault();
+    const loginUser = async (event) => {
+        event.preventDefault();
         try {
             const token = await UserService.loginUser(user);
             if (token.data.token) {
@@ -35,12 +35,13 @@ const LoginPage = () => {
 
 
     return <>
-        <form onSubmit={loginUser} method='get'>
+        <form onSubmit={loginUser} method='post'>
             <h1>Login</h1>
             <input type="text" name="email" id="email" placeholder='Votre email' onChange={handleChange} value={user.email} />
             <input type="password" name="password" id="password" placeholder='Votre mot de passe' onChange={handleChange} value={user.password} />
             <button type="submit">Valider</button>
         </form>
+        <a href='/signup'>Créer un compte</a>
     </>
 }
 

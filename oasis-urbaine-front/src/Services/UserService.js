@@ -4,7 +4,11 @@ import { jwtDecode } from 'jwt-decode';
 class UserService {
 
     static loginUser(user){
-        return axios.post(`http://127.0.0.1:3001/users/login`, user);
+        return axios.post('http://127.0.0.1:3001/users/login', user);
+    }
+
+    static signupUser(user){
+        return axios.post(`http://127.0.0.1:3001/users/signup`, user)
     }
     
     static setAxiosToken(token) {
