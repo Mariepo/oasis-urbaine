@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = 3001;
-const AuthenticateController = require('./Controllers/AuthenticateController');
 
 app.use(express.json());
 app.use(cors());

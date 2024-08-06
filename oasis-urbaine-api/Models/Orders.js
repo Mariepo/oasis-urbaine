@@ -1,63 +1,63 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require('../Config/Sequelize');
 const Users = require('./Users');
-const DeliveryMethods = require('./Users');
+const DeliveryMethods = require('./DeliveryMethods');
 
-class Orders extends Model {
-
-}
+class Orders extends Model {}
 
 Orders.init({
-    id : {
-        type : DataTypes.INTEGER,
-        primaryKey : true,
-        autoIncrement : true
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
-    subtotal : {
-        type : DataTypes.DECIMAL,
-        allowNull : false
+    subtotal: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
     },
-    total_amount : {
-        type : DataTypes.DECIMAL,
-        allowNull : false
+    total_amount: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
     },
-    status : {
-        type : DataTypes.STRING(100),
-        allowNull : true
+    status: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+        defaultValue: 'En attente'
     },
-    created_at : {
-        type : DataTypes.DATE,
-        allowNull : false
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
     },
-    updated_at : {
-        type : DataTypes.DATE,
-        allowNull : false
+    updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
     },
-    id_delivery_method : {
-        type : DataTypes.INTEGER,
-        allowNull : true,
-        references : {
-            model : "delivery_methods",
-            key : "id"
+    id_delivery_method: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: DeliveryMethods,
+            key: 'id'
         }
     },
-    id_user : {
-        type : DataTypes.INTEGER,
-        allowNull : true,
-        references : {
-            model : "users",
-            key : "id"
+    id_user: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: Users,
+            key: 'id'
         }
-    }}, {
-        sequelize,
-        modelName : "Orders",
-        tableName : "orders",
-        timestamps : false
     }
-)
+}, {
+    sequelize,
+    modelName: "Orders",
+    tableName: "orders",
+    timestamps: false
+});
 
-
-Orders.hasOne(Users, {as : "users", foreignKey: "id_users"});
-Orders.hasOne(DeliveryMethods, {as : "delivery_methods", foreignKey: "id_delivery_method"});
+Orders.belongsTo(Users, { as: "user", foreignKey: "id_user" });
+Orders.belongsTo(DeliveryMethods, { as: "delivery_method", foreignKey: "id_delivery_method" });
 
 module.exports = Orders;
