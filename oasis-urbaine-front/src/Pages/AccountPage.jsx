@@ -39,6 +39,9 @@ function AccountPage() {
     <div>
         <Row>
             <h1>Bonjour {user.name}</h1>
+            <p>Adresse :{user.address} {user.postal_code} {user.city} </p>
+            <p>Adresse : {user.phone}</p>
+            <p>Adresse : {user.email}</p>
         </Row>
         <button onClick={logout}>Deconnexion</button>
     </div>
