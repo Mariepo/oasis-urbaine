@@ -6,4 +6,9 @@ const router = express.Router();
 
 router.get("/:id", AuthenticateController.authenticateToken, (request, result) => {OrdersController.getOrderById(request, result)});
 
+router.get("/:id/user", AuthenticateController.authenticateToken, (request, result) => {
+    OrdersController.getOrdersByUserId(request, result);
+});
+
+
 module.exports = router;

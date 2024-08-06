@@ -12,6 +12,16 @@ class OrdersController {
         }
     }
 
+    async getOrdersByUserId(request, result) {
+        try {
+            const orders = await OrdersService.getOrdersByUserId(request.params.id);
+            result.json(orders);
+        } catch (error) {
+            result.status(500);
+            result.json({ error: "Une erreur est survenue lors de la récupération des commandes" });
+        }
+    }
 }
+
 
 module.exports = new OrdersController();
