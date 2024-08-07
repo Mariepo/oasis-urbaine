@@ -4,7 +4,7 @@ import UsersService from '../Services/UsersService';
 import OrdersService from '../Services/OrdersService';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card, Table } from 'react-bootstrap';
 
 function AccountPage() {
     const navigate = useNavigate();
@@ -44,34 +44,63 @@ function AccountPage() {
     useEffect(() => {
         fetchUser();
         fetchOrder();
+        document.body.classList.add('body-account-page');
     }, []);
 
     return <>
-        <Container>
-    <div>
-        <Row>
-            <h1>Bonjour {user.name}</h1>
-            <p>Adresse :{user.address} {user.postal_code} {user.city} </p>
-            <p>Adresse : {user.phone}</p>
-            <p>Adresse : {user.email}</p>
-        </Row>
-        <button onClick={logout}>Deconnexion</button>
-    </div>
-    <h2>Historique de commande</h2>
-            {orders.length === 0 ? (
-                <p>Aucune commande disponible.</p>
-            ) : (
-                orders.map((order) => (
-                    <div key={order.id}>
-                        <p>Commande ID: {order.id}</p>
-                        <p>Montant total: {order.total_amount}</p>
-                        <p>Statut: {order.status}</p>
-                        <p>Date de création: {new Date(order.created_at).toLocaleDateString()}</p>
-                        <hr />
-                    </div>
-                ))
-            )}
-    
+        <Container className='mt-5 mb-5'>
+            <Row>
+                <h1>Bonjour {user.firstname} ! 👋</h1>
+                <div>
+                    <Button variant="link ps-0" onClick={logout}>Deconnexion</Button>
+                </div>
+            </Row>
+            <Row className='mt-5 mb-5'>
+                <Col className='col-12 col-lg-8'>
+                    <h2>Historique de commande</h2>
+                    {orders.length === 0 ? (
+                        <p>Aucune commande disponible.</p>
+                    ) : (
+                        <Table bordered>
+                            <thead>
+                                <tr>
+                                    <th>Numéro</th>
+                                    <th>Date</th>
+                                    <th>Statut</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map((order) => (
+                                <tr key={order.id}>
+                                    <td>{order.id}</td>
+                                    <td>{new Date(order.created_at).toLocaleDateString()}</td>
+                                    <td>{order.status}</td>
+                                    <td>{order.total_amount}</td>
+                                </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    )}
+                </Col>
+                <Col className='col-12 col-lg-4'>
+                    <h2>Coordonnées</h2>
+                    <Card>
+                        <Card.Body>
+                            <ul>
+                                <li>{user.firstname} {user.lastname}</li>
+                                <li>{user.address}</li>
+                                <li>{user.postal_code} {user.city}</li>
+                            </ul>
+                            <ul>
+                                <li>{user.phone}</li>
+                                <li>{user.email}</li>
+                            </ul>
+                            <Button variant="link ps-0">Modifier</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
         </Container>
     </>
 

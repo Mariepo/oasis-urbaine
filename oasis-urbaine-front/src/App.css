@@ -81,3 +81,8 @@ footer {
     object-fit: cover;
     border-radius: 12px;
 }
+
+/* User account */
+.body-account-page {
+    background-color: var(--background-grey);
+}
