@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = 3001;
-const AuthenticateController = require('./Controllers/AuthenticateController');
 
 app.use(express.json());
 app.use(cors());
@@ -12,10 +11,14 @@ const productsRoutes = require('./Routes/ProductsRoutes');
 const productTypesRoutes = require('./Routes/ProductTypesRoutes');
 const categoriesRoutes = require('./Routes/CategoriesRoutes');
 const usersRoutes = require('./Routes/UsersRoutes');
+const ordersRoutes = require('./Routes/OrdersRoutes');
+const deliverMethodsRoutes = require('./Routes/DeliveryMethodsRoutes');
 app.use('/products', productsRoutes);
 app.use('/product-types', productTypesRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/users', usersRoutes);
+app.use('/orders', ordersRoutes);
+app.use('/delivery', deliverMethodsRoutes);
 // app.use('/users', AuthenticateController.authenticateToken, usersRoutes);
 
 app.listen(port, () => {
