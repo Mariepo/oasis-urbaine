@@ -12,7 +12,6 @@
 footer {
     background-color: var(--background-dark-grey);
     padding: 3.75rem 0;
-    margin-top : 5rem;
 }
 
 /* Homepage */
@@ -56,7 +55,7 @@ footer {
 
 /* Products page */
 .header-products {
-    background-image: url('./assets/header-products.png');
+    background-image: url('./assets/images/header-products.png');
     background-size: cover;
     background-position: center right;
     color: white;
@@ -85,4 +84,21 @@ footer {
 /* User account */
 .body-account-page {
     background-color: var(--background-grey);
+}
+
+/* 404 */
+.error-page-container {
+    background-color: var(--background-orange);
+}
+.error-image-container {
+    background-image: url(./assets/images/error-page.png);
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+}
+/* md - tablette */
+@media screen and (min-width: 576px){
+    .error-page-container {
+        height: 90vh;
+    }
 }
