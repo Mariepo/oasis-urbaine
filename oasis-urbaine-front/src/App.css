@@ -9,9 +9,15 @@
 }
 
 /* Global */
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 footer {
     background-color: var(--background-dark-grey);
     padding: 3.75rem 0;
+    margin-top: auto
 }
 
 /* Homepage */
@@ -96,9 +102,37 @@ footer {
     background-position: center;
     min-height: 400px;
 }
-/* md - tablette */
+/* xs - phone */
 @media screen and (min-width: 576px){
     .error-page-container {
         height: 90vh;
+    }
+}
+
+/* Login and signup */
+@keyframes zoom {
+    0% { background-size: 100%; }
+    100% { background-size: 110%; }
+}
+.login-image-container {
+    background-image: url(./assets/images/login-background.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 600px;
+    background-color: var(--background-dark-grey);
+    animation: zoom 10s infinite alternate;
+}
+.signup-form-title {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+/* md - tablette */
+@media screen and (max-width: 768px){
+    .login-image-container {
+        background-image: url(./assets/images/login-background-mobile.png);
+        background-position: top;
+        background-size: contain;
     }
 }
