@@ -12,7 +12,7 @@ function Cart() {
   // const [selectedDeliveryPrice, setSelectedDeliveryPrice] = useState('');
   // const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState({ id: '', price: '' });   
   const subtotal = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
-  const total = subtotal + Number(selectedDeliveryMethod.price);
+  const total = subtotal + (selectedDeliveryMethod ? Number(selectedDeliveryMethod.price) : 0);
 
   const fetchDeliveryMethods = async () => {
     try {
