@@ -13,14 +13,14 @@ function CartItem({item}) {
         : `${price}`;
     
     const {addToCart, deleteFromCart, removeFromCart} = useContext(CartContext);
-    const addProduct = () => {
+    const increaseProductQuantity = () => {
         addToCart(item, false);
     }
     const deleteProduct  = () => {
         deleteFromCart(item.id);
     }
 
-    const removeProduct = () => {
+    const decreaseProductQuantity = () => {
         removeFromCart(item.id);
     }
 
@@ -37,7 +37,7 @@ function CartItem({item}) {
             </Col>
             <Col className='d-flex flex-column justify-content-center'>
                 <div className='d-flex align-items-center'>
-                    <Button variant="light" onClick={removeProduct}>-</Button>
+                    <Button variant="light" onClick={decreaseProductQuantity}>-</Button>
                     <Form.Control
                         type="text"
                         value={item.quantity}
@@ -45,7 +45,7 @@ function CartItem({item}) {
                         className="mx-0 text-center"
                         style={{ width: '60px' }}
                     />
-                    <Button variant="light" onClick={addProduct}>+</Button>
+                    <Button variant="light" onClick={increaseProductQuantity}>+</Button>
                     <div className='px-5'  onClick={deleteProduct}>
                         <i className="bi bi-trash3"></i>
                     </div>

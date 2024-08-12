@@ -10,7 +10,6 @@ function NavbarComponent() {
   const cartItemsQuantity = cartItems.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
-  console.log(cartItemsQuantity);
 
   const navigate = useNavigate();
   const navigateTo = (route) => {
