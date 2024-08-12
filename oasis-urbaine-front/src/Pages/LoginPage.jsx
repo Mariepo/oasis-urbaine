@@ -36,23 +36,16 @@ const LoginPage = () => {
 
 
     return <>
-        {/* <form>
-            <input type="text" name="email" id="email" placeholder='Votre email' onChange={handleChange} value={user.email} />
-            <input type="password" name="password" id="password" placeholder='Votre mot de passe' onChange={handleChange} value={user.password} />
-            <button type="submit">Valider</button>
-        </form>
-        <a href='/signup'>Créer un compte</a> */}
         <Container fluid className='vh-100 d-flex align-items-center login-image-container'>
-            <Form onSubmit={loginUser} method='post' className='col-4 mx-auto d-flex flex-column mb-5'>
+            <Form onSubmit={loginUser} method='post' className='col-10 col-md-8 col-lg-4 mx-auto d-flex flex-column mb-5'>
                 <h1 className='text-center'>Connexion</h1>
                 <Form.Group className="mb-3" controlId="email">
-                    <Form.Label>Votre email</Form.Label>
+                    <Form.Label>Email</Form.Label>
                     <Form.Control type="email" name="email" placeholder="example@gmail.com" onChange={handleChange} value={user.email} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="password">
                     <Form.Label>Mot de passe</Form.Label>
-                    <Form.Control type="password" name="password" placeholder='Votre mot de passe' onChange={handleChange} value={user.password}/>
-                    <Button variant="link" className='ps-0' size="sm">Mot de passe oublié ?</Button>
+                    <Form.Control type="password" name="password" onChange={handleChange} value={user.password}/>
                 </Form.Group>
                 <Button variant="primary" type="submit">Se connecter</Button>
                 <Button variant="link" onClick={() => {navigate('/signup')}} className='py-3'>Créer un compte</Button>
