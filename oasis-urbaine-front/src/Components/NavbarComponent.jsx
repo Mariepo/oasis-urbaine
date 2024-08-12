@@ -2,9 +2,16 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Container, Nav, Navbar} from 'react-bootstrap';
 import AuthContext from '../Context/AuthContext';
+import CartContext from '../Context/CartContext';
 
 function NavbarComponent() {
   const {isAuthenticated} = useContext(AuthContext);
+  const {cartItems} = useContext(CartContext);
+  const cartItemsQuantity = cartItems.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
+  console.log(cartItemsQuantity);
+
   const navigate = useNavigate();
   const navigateTo = (route) => {
     navigate(route);
@@ -34,8 +41,9 @@ function NavbarComponent() {
                     <i className="bi bi-person-circle"></i>
                   </Nav.Link>
                 </>}
-                <Nav.Link href="">
-                  <i className="bi bi-basket"></i>
+                <Nav.Link onClick={() => {navigateTo('/cart')}}>
+                  <i className="bi bi-basket"></i> 
+                  <span className='ms-2'>{cartItemsQuantity}</span>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
