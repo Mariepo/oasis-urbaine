@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import UsersService from '../Services/UsersService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AuthContext from '../Context/AuthContext';
 import {Container, Button, Form} from 'react-bootstrap';
@@ -10,6 +10,7 @@ const LoginPage = () => {
     const [user, setUser] = useState({ email: '', password: '' });   
     const {setIsAuthenticated, setToken} = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleChange = (event) => {
         const {name, value} = event.currentTarget;
@@ -26,7 +27,8 @@ const LoginPage = () => {
                 setIsAuthenticated(true);
                 setToken(token.data.token);
                 toast.success("Vous êtes bien connecté");
-                navigate('/');
+                const redirectTo = location.state?.from || '/';
+                navigate(redirectTo);
             } 
         } catch (error) {
             toast.error("Identifiants incorrects");

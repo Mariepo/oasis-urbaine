@@ -11,7 +11,7 @@ function ErrorPage() {
         <Col className='col-12 col-sm-5 col-lg-6 d-flex flex-column align-items-center justify-content-center p-5 order-sm-2 order-1'>
           <div className='d-flex flex-column align-items-start'>
             <h1>Oops, cette page n’existe pas !</h1>
-            <Button variant='primary' onClick={() =>{navigate('/')}}>Retour à l'acceuil</Button>
+            <Button variant='primary' onClick={() =>{navigate('/')}}>Retour à la boutique</Button>
           </div>
         </Col>
       </Row>
