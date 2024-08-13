@@ -6,6 +6,7 @@
     --background-orange : #FAF4E8;
     --background-grey : #F8F8F8;
     --background-dark-grey : #F3F3F3;
+    --border-radius-md : 12px;
 }
 
 /* Global */
@@ -143,4 +144,14 @@ footer {
 }
 .cart-image-container img {
     width: 100%;
+}
+
+/* Order confirmation page */
+.order-summary-container {
+    background-color: var(--background-orange);
+    border-radius: var(--border-radius-md);
+    background-image: url("assets/images/order-confirmation-background.png");
+    background-size: cover;
+    background-position: left center;
+    background-attachment: fixed;
 }

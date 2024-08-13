@@ -27,6 +27,7 @@ import AccountPage from './Pages/AccountPage';
 import ErrorPage from './Pages/ErrorPage';
 import SignupPage from './Pages/SignupPage';
 import Cart from './Pages/Cart';
+import OrderConfirmationPage from './Pages/OrderConfirmationPage';
 
 function App() {
   UsersService.checkToken();
@@ -48,6 +49,7 @@ function App() {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/signup' element={<SignupPage />} />
               <Route path='/cart' element={<Cart/>} />
+              {isAuthenticated && <Route path='/order-confirmation' element={<OrderConfirmationPage/>} />}
               <Route path='/*' element={<ErrorPage />} />
             </Routes>
             <FooterComponent></FooterComponent>

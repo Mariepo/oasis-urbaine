@@ -55,7 +55,7 @@ function Cart() {
       };
       await OrdersService.addOrder(order);
       clearCart();
-      navigate ("/");
+      navigate ("/order-confirmation");
     } catch (error) {
       console.log(error);
     }
