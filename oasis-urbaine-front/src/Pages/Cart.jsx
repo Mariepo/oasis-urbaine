@@ -43,21 +43,25 @@ function Cart() {
     }
   }
   const addOrder = async () => {
-    try {
-      const order = {
-        id_user: id_user,
-        id_delivery_method: selectedDeliveryMethodId,
-        id_payment_method: selectedPaymentMethodId, 
-        items: cartItems.map((item) => ({
-          id_product: item.id,
-          quantity: item.quantity
-        })),      
-      };
-      await OrdersService.addOrder(order);
-      clearCart();
-      navigate ("/order-confirmation");
-    } catch (error) {
-      console.log(error);
+    if(id_user === null) {
+      navigate('/login', {state: {from: '/cart'}});
+    } else {
+      try {
+        const order = {
+          id_user: id_user,
+          id_delivery_method: selectedDeliveryMethodId,
+          id_payment_method: selectedPaymentMethodId, 
+          items: cartItems.map((item) => ({
+            id_product: item.id,
+            quantity: item.quantity
+          })),      
+        };
+        await OrdersService.addOrder(order);
+        clearCart();
+        navigate ("/order-confirmation");
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
