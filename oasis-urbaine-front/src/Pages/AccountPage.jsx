@@ -47,6 +47,11 @@ function AccountPage() {
         document.body.classList.add('body-account-page');
     }, []);
 
+    const formatPrice = (price) => {
+        const roundedPrice = Number(price).toFixed(2);
+        return roundedPrice.endsWith(".00") ? Math.round(price) : roundedPrice;
+    }
+
     return <>
         <Container className='mt-5 mb-5'>
             <Row>
@@ -73,10 +78,10 @@ function AccountPage() {
                             <tbody>
                                 {orders.map((order) => (
                                 <tr key={order.id}>
-                                    <td>{order.id}</td>
+                                    <td>#{order.id}</td>
                                     <td>{new Date(order.created_at).toLocaleDateString()}</td>
                                     <td>{order.status}</td>
-                                    <td>{order.total_amount}</td>
+                                    <td>{formatPrice(order.total_amount)}€</td>
                                 </tr>
                                 ))}
                             </tbody>
@@ -88,7 +93,7 @@ function AccountPage() {
                     <Card>
                         <Card.Body>
                             <ul>
-                                <li>{user.firstname} {user.lastname}</li>
+                                <li>{user.firstname} {user.name}</li>
                                 <li>{user.address}</li>
                                 <li>{user.postal_code} {user.city}</li>
                             </ul>

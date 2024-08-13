@@ -14,11 +14,11 @@ Orders.init({
     },
     subtotal: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
+        allowNull: true
     },
     total_amount: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
+        allowNull: true
     },
     status: {
         type: DataTypes.STRING(100),
@@ -26,11 +26,6 @@ Orders.init({
         defaultValue: 'En attente'
     },
     created_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    },
-    updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW
@@ -49,17 +44,16 @@ Orders.init({
         references: {
             model: Users,
             key: 'id'
-        },
-        id_payment_method: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: PaymentMethods,
-                key: 'id'
-            }
         }
-    }
-}, {
+    },
+    id_payment_method: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: PaymentMethods,
+            key: 'id'
+        }
+    }}, {
     sequelize,
     modelName: "Orders",
     tableName: "orders",
