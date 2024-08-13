@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../Context/CartContext";
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import CartItem from "../Components/CartItem";
 import DeliveryMethodsService from "../Services/DeliveryMethodsService";
 import PaymentMethodsService from "../Services/PaymentMethodsService";
+import OrdersService from "../Services/OrdersService";
+import UsersService from "../Services/UsersService";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
   // Méthodes de livraison
   const [deliveryMethods, setDeliveryMethods] = useState([]);
   const [selectedDeliveryMethodId, setSelectedDeliveryMethodId] = useState(1);
@@ -20,6 +24,8 @@ function Cart() {
   const subtotal = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
   const total = subtotal + (selectedDeliveryMethod ? Number(selectedDeliveryMethod.price) : 0);
 
+  // Services
+  const id_user = UsersService.getUserId();
   const fetchDeliveryMethods = async () => {
     try {
       const response = await DeliveryMethodsService.fetchDeliveryMethods();
@@ -36,28 +42,32 @@ function Cart() {
       console.log(error);
     }
   }
-
-  // const deliveryIdToPrice = (deliveryId) => {
-  //   console.log(deliveryId)
-  //   console.log(deliveryMethods)
-  //   const deliveryMethod = deliveryMethods.find((method) => method.id === Number(deliveryId));
-  //   console.log(deliveryMethod)
-  //   return deliveryMethod.price;
-  // }
-
-  const handleDeliveryChange = (event) => {
-    // Passer l'id d'un string à un nombre
-    setSelectedDeliveryMethodId(Number(event.target.value));
-    // const deliveryMethodId = event.target.value;
-    // const price2 = deliveryIdToPrice(deliveryMethodId);
-    // setSelectedDeliveryPrice(price)
-    // setSelectedDeliveryMethod({id:deliveryMethodId, price:price2});
+  const addOrder = async () => {
+    try {
+      const order = {
+        id_user: id_user,
+        id_delivery_method: selectedDeliveryMethodId,
+        id_payment_method: selectedPaymentMethodId, 
+        items: cartItems.map((item) => ({
+          id_product: item.id,
+          quantity: item.quantity
+        })),      
+      };
+      await OrdersService.addOrder(order);
+      clearCart();
+      navigate ("/");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+  // Handle change
+  const handleDeliveryChange = (event) => {
+    setSelectedDeliveryMethodId(Number(event.target.value));
+  }
   const handlePaymentChange = (event) => {
     setSelectedPaymentMethodId(Number(event.target.value));
   }
-
 
   useEffect( () => {
     fetchDeliveryMethods();
@@ -114,6 +124,7 @@ function Cart() {
               <p>Sous-total : {subtotal}€</p>
               <p>Livraison : {selectedDeliveryMethod ? `${formatPrice(selectedDeliveryMethod.price)}€` : 'Aucune'}</p>
               <p>Total : {total}€</p>
+              <Button variant="primary" type="submit" onClick={addOrder}>Payer maintenant</Button>
             </section>
           </>
         )}
