@@ -13,12 +13,15 @@ const categoriesRoutes = require('./Routes/CategoriesRoutes');
 const usersRoutes = require('./Routes/UsersRoutes');
 const ordersRoutes = require('./Routes/OrdersRoutes');
 const deliverMethodsRoutes = require('./Routes/DeliveryMethodsRoutes');
+const paymentMethodsRoutes = require('./Routes/PaymentMethodsRoutes');
+
 app.use('/products', productsRoutes);
 app.use('/product-types', productTypesRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/users', usersRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/delivery', deliverMethodsRoutes);
+app.use('/payments', paymentMethodsRoutes);
 // app.use('/users', AuthenticateController.authenticateToken, usersRoutes);
 
 app.listen(port, () => {

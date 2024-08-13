@@ -136,3 +136,11 @@ footer {
         background-size: contain;
     }
 }
+
+/* Cart */
+.cart-image-container {
+    max-width: 110px;
+}
+.cart-image-container img {
+    width: 100%;
+}

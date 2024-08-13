@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import ProductsService from "../Services/ProductsService";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import CartContext from "../Context/CartContext";
 
 function ProductDetailsPage(){
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const { addToCart } = useContext(CartContext);
 
   async function fetchProductsById () {
     try {
@@ -41,7 +43,7 @@ function ProductDetailsPage(){
           <span>{formattedPrice}€</span>
           <p>Livraison calculée à la prochaine étape</p>
           <div className="d-grid gap-2">
-            <Button variant="primary">Ajouter au panier</Button>
+            <Button variant="primary" onClick={() => addToCart(product, true)}>Ajouter au panier</Button>
           </div>
           <hr className="my-4" />
           <div className="pt-4">
