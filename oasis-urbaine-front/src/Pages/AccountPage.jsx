@@ -88,7 +88,7 @@ function AccountPage() {
                     <Card>
                         <Card.Body>
                             <ul>
-                                <li>{user.firstname} {user.lastname}</li>
+                                <li>{user.firstname} {user.name}</li>
                                 <li>{user.address}</li>
                                 <li>{user.postal_code} {user.city}</li>
                             </ul>
