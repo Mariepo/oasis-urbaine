@@ -109,7 +109,7 @@ function AccountPage() {
                                 <li>{user.phone}</li>
                                 <li>{user.email}</li>
                             </ul>
-                            <Button variant="link ps-0">Modifier</Button>
+                            <Button variant="link ps-0" onClick={()=>{navigate('/edit-address')}}>Modifier</Button>
                         </Card.Body>
                     </Card>
                 </Col>

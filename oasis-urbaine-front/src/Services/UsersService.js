@@ -10,7 +10,10 @@ class UsersService {
     static signupUser(user){
         return axios.post(`http://127.0.0.1:3001/users/signup`, user)
     }
-    
+
+    static editUser(id, user){
+        return axios.patch(`http://127.0.0.1:3001/users/${id}`, user)
+    }    
     static getUserId() {
         const token = window.localStorage.getItem("authToken");
         if (token) {
