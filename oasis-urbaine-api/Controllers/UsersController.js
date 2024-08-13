@@ -3,7 +3,7 @@ const AuthenticateController = require("./AuthenticateController");
 
 class UsersController {
 
-    async getAllUser(request, result){
+    async getAllUsers(request, result){
         try {
             const users = await UsersService.getAllUsers();
             result.json(users);

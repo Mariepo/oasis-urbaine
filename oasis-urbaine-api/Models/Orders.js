@@ -2,6 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require('../Config/Sequelize');
 const Users = require('./Users');
 const DeliveryMethods = require('./DeliveryMethods');
+const PaymentMethods = require('./PaymentMethods');
 
 class Orders extends Model {}
 
@@ -48,6 +49,14 @@ Orders.init({
         references: {
             model: Users,
             key: 'id'
+        },
+        id_payment_method: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: PaymentMethods,
+                key: 'id'
+            }
         }
     }
 }, {
@@ -59,5 +68,6 @@ Orders.init({
 
 Orders.belongsTo(Users, { as: "user", foreignKey: "id_user" });
 Orders.belongsTo(DeliveryMethods, { as: "delivery_method", foreignKey: "id_delivery_method" });
+Orders.belongsTo(PaymentMethods, { as: "payment_method", foreignKey: "id_payment_method" });
 
 module.exports = Orders;
