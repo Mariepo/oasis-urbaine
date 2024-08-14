@@ -1,8 +1,9 @@
+// services/ProductCategoryService.js
 const ProductCategory = require('../Models/ProductCategory');
 
 class ProductCategoryService {
-    async addProductCategory(productCategory) {
-        return await ProductCategory.create(productCategory);
+    async addProductCategory(id_product, id_category) {
+        return await ProductCategory.create({ id_product, id_category });
     }
 }
 

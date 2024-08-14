@@ -24,15 +24,13 @@ class ProductsController {
         }
     }
 
+    // Commentaire : on ajoute les catégorie dans le corps de la requête
     async addProduct(request, result){
         try {
             const product = await ProductsService.addProduct(request.body);
-            const productCategories = await request.body.categories;
-            for(let category of productCategories){
-                await ProductCategoryService.addProductCategory({
-                    id_product: product.id,
-                    id_category: category.id_category
-                });
+            const productCategories = request.body.categories || [];
+            for (let category of productCategories) {
+                await ProductCategoryService.addProductCategory(product.id, category.id_category);
             }
             result.json(product);
         } catch (error) {
@@ -40,6 +38,7 @@ class ProductsController {
             result.json({error : "Une erreur est survenue lors de l'ajout du produit"});            
         }
     }
+
 
     async updateProduct(request, result) {
         try {
