@@ -71,12 +71,6 @@ function Cart() {
     setter(Number(event.target.value));
   }
 
-  // const handleDeliveryChange = (event) => {
-  //   setSelectedDeliveryMethodId(Number(event.target.value));
-  // }
-  // const handlePaymentChange = (event) => {
-  //   setSelectedPaymentMethodId(Number(event.target.value));
-  // }
 
   const formatPrice = (price) => {
     const roundedPrice = Number(price).toFixed(2);

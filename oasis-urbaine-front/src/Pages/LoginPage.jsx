@@ -26,7 +26,6 @@ const LoginPage = () => {
                 window.localStorage.setItem('authToken', token.data.token);
                 setIsAuthenticated(true);
                 setToken(token.data.token);
-                // role
                 setIsAdmin(UsersService.isAdmin()); 
                 toast.success("Vous êtes bien connecté");
                 const redirectTo = location.state?.from || '/';

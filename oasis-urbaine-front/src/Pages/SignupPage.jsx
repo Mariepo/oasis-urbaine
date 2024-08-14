@@ -25,7 +25,6 @@ function SignupPage() {
     window.scrollTo(0, 0);
   }
 
-
   const handleChange = (event) => {
     const {name, value} = event.currentTarget;
     setUser({...user, [name] : value});
@@ -56,7 +55,6 @@ function SignupPage() {
       window.localStorage.setItem('authToken', token.data.token);
       setIsAuthenticated(true);
       setToken(token.data.token);
-      // role
       setIsAdmin(UsersService.isAdmin()); 
       navigateTo('/');
     } catch (error) {

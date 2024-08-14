@@ -64,7 +64,6 @@ class UsersService {
         }
     }
     
-    // role
     static isAdmin(){
         const token = window.localStorage.getItem("authToken");
         if(token) {
