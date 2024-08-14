@@ -1,3 +1,4 @@
+const ProductCategoryService = require('../Services/ProductCategoryService');
 const ProductsService = require('../Services/ProductsService')
 
 class ProductsController {
@@ -26,6 +27,13 @@ class ProductsController {
     async addProduct(request, result){
         try {
             const product = await ProductsService.addProduct(request.body);
+            const productCategories = await request.body.categories;
+            for(let category of productCategories){
+                await ProductCategoryService.addProductCategory({
+                    id_product: product.id,
+                    id_category: category.id_category
+                });
+            }
             result.json(product);
         } catch (error) {
             result.status(500);

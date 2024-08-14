@@ -34,10 +34,6 @@ Products.init({
         type : DataTypes.DECIMAL,
         allowNull : false
     },
-    stock : {
-        type : DataTypes.INTEGER,
-        allowNull : false
-    },
     dimension : {
         type : DataTypes.STRING,
         allowNull : true
