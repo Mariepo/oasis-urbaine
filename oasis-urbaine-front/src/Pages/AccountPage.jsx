@@ -69,18 +69,26 @@ function AccountPage() {
                         <Table bordered>
                             <thead>
                                 <tr>
-                                    <th>Numéro</th>
+                                    {/* <th>Numéro<br/>de commande</th> */}
                                     <th>Date</th>
                                     <th>Statut</th>
+                                    <th>Articles</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {orders.map((order) => (
                                 <tr key={order.id}>
-                                    <td>#{order.id}</td>
+                                    {/* <td>#{order.id}</td> */}
                                     <td>{new Date(order.created_at).toLocaleDateString()}</td>
                                     <td>{order.status}</td>
+                                    <td>
+                                        {order.order_items.map((item) => (
+                                            <div key={item.id}>
+                                                {`${item.product.title} (x${item.quantity})`}
+                                            </div>
+                                        ))}
+                                    </td>
                                     <td>{formatPrice(order.total_amount)}€</td>
                                 </tr>
                                 ))}
@@ -101,7 +109,7 @@ function AccountPage() {
                                 <li>{user.phone}</li>
                                 <li>{user.email}</li>
                             </ul>
-                            <Button variant="link ps-0">Modifier</Button>
+                            <Button variant="link ps-0" onClick={()=>{navigate('/edit-address')}}>Modifier</Button>
                         </Card.Body>
                     </Card>
                 </Col>

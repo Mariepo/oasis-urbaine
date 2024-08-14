@@ -3,6 +3,7 @@ const sequelize = require('../Config/Sequelize');
 const Users = require('./Users');
 const DeliveryMethods = require('./DeliveryMethods');
 const PaymentMethods = require('./PaymentMethods');
+const OrderItems = require("./OrderItems");
 
 class Orders extends Model {}
 
@@ -63,5 +64,8 @@ Orders.init({
 Orders.belongsTo(Users, { as: "user", foreignKey: "id_user" });
 Orders.belongsTo(DeliveryMethods, { as: "delivery_method", foreignKey: "id_delivery_method" });
 Orders.belongsTo(PaymentMethods, { as: "payment_method", foreignKey: "id_payment_method" });
+Orders.hasMany(OrderItems, { as: "order_items", foreignKey: "id_order" });
+
 
 module.exports = Orders;
+

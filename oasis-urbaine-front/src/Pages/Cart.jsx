@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../Context/CartContext";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Card } from "react-bootstrap";
 import CartItem from "../Components/CartItem";
 import DeliveryMethodsService from "../Services/DeliveryMethodsService";
 import PaymentMethodsService from "../Services/PaymentMethodsService";
@@ -26,6 +26,15 @@ function Cart() {
 
   // Services
   const id_user = UsersService.getUserId();
+  const [user, setUser] = useState([]);
+  const fetchUser = async () => {
+      try {
+          const response = await UsersService.getUserById(id_user);
+          setUser(response.data);
+      } catch (error) {
+          console.log(error);
+      }
+  }
   const fetchDeliveryMethods = async () => {
     try {
       const response = await DeliveryMethodsService.fetchDeliveryMethods();
@@ -76,6 +85,7 @@ function Cart() {
   useEffect( () => {
     fetchDeliveryMethods();
     fetchPaymentMethods();
+    fetchUser();
   }, []);
 
   const formatPrice = (price) => {
@@ -102,20 +112,28 @@ function Cart() {
         {cartItems.length > 0 && (
           <>
             <section>
-              <h2>Paiement</h2>
-              {paymentMethods.map((paymentMethod) => (
-                  <Form.Check type="radio" name="payment" id={`payment-${paymentMethod.id}`} key={paymentMethod.id} label={paymentMethod.name} value={paymentMethod.id} onChange={handlePaymentChange} checked={paymentMethod.id === selectedPaymentMethodId}
-                  />
-              ))}
-            </section>
-          </>
-        )}
-        {cartItems.length > 0 && (
-          <>
-            <section>
               <h2>Mode de livraison</h2>
               {deliveryMethods.map((deliveryMethod) => (
                   <Form.Check type="radio" name="delivery" id={`delivery-${deliveryMethod.id}`} key={deliveryMethod.id} label={`${deliveryMethod.name} ${deliveryMethod.description} - ${deliveryMethod.price}€`} value={deliveryMethod.id} onChange={handleDeliveryChange} checked={deliveryMethod.id === selectedDeliveryMethodId}
+                  />
+              ))}
+              <Card className="mt-4">
+                <Card.Body>
+                  <div>Adresse : {user.address}, {user.postal_code} {user.city} - {user.email} - {user.phone}</div>
+                  <Button variant="link ps-0" onClick={()=>{navigate('/edit-address', {state: {from: '/cart'}})}}>Modifier</Button>
+                </Card.Body>
+              </Card> 
+              <div className="pt-4">
+              </div>
+            </section>
+          </>
+        )}            
+        {cartItems.length > 0 && (
+          <>
+            <section>
+              <h2>Paiement</h2>
+              {paymentMethods.map((paymentMethod) => (
+                  <Form.Check type="radio" name="payment" id={`payment-${paymentMethod.id}`} key={paymentMethod.id} label={paymentMethod.name} value={paymentMethod.id} onChange={handlePaymentChange} checked={paymentMethod.id === selectedPaymentMethodId}
                   />
               ))}
             </section>
