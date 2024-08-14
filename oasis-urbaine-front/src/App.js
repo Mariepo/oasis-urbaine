@@ -29,13 +29,16 @@ import SignupPage from './Pages/SignupPage';
 import Cart from './Pages/Cart';
 import OrderConfirmationPage from './Pages/OrderConfirmationPage';
 import EditUserForm from './Pages/EditUserForm';
+import AdminPage from './Pages/AdminPage';
 
 function App() {
   UsersService.checkToken();
   const [isAuthenticated, setIsAuthenticated] = useState(UsersService.isAuthenticated)
+  // role
+  const [isAdmin, setIsAdmin] = useState(UsersService.isAdmin);
   const [token, setToken] = useState(window.localStorage.getItem('authToken') ? window.localStorage.getItem('authToken') : null);
   return <>
-    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, token, setToken}}>
+    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, token, setToken, setIsAdmin}}>
         <CartProvider>
           <BrowserRouter> 
             <Headerbanner></Headerbanner>
@@ -47,6 +50,7 @@ function App() {
               <Route path='/categories' element={<ProductsPage />} />
               <Route path='/categories/:id/products' element={<ProductsPage />} />
               {isAuthenticated && <Route path='/account' element={<AccountPage />} />}
+              {isAdmin && <Route path='/admin' element={<AdminPage />} />}
               <Route path='/login' element={<LoginPage />} />
               <Route path='/signup' element={<SignupPage />} />
               <Route path='/cart' element={<Cart/>} />

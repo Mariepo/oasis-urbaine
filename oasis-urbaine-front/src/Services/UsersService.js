@@ -63,6 +63,21 @@ class UsersService {
             return false;
         }
     }
+    
+    // role
+    static isAdmin(){
+        const token = window.localStorage.getItem("authToken");
+        if(token) {
+            const { is_admin } = jwtDecode(token);
+            if (is_admin === 1) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false;
+        }
+    }
 
     static logout() {
         window.localStorage.removeItem("authToken");
@@ -70,7 +85,5 @@ class UsersService {
     }
     
 }
-
-
 
 export default UsersService
