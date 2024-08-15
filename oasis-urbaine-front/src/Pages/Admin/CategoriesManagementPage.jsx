@@ -5,6 +5,7 @@ import CategoryList from '../../Components/CategoryList';
 import HeaderCategoryManagement from '../../Components/HeaderCategoryManagement';
 import { toast } from 'react-toastify';
 import EditCategoryModal from '../../Components/EditCategoryModal';
+import DeleteCategoryModal from '../../Components/DeleteCategoryModal';
 
 function CategoriesManagementPage() {
   const [categories, setCategories] = useState([]);
@@ -19,6 +20,13 @@ function CategoriesManagementPage() {
   const handleCloseEditCategoryModal = () => setShowEditCategoryModal(false);
   const handleShowEditCategoryModal = (categoryId, categoryName) => {
     setShowEditCategoryModal(true);
+    setSelectedCategoryId(categoryId);
+    setSelectedCategoryName(categoryName);
+  }
+  const [showDeleteCategoryModal, setShowDeleteCategoryModal] = useState(false);
+  const handleCloseDeleteCategoryModal = () => setShowDeleteCategoryModal(false);
+  const handleShowDeleteCategoryModal = (categoryId, categoryName) => {
+    setShowDeleteCategoryModal(true);
     setSelectedCategoryId(categoryId);
     setSelectedCategoryName(categoryName);
   }
@@ -41,8 +49,7 @@ function CategoriesManagementPage() {
     setSelectedCategoryName(event.target.value);
   }
 
-  const addNewCategory = async (event) => {
-    event.preventDefault();
+  const addNewCategory = async () => {
     try {
       await CategoriesService.addCategory(newCategory);
       setCategoryName('');
@@ -53,8 +60,7 @@ function CategoriesManagementPage() {
       toast.error('Erreur lors de l\'ajout de la catégorie');
     }
   }
-  const editCategory = async (event) => {
-    event.preventDefault();
+  const editCategory = async () => {
     try {
       await CategoriesService.editCategory(selectedCategoryId, {name : selectedCategoryName});
       setSelectedCategoryId(null);
@@ -65,6 +71,19 @@ function CategoriesManagementPage() {
     } catch (error) {
       console.log(error);
       toast.error('Erreur lors de la modification de la catégorie');
+    }
+  }
+  const deleteCategory = async () => {
+    try {
+      await CategoriesService.deleteCategory(selectedCategoryId);
+      setSelectedCategoryId(null);
+      setSelectedCategoryName('');
+      setShowDeleteCategoryModal(false);
+      fetchCategories();
+      toast.success('Catégorie modifiée avec succès !');
+    } catch (error) {
+      console.log(error);
+      toast.error('Erreur lors de la suppression de la catégorie');
     }
   }
   
@@ -78,12 +97,13 @@ function CategoriesManagementPage() {
     <HeaderCategoryManagement textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} />
     <Row className='col-12 col-lg-8 mx-auto py-4'>
       {categories.map((category) => (
-        <CategoryList key={category.id} name={category.name} onClickEdit={()=>{handleShowEditCategoryModal(category.id, category.name)}}/>
+        <CategoryList key={category.id} name={category.name} onClickEdit={()=>{handleShowEditCategoryModal(category.id, category.name)}} onClickDelete={()=>handleShowDeleteCategoryModal(category.id, category.name)}/>
       ))}
     </Row>
   </Container>
 
   <EditCategoryModal show={showEditCategoryModal} handleClose={handleCloseEditCategoryModal} selectedCategoryName={selectedCategoryName} handleCategoryChange={handleCategoryChange} editCategory={editCategory} />
+  <DeleteCategoryModal  show={showDeleteCategoryModal} handleClose={handleCloseDeleteCategoryModal} selectedCategoryName={selectedCategoryName} deleteCategory={deleteCategory} />
 
 </>
 }

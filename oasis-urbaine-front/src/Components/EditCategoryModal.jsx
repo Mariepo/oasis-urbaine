@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Button, Modal, Form } from 'react-bootstrap'
+import { Button, Modal, Form } from 'react-bootstrap'
 
 function EditCategoryModal({show, handleClose, selectedCategoryName, handleCategoryChange, editCategory}) {
   return (
