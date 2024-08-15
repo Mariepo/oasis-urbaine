@@ -29,12 +29,11 @@ import SignupPage from './Pages/SignupPage';
 import Cart from './Pages/Cart';
 import OrderConfirmationPage from './Pages/OrderConfirmationPage';
 import EditUserForm from './Pages/EditUserForm';
-import ProductsManagementPage from './Pages/ProductsManagementPage';
+import ProductsManagementPage from './Pages/Admin/ProductsManagementPage';
 import CategoriesManagementPage from './Pages/Admin/CategoriesManagementPage';
-import EditCategoryForm from './Pages/Admin/EditCategoryForm';
 import AddCategoryForm from './Pages/Admin/AddCategoryForm';
-import AddProductForm from './Pages/AddProductForm';
-import EditProductForm from './Pages/EditProductForm';
+import AddProductForm from './Pages/Admin/AddProductForm';
+import EditProductForm from './Pages/Admin/EditProductForm';
 
 function App() {
   UsersService.checkToken();
@@ -67,7 +66,6 @@ function App() {
                   <Route path='/edit-product/:id' element={<EditProductForm />} /> 
                   <Route path='/categories-management' element={<CategoriesManagementPage/>} /> 
                   <Route path='/add-category' element={<AddCategoryForm/>} /> 
-                  <Route path='/edit-category/:id' element={<EditCategoryForm/>} /> 
                 </>}</>}
             </Routes>
             <FooterComponent></FooterComponent>

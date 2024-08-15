@@ -42,12 +42,16 @@ class ProductsController {
 
     async updateProduct(request, result) {
         try {
-            const product = await ProductsService.updateProduct(request.params.id, request.body);
+            await ProductsService.updateProduct(request.params.id, request.body);
+            // Suppression des anciennes catégories associées
+            await ProductCategoryService.deleteProductCategoryByProductId(request.params.id);
+            // Ajout des nouvelles catégories
             const productCategories = request.body.categories || [];
             for (let category of productCategories) {
                 await ProductCategoryService.addProductCategory(request.params.id, category.id_category);
             }
-            result.json(product);
+            const updatedProduct = await ProductsService.getProductById(request.params.id);
+            result.json(updatedProduct);
         } catch (error) {
             result.status(500);
             result.json({error : "Une erreur est survenue lors de la modification du produit"});              
