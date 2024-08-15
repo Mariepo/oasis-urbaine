@@ -5,15 +5,15 @@ class CategoriesService {
         return axios.get('http://127.0.0.1:3001/categories');
     }
 
-    static addCategorie(categorie) {
-        return axios.post('http://127.0.0.1:3001/categories', categorie)
+    static addCategory(category) {
+        return axios.post('http://127.0.0.1:3001/categorys', category)
     }
 
-    static editCategorie(id, categorie) {
-        return axios.patch(`http://127.0.0.1:3001/categories${id}`, categorie)
+    static editCategory(id, category) {
+        return axios.patch(`http://127.0.0.1:3001/categories${id}`, category)
     }
 
-    static deleteCategorie(id){
+    static deleteCategory(id){
         return axios.delete(`http://127.0.0.1:3001/categories${id}`)
     }
 }

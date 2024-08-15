@@ -3,7 +3,7 @@ const Products = require("../Models/Products");
 
 class CategoriesService {
     async getAllCategories() {
-        return await Categories.findAll();
+        return await Categories.findAll({order: [['id', 'DESC']]});
     }
 
     async getCategoryById(id){
