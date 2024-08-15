@@ -18,13 +18,12 @@ function SignupPage() {
     city: ''            
   });  
   const [confirmPassword, setConfirmPassword] = useState(''); 
-  const {setIsAuthenticated, setToken} = useContext(AuthContext);
+  const {setIsAuthenticated, setToken, setIsAdmin} = useContext(AuthContext);
   const navigate = useNavigate();
   const navigateTo = (route) => {
     navigate(route);
     window.scrollTo(0, 0);
   }
-
 
   const handleChange = (event) => {
     const {name, value} = event.currentTarget;
@@ -56,6 +55,7 @@ function SignupPage() {
       window.localStorage.setItem('authToken', token.data.token);
       setIsAuthenticated(true);
       setToken(token.data.token);
+      setIsAdmin(UsersService.isAdmin()); 
       navigateTo('/');
     } catch (error) {
       toast.error('Erreur lors de la création du compte')

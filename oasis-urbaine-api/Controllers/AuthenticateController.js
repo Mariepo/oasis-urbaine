@@ -20,14 +20,6 @@ class AuthenticateController {
                 return result.json({error : "Vous token n'est pas valide"});                
             }
 
-            // const userData = UsersService.getUserById(request.params.id);
-
-            // if (userData.token != token) {
-            //     console.log(userData.token);
-            //     console.log(token);
-            //     result.status(403); 
-            //     return result.json({error : "Token invalide"});
-            // }
             request.user = user;
             next();
         })
@@ -37,7 +29,8 @@ class AuthenticateController {
         const userPayload = {
             id : user.id,
             email : user.email,
-            user : user.firstname + " " + user.name
+            user : user.firstname + " " + user.name,
+            is_admin : user.is_admin
         }
         return jwt.sign(userPayload, config.SECRET, {expiresIn : "1H"});
     }

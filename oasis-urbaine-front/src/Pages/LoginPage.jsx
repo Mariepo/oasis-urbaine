@@ -8,7 +8,7 @@ import {Container, Button, Form} from 'react-bootstrap';
 
 const LoginPage = () => {
     const [user, setUser] = useState({ email: '', password: '' });   
-    const {setIsAuthenticated, setToken} = useContext(AuthContext);
+    const {setIsAuthenticated, setToken, setIsAdmin} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -26,6 +26,7 @@ const LoginPage = () => {
                 window.localStorage.setItem('authToken', token.data.token);
                 setIsAuthenticated(true);
                 setToken(token.data.token);
+                setIsAdmin(UsersService.isAdmin()); 
                 toast.success("Vous êtes bien connecté");
                 const redirectTo = location.state?.from || '/';
                 navigate(redirectTo);

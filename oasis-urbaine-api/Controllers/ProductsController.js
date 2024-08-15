@@ -1,3 +1,4 @@
+const ProductCategoryService = require('../Services/ProductCategoryService');
 const ProductsService = require('../Services/ProductsService')
 
 class ProductsController {
@@ -23,9 +24,14 @@ class ProductsController {
         }
     }
 
+    // Commentaire : on ajoute les catégorie dans le corps de la requête
     async addProduct(request, result){
         try {
             const product = await ProductsService.addProduct(request.body);
+            const productCategories = request.body.categories || [];
+            for (let category of productCategories) {
+                await ProductCategoryService.addProductCategory(product.id, category.id_category);
+            }
             result.json(product);
         } catch (error) {
             result.status(500);
@@ -33,9 +39,15 @@ class ProductsController {
         }
     }
 
+
     async updateProduct(request, result) {
         try {
             const product = await ProductsService.updateProduct(request.params.id, request.body);
+            await ProductCategoryService.deleteProductCategory(request.params.id);
+            const productCategories = request.body.categories || [];
+            for (let category of productCategories) {
+                await ProductCategoryService.addProductCategory(request.params.id, category.id_category);
+            }
             result.json(product);
         } catch (error) {
             result.status(500);
