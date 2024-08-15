@@ -58,7 +58,7 @@ function App() {
                 <Route path='/products-management' element={<ProductsManagementPage />} /> 
                 <Route path='/categories-management' element={<CategoriesManagementPage />} /> 
                 <Route path='/add-product' element={<AddProductForm />} /> 
-                <Route path='/edit-product' element={<EditProductForm />} /> 
+                <Route path='/edit-product/:id' element={<EditProductForm />} /> 
                 <Route path='/delete-product' element={<DeleteProduct />} /> 
               </>}</>}
               <Route path='/login' element={<LoginPage />} />

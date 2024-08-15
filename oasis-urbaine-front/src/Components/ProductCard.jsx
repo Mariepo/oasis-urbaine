@@ -7,6 +7,10 @@ import AuthContext from '../Context/AuthContext';
 function ProductCard({product, handleShowModal}) {
   const {isAdmin} = useContext(AuthContext);
   const navigate = useNavigate();
+  const navigateTo = (route) => {
+    navigate(route);
+    window.scrollTo(0, 0);
+  }
   const location = useLocation();
   const isOnProductsManagementPage = location.pathname === '/products-management';
 
@@ -36,7 +40,7 @@ function ProductCard({product, handleShowModal}) {
             </Card.Body>
             {isAdmin && isOnProductsManagementPage &&
               <Card.Footer className='d-flex justify-content-between gap-3'>
-                  <Button variant="outline-primary" className='flex-fill' onClick={()=> {navigate('/edit-product')}}>Modifier</Button>
+                  <Button variant="outline-primary" className='flex-fill' onClick={()=> {navigateTo(`/edit-product/${product.id}`)}}>Modifier</Button>
                   <Button variant="outline-danger" className='flex-fill' onClick={()=>{handleShowModal(product.id)}}>Supprimer</Button>
               </Card.Footer>
             }
