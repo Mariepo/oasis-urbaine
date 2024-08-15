@@ -29,13 +29,19 @@ import SignupPage from './Pages/SignupPage';
 import Cart from './Pages/Cart';
 import OrderConfirmationPage from './Pages/OrderConfirmationPage';
 import EditUserForm from './Pages/EditUserForm';
+import ProductsManagementPage from './Pages/ProductsManagementPage';
+import CategoriesManagementPage from './Pages/CategoriesManagementPage';
+import AddProductForm from './Pages/AddProductForm';
+import EditProductForm from './Pages/EditProductForm';
+import DeleteProduct from './Pages/DeleteProduct';
 
 function App() {
   UsersService.checkToken();
   const [isAuthenticated, setIsAuthenticated] = useState(UsersService.isAuthenticated)
+  const [isAdmin, setIsAdmin] = useState(UsersService.isAdmin);
   const [token, setToken] = useState(window.localStorage.getItem('authToken') ? window.localStorage.getItem('authToken') : null);
   return <>
-    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, token, setToken}}>
+    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, token, setToken, isAdmin, setIsAdmin}}>
         <CartProvider>
           <BrowserRouter> 
             <Headerbanner></Headerbanner>
@@ -46,16 +52,26 @@ function App() {
               <Route path='/products/:id' element={<ProductDetailsPage />} />
               <Route path='/categories' element={<ProductsPage />} />
               <Route path='/categories/:id/products' element={<ProductsPage />} />
-              {isAuthenticated && <Route path='/account' element={<AccountPage />} />}
+              {isAuthenticated && <>
+                <Route path='/account' element={<AccountPage />} /> 
+              {isAdmin && <>
+                <Route path='/products-management' element={<ProductsManagementPage />} /> 
+                <Route path='/categories-management' element={<CategoriesManagementPage />} /> 
+                <Route path='/add-product' element={<AddProductForm />} /> 
+                <Route path='/edit-product/:id' element={<EditProductForm />} /> 
+                <Route path='/delete-product' element={<DeleteProduct />} /> 
+              </>}</>}
               <Route path='/login' element={<LoginPage />} />
               <Route path='/signup' element={<SignupPage />} />
               <Route path='/cart' element={<Cart/>} />
-              {isAuthenticated && <Route path='/order-confirmation' element={<OrderConfirmationPage/>} />}
-              {isAuthenticated && <Route path='/edit-address' element={<EditUserForm/>} />}
+              {isAuthenticated && <>
+                <Route path='/order-confirmation' element={<OrderConfirmationPage/>} />
+                <Route path='/edit-address' element={<EditUserForm/>} />
+              </>}
               <Route path='/*' element={<ErrorPage />} />
             </Routes>
             <FooterComponent></FooterComponent>
-            <ToastContainer autoClose={10000} />
+            <ToastContainer autoClose={5000} />
           </BrowserRouter>
         </CartProvider>    
     </AuthContext.Provider>

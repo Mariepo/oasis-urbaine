@@ -6,6 +6,8 @@ const AuthContext = createContext({
     setIsAuthenticated : () => {},
     token : null,
     setToken : () => {}, 
+    isAdmin : false,
+    setIsAdmin : () => {}
 })
 
 export default AuthContext;

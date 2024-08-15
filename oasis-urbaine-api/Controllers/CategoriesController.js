@@ -1,4 +1,5 @@
 const CategoriesService = require("../Services/CategoriesService");
+const ProductCategoryService = require("../Services/ProductCategoryService");
 
 class CategoriesController {
     async getAllCategories(request, result) {
@@ -59,6 +60,16 @@ class CategoriesController {
             result.status(500);
             result.json({ error: "Une erreur est survenue lors de la récupération des produits pour la catégorie" });
         }
+    }
+
+    async getCategoryByProductId(request, result) {
+        try {
+            const categorie = await ProductCategoryService.getCategoriesByProductId(request.params.id);
+            result.json(categorie);
+        } catch (error) {
+            result.status(500);
+            result.json({ error: "Une erreur est survenue lors de la récupération des catégories du produit" });
+        }        
     }
 }
 

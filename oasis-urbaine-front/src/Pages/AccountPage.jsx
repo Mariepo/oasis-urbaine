@@ -8,7 +8,7 @@ import { Container, Row, Col, Button, Card, Table } from 'react-bootstrap';
 
 function AccountPage() {
     const navigate = useNavigate();
-    const {setIsAuthenticated, setToken} = useContext(AuthContext);
+    const {setIsAuthenticated, setToken, setIsAdmin} = useContext(AuthContext);
     const [user, setUser] = useState([]);
     const [orders, setOrders] = useState([]);
     const id = UsersService.getUserId();
@@ -16,6 +16,7 @@ function AccountPage() {
     // Deconnexion
     const logout = () => {
         setIsAuthenticated(false);
+        setIsAdmin(false);
         setToken(null);
         UsersService.logout();
         navigate('/login');

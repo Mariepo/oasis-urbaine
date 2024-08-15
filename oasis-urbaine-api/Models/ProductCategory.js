@@ -30,5 +30,7 @@ ProductCategory.init({
         tableName : "product_category",
         timestamps : false
     })
+    
 
 module.exports = ProductCategory;
+

@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Container, Nav, Navbar} from 'react-bootstrap';
 import AuthContext from '../Context/AuthContext';
 import CartContext from '../Context/CartContext';
 
 function NavbarComponent() {
-  const {isAuthenticated} = useContext(AuthContext);
+  const {isAuthenticated, isAdmin} = useContext(AuthContext);
   const {cartItems} = useContext(CartContext);
   const cartItemsQuantity = cartItems.reduce((total, item) => {
     return total + item.quantity;
@@ -26,6 +26,12 @@ function NavbarComponent() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto ms-auto">
                 <Nav.Link onClick={() => {navigateTo('/products')}}>Arbres fruitiers d’intérieur 🍊</Nav.Link>
+                {isAdmin && 
+                  <>
+                    <Nav.Link onClick={() => {navigateTo('/products-management')}}>Gestion des produits</Nav.Link>
+                    <Nav.Link onClick={() => {navigateTo('/categories-management')}}>Gestion des categories</Nav.Link>
+                  </>
+                }
               </Nav>
               <Nav>
                 {isAuthenticated ? 
