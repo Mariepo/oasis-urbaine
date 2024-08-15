@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ProductsService from '../Services/ProductsService';
+import ProductsService from '../../Services/ProductsService';
 import { useParams, useNavigate } from 'react-router-dom';
-
-// Components
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
-import ProductCard from '../Components/ProductCard';
+import { Container, Row, Col} from 'react-bootstrap';
+import ProductCard from '../../Components/ProductCard';
 import { toast } from 'react-toastify';
-
+import HeaderManagement from '../../Components/HeaderManagement';
+import DeleteProductModal from '../../Components/DeleteProductModal';
 
 function ProductsManagementPage() {
     const { id } = useParams();
@@ -50,14 +49,9 @@ function ProductsManagementPage() {
 
 
     return <>
-        <Container className='pt-3'>
-            <Row className='my-5 d-flex flex-row justify-content-center'>
-            <h1>Gérer les produits</h1>
-            <div>
-                <Button variant='primary' onClick={()=>{navigate('/add-product')}}>Ajouter un produit</Button>
-            </div>
-            </Row>
-            <Row className="g-4">
+        <Container className='py-5'>
+            <HeaderManagement lg={12} textH1={"Gestion des produit"} textButton={"Ajouter un produit"} onClick={()=>{navigate('/add-product')}} />
+            <Row className="g-4 py-4">
                 {products.map((product) => (
                     <Col xs={12} sm={6} md={6} lg={3} className='mb-5' key={product.id} >
                         <ProductCard product={product} handleShowModal={handleShowModal}/>
@@ -66,16 +60,8 @@ function ProductsManagementPage() {
             </Row>
         </Container>
 
-        <Modal show={show} onHide={handleCloseModal} backdrop="static" centered>
-            <Modal.Header closeButton>
-                <Modal.Title>Supprimer le produit</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Êtes-vous sûr de vouloir supprimer ce produit ? Cette action est irréversible.</Modal.Body>
-            <Modal.Footer>
-                <Button variant="outline-secondary" onClick={handleCloseModal}> Annuler</Button>
-                <Button variant="danger" onClick={deleteProduct}>Oui, je supprime le produit</Button>
-            </Modal.Footer>
-        </Modal>
+        <DeleteProductModal show={show} handleCloseModal={handleCloseModal} onClick={deleteProduct} />
+
     </>
     }
 
