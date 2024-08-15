@@ -13,6 +13,14 @@ class ProductCategoryService {
             }
         });
     }
+
+    async deleteProductCategoryByProductId(id) {
+        return await ProductCategory.destroy({
+            where: { 
+                id_product : id 
+            }
+        });
+    }
 }
 
 module.exports = new ProductCategoryService();

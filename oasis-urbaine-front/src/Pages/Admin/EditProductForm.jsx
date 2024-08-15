@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Form, Button, InputGroup } from 'react-bootstrap'
-import ProductsService from '../Services/ProductsService';
-import CategoriesService from '../Services/CategoriesService';
+import ProductsService from '../../Services/ProductsService';
+import CategoriesService from '../../Services/CategoriesService';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -37,8 +37,6 @@ function EditProductForm() {
       console.log(error);
     }    
   }
-  console.log(product)
-
 
   const handleChange = (event) => {
     const {name, value} = event.currentTarget;
@@ -64,7 +62,6 @@ function EditProductForm() {
           id_category: id_category
         }))
       }
-      // await ProductsService.addProduct(productWithCategories)
       await ProductsService.editProduct(id, productWithCategories)
       toast.success('Produit modifié avec succès !');
       navigateTo('/products-management')

@@ -17,11 +17,11 @@ function ProductDetailsPage(){
       console.log(error);
     }
   } 
+  console.log(product)
 
   useEffect(() => {
     fetchProductsById();
   }, []);
-
     // Convertir le prix en nombre, puis en format avec 2 décimales
     const price = parseFloat(product.price).toFixed(2);
 
@@ -42,6 +42,15 @@ function ProductDetailsPage(){
           <h1>{product.title}</h1>
           <span>{formattedPrice}€</span>
           <p>Livraison calculée à la prochaine étape</p>
+          {product.categories && product.categories.length > 0 && (
+            <ul>
+              {product.categories.map((categorie) => (
+                  <li as="li" key={categorie.id}>
+                      {categorie.name}
+                  </li>
+              ))}
+            </ul>
+            )}
           <div className="d-grid gap-2">
             <Button variant="primary" onClick={() => addToCart(product, true)}>Ajouter au panier</Button>
           </div>

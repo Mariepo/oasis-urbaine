@@ -42,6 +42,7 @@ function Cart() {
   useEffect( () => {
     fetchData();
   }, []);
+  
 
   const addOrder = async () => {
     if(id_user === null) {

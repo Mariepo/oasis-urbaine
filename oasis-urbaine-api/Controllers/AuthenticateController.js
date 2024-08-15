@@ -32,7 +32,7 @@ class AuthenticateController {
             user : user.firstname + " " + user.name,
             is_admin : user.is_admin
         }
-        return jwt.sign(userPayload, config.SECRET, {expiresIn : "1H"});
+        return jwt.sign(userPayload, config.SECRET, {expiresIn : "4H"});
     }
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Form, Button, InputGroup } from 'react-bootstrap'
-import ProductsService from '../Services/ProductsService';
-import CategoriesService from '../Services/CategoriesService';
+import ProductsService from '../../Services/ProductsService';
+import CategoriesService from '../../Services/CategoriesService';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -66,9 +66,18 @@ function AddProductForm() {
     }
   }
 
-  useEffect(() => {
-    fetchCategories();
-}, []);  
+    useEffect(() => {
+      fetchCategories();
+  }, []);  
+
+  // Prevent the input value change on scroll
+  const numberInputOnWheelPreventChange = (e) => {
+    e.target.blur()
+    e.stopPropagation()
+      setTimeout(() => {
+        e.target.focus()
+    }, 0)
+  }
 
   return (
     <Container fluid className=' py-5'>
@@ -77,7 +86,7 @@ function AddProductForm() {
           <fieldset>
             <p className='signup-form-title'>Description</p>
             <Form.Group className="mb-3" controlId="title">
-              <Form.Label>Nom du produit</Form.Label>
+              <Form.Label>Nom du produit *</Form.Label>
               <Form.Control type="text" name="title" placeholder="Nom du produit" onChange={handleChange} value={product.title} required/>
             </Form.Group>            
             <Form.Group className="mb-3" controlId="description">
@@ -85,8 +94,8 @@ function AddProductForm() {
               <Form.Control as="textarea" rows={3} name="description" placeholder="Description" value={product.description} onChange={handleChange} />
             </Form.Group>            
             <Form.Group className="mb-3" controlId="price">
-              <Form.Label>Prix (€)</Form.Label>
-              <Form.Control type="number" name="price" min="0" step="0.01" placeholder="Prix du produit" value={product.price} onChange={handleChange} required/>
+              <Form.Label>Prix (€) *</Form.Label>
+              <Form.Control onWheel={numberInputOnWheelPreventChange} type="number" name="price" min="0" placeholder="Prix du produit" value={product.price} onChange={handleChange} required/>
             </Form.Group>   
             <Form.Group>
               <Form.Label htmlFor="dimension">Taille en cm</Form.Label>

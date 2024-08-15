@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Row} from 'react-bootstrap'
 import CategoriesService from '../../Services/CategoriesService';
 import CategoryList from '../../Components/CategoryList';
-import HeaderCategoryManagement from '../../Components/HeaderCategoryManagement';
+import HeaderManagement from '../../Components/HeaderManagement';
 import { toast } from 'react-toastify';
 import EditCategoryModal from '../../Components/EditCategoryModal';
 import DeleteCategoryModal from '../../Components/DeleteCategoryModal';
@@ -94,7 +94,7 @@ function CategoriesManagementPage() {
 
   return <>
   <Container className='py-5'>
-    <HeaderCategoryManagement textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} />
+    <HeaderManagement lg={8} textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} buttonWidth={"w-100"} />
     <Row className='col-12 col-lg-8 mx-auto py-4'>
       {categories.map((category) => (
         <CategoryList key={category.id} name={category.name} onClickEdit={()=>{handleShowEditCategoryModal(category.id, category.name)}} onClickDelete={()=>handleShowDeleteCategoryModal(category.id, category.name)}/>

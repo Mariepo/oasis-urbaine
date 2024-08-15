@@ -15,10 +15,6 @@ Categories.init({
     name : {
         type : DataTypes.STRING,
         allowNull : false
-    },
-    description : {
-        type : DataTypes.TEXT,
-        allowNull : true
     }
     }, {
         sequelize,
@@ -28,7 +24,5 @@ Categories.init({
     }
 )
 
-// Categories.belongsToMany(Products, {as : 'products', foreignKey : 'id_product', through: ProductsCategory});
-// Products.belongsToMany(Categories, {as : 'categories', foreignKey: "id_category", through: ProductsCategory});
 
 module.exports = Categories;
