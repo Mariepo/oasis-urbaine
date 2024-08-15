@@ -30,10 +30,11 @@ import Cart from './Pages/Cart';
 import OrderConfirmationPage from './Pages/OrderConfirmationPage';
 import EditUserForm from './Pages/EditUserForm';
 import ProductsManagementPage from './Pages/ProductsManagementPage';
-import CategoriesManagementPage from './Pages/CategoriesManagementPage';
+import CategoriesManagementPage from './Pages/Admin/CategoriesManagementPage';
+import EditCategoryForm from './Pages/Admin/EditCategoryForm';
+import AddCategoryForm from './Pages/Admin/AddCategoryForm';
 import AddProductForm from './Pages/AddProductForm';
 import EditProductForm from './Pages/EditProductForm';
-import DeleteProduct from './Pages/DeleteProduct';
 
 function App() {
   UsersService.checkToken();
@@ -52,23 +53,22 @@ function App() {
               <Route path='/products/:id' element={<ProductDetailsPage />} />
               <Route path='/categories' element={<ProductsPage />} />
               <Route path='/categories/:id/products' element={<ProductsPage />} />
-              {isAuthenticated && <>
-                <Route path='/account' element={<AccountPage />} /> 
-              {isAdmin && <>
-                <Route path='/products-management' element={<ProductsManagementPage />} /> 
-                <Route path='/categories-management' element={<CategoriesManagementPage />} /> 
-                <Route path='/add-product' element={<AddProductForm />} /> 
-                <Route path='/edit-product/:id' element={<EditProductForm />} /> 
-                <Route path='/delete-product' element={<DeleteProduct />} /> 
-              </>}</>}
               <Route path='/login' element={<LoginPage />} />
               <Route path='/signup' element={<SignupPage />} />
               <Route path='/cart' element={<Cart/>} />
+              <Route path='/*' element={<ErrorPage />} />
               {isAuthenticated && <>
+                <Route path='/account' element={<AccountPage />} /> 
                 <Route path='/order-confirmation' element={<OrderConfirmationPage/>} />
                 <Route path='/edit-address' element={<EditUserForm/>} />
-              </>}
-              <Route path='/*' element={<ErrorPage />} />
+                {isAdmin && <>
+                  <Route path='/products-management' element={<ProductsManagementPage />} /> 
+                  <Route path='/add-product' element={<AddProductForm />} /> 
+                  <Route path='/edit-product/:id' element={<EditProductForm />} /> 
+                  <Route path='/categories-management' element={<CategoriesManagementPage/>} /> 
+                  <Route path='/add-category' element={<AddCategoryForm/>} /> 
+                  <Route path='/edit-category/:id' element={<EditCategoryForm/>} /> 
+                </>}</>}
             </Routes>
             <FooterComponent></FooterComponent>
             <ToastContainer autoClose={5000} />
