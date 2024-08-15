@@ -14,10 +14,12 @@ const usersRoutes = require('./Routes/UsersRoutes');
 const ordersRoutes = require('./Routes/OrdersRoutes');
 const deliverMethodsRoutes = require('./Routes/DeliveryMethodsRoutes');
 const paymentMethodsRoutes = require('./Routes/PaymentMethodsRoutes');
+const productCategoryRoutes = require('./Routes/ProductCategoryRoutes');
 
 app.use('/products', productsRoutes);
 app.use('/product-types', productTypesRoutes);
 app.use('/categories', categoriesRoutes);
+app.use('/product-category', productCategoryRoutes);
 app.use('/users', usersRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/delivery', deliverMethodsRoutes);

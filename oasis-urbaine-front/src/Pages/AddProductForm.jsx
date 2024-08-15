@@ -66,9 +66,18 @@ function AddProductForm() {
     }
   }
 
-  useEffect(() => {
-    fetchCategories();
-}, []);  
+    useEffect(() => {
+      fetchCategories();
+  }, []);  
+
+  // Prevent the input value change on scroll
+  const numberInputOnWheelPreventChange = (e) => {
+    e.target.blur()
+    e.stopPropagation()
+      setTimeout(() => {
+        e.target.focus()
+    }, 0)
+  }
 
   return (
     <Container fluid className=' py-5'>
@@ -86,7 +95,7 @@ function AddProductForm() {
             </Form.Group>            
             <Form.Group className="mb-3" controlId="price">
               <Form.Label>Prix (€)</Form.Label>
-              <Form.Control type="number" name="price" min="0" step="0.01" placeholder="Prix du produit" value={product.price} onChange={handleChange} required/>
+              <Form.Control onWheel={numberInputOnWheelPreventChange} type="number" name="price" min="0" placeholder="Prix du produit" value={product.price} onChange={handleChange} required/>
             </Form.Group>   
             <Form.Group>
               <Form.Label htmlFor="dimension">Taille en cm</Form.Label>

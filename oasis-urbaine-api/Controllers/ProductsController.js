@@ -43,7 +43,6 @@ class ProductsController {
     async updateProduct(request, result) {
         try {
             const product = await ProductsService.updateProduct(request.params.id, request.body);
-            await ProductCategoryService.deleteProductCategory(request.params.id);
             const productCategories = request.body.categories || [];
             for (let category of productCategories) {
                 await ProductCategoryService.addProductCategory(request.params.id, category.id_category);
