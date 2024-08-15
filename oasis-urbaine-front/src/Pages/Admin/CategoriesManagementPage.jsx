@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Button, Modal, Form } from 'react-bootstrap'
+import { Container, Row} from 'react-bootstrap'
 import CategoriesService from '../../Services/CategoriesService';
 import CategoryList from '../../Components/CategoryList';
 import HeaderCategoryManagement from '../../Components/HeaderCategoryManagement';
 import { toast } from 'react-toastify';
+import EditCategoryModal from '../../Components/EditCategoryModal';
 
 function CategoriesManagementPage() {
   const [categories, setCategories] = useState([]);
@@ -14,10 +15,10 @@ function CategoriesManagementPage() {
   // pour passer l'id de la catégorie cliquée
   const [selectedCategoryId, setSelectedCategoryId] = useState();
   const [selectedCategoryName, setSelectedCategoryName] = useState();
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = (categoryId, categoryName) => {
-    setShow(true);
+  const [showEditCategoryModal, setShowEditCategoryModal] = useState(false);
+  const handleCloseEditCategoryModal = () => setShowEditCategoryModal(false);
+  const handleShowEditCategoryModal = (categoryId, categoryName) => {
+    setShowEditCategoryModal(true);
     setSelectedCategoryId(categoryId);
     setSelectedCategoryName(categoryName);
   }
@@ -58,7 +59,7 @@ function CategoriesManagementPage() {
       await CategoriesService.editCategory(selectedCategoryId, {name : selectedCategoryName});
       setSelectedCategoryId(null);
       setSelectedCategoryName('');
-      setShow(false);
+      setShowEditCategoryModal(false);
       fetchCategories();
       toast.success('Catégorie modifiée avec succès !');
     } catch (error) {
@@ -77,35 +78,13 @@ function CategoriesManagementPage() {
     <HeaderCategoryManagement textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} />
     <Row className='col-12 col-lg-8 mx-auto py-4'>
       {categories.map((category) => (
-        <CategoryList key={category.id} name={category.name} onClickEdit={()=>{handleShow(category.id, category.name)}}/>
+        <CategoryList key={category.id} name={category.name} onClickEdit={()=>{handleShowEditCategoryModal(category.id, category.name)}}/>
       ))}
     </Row>
   </Container>
 
+  <EditCategoryModal show={showEditCategoryModal} handleClose={handleCloseEditCategoryModal} selectedCategoryName={selectedCategoryName} handleCategoryChange={handleCategoryChange} editCategory={editCategory} />
 
-  {/* Edit Modal */}
-  <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Modifier la catégorie</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group className="flex-fill" controlId="category">
-            <Form.Control type="text" placeholder="Nom de la catégorie" name="name" value={selectedCategoryName} onChange={handleCategoryChange} />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="outlinesecondary" onClick={handleClose}>
-            Annuler
-          </Button>
-          <Button variant="primary" onClick={editCategory}>Modifier</Button>
-        </Modal.Footer>
-      </Modal>
 </>
 }
 
