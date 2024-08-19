@@ -32,7 +32,7 @@ function ProductCard({product, handleShowModal}) {
         <Card>
             <Card.Img variant="top" src={product.image_thumbnail}  onClick={navigateToProductDetails}/>
             <Card.Body  onClick={navigateToProductDetails}>
-                <Card.Title className='d-flex justify-content-between'>
+                <Card.Title className='d-flex justify-content-between product-card-title'>
                     <div>{product.title}</div>
                     <div>{formattedPrice}€</div>
                 </Card.Title>

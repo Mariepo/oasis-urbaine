@@ -1,0 +1,33 @@
+// CUSTOM VARIABLES
+// color
+$background-green: #E9FAE8;
+$background-orange: #FAF4E8;
+$background-grey: #F8F8F8;
+$background-dark-grey: #F3F3F3;
+$border-radius-md: 12px;
+
+
+
+// BOOTSTRAP VARIABLES
+// color
+$primary: #0F8277; 
+
+// button
+$btn-border-radius: $border-radius-md;
+$btn-padding-y: 12px;           
+$btn-padding-x: 16px;
+$btn-link-color: #A34D00;
+$btn-link-hover-color: #7c3a00;
+
+// font
+$headings-font-family: "DM Serif Display", serif;
+$font-family-sans-serif: 'poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+// input
+$input-border-radius: $border-radius-md;
+$input-btn-padding-y: 12px; 
+$input-btn-padding-x: 16px;
+
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+

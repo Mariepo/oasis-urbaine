@@ -16,8 +16,8 @@ function HeaderHome() {
             <Row className='d-flex flex-column flex-md-row align-items-center ms-md-5'>
                 <Col className='col-12 col-md-6 order-2 order-md-1'>
                     <h1>Une oasis de verdure et de sérénité</h1>
-                    <p>Nos arbres fruitiers vous permettent de profiter de récoltes savoureuses tout en respectant l'environnement. </p>
-                    <Button variant="primary" onClick={() => {navigateTo('/products')}}>Voir tous les arbres fruitiers</Button>
+                    <p className='my-4'>Nos arbres fruitiers vous permettent de profiter de récoltes savoureuses tout en respectant l'environnement. </p>
+                    <Button className='mt-2' variant="primary" onClick={() => {navigateTo('/products')}}>Voir tous les arbres fruitiers</Button>
                 </Col>
                 <Col className='col-12 col-md-6 order-1 order-md-2'>
                     <div className='header-image-container'>
