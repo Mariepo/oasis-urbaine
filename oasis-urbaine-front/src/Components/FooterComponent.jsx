@@ -5,7 +5,7 @@ function FooterComponent() {
     return (
         <footer>
             <Container>
-                <div className='d-flex flex-column flex-md-row justify-content-between align-items-center gap-3'>
+                <div className='d-flex flex-column flex-md-row justify-content-between align-items-center flex-wrap gap-3'>
                     <div>
                         <img src='assets/images/logo-oasis-urbaine.svg' alt='logo Oasis Urbaine' className='img-fluid' />
                     </div>

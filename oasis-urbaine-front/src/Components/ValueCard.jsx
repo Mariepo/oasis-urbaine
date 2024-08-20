@@ -5,9 +5,8 @@ import Card from 'react-bootstrap/Card';
 
 function ValueCard({videoSource, title, description}) {
     return (
-        <Card>
-            <Card.Img variant="top" src=""/>
-            <video autoPlay muted loop width="100%">
+        <Card className='value-card'>
+            <video autoPlay muted loop width="100%" height="300px"> 
                 <source src={videoSource} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>

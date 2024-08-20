@@ -90,11 +90,15 @@ function CategoriesManagementPage() {
 
   useEffect(() => {
     fetchCategories();
+    document.body.classList.add('background-body-grey');
+    return () => {
+        document.body.classList.remove('background-body-grey');
+    };
   }, [])
 
   return <>
   <Container className='py-5'>
-    <HeaderManagement lg={8} textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} buttonWidth={"w-100"} />
+    <HeaderManagement lg={8} textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} className={"col-12 col-md-4"} />
     <Row className='col-12 col-lg-8 mx-auto py-4'>
       {categories.map((category) => (
         <CategoryList key={category.id} name={category.name} onClickEdit={()=>{handleShowEditCategoryModal(category.id, category.name)}} onClickDelete={()=>handleShowDeleteCategoryModal(category.id, category.name)}/>

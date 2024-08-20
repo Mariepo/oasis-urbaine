@@ -21,7 +21,7 @@ function NavbarComponent() {
   const isActive = (route) => location.pathname === route;
 
     return <>
-        <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
+        <Navbar expand="lg" sticky="top">
           <Container>
             <Navbar.Brand onClick={() => {navigateTo('/')}} className='cursor-pointer'>
               <img src="assets/images/logo-oasis-urbaine.svg" alt="logo de la marque Oasis Urbaine" />

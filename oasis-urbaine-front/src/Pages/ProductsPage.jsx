@@ -46,27 +46,23 @@ function ProductsPage() {
         fetchCategories();
     }, [id]);
 
-    function displaySelectedComponent(event){
-        const target = event.currentTarget;
-        document.querySelectorAll('.selected-badge').forEach(element => {
-            if (element !== target) {
-                element.classList.remove('selected-badge');
-            }
-        });
-        target.classList.toggle('selected-badge');
+    function displaySelectedCategoryBadge(event) {
+        document.querySelector('.category-badge-active')?.classList.remove('category-badge-active');
+        event.currentTarget.classList.add('category-badge-active');
     }
+    
     
 
     return <>
         <HeaderProducts></HeaderProducts>
-        <Container className='pt-3'>
-            <Stack direction="horizontal" gap={2} className='pb-3 flex-wrap'>
-                <CategoryBadge name={"Tous"} onClick={(event) => {navigate('/products'); displaySelectedComponent(event);}} />
+        <Container>
+            <Stack direction="horizontal" gap={2} className='mt-2 mb-5 flex-wrap'>
+                <CategoryBadge name={"Tous"} onClick={(event) => {navigate('/products'); displaySelectedCategoryBadge(event);}} className={'category-badge' + (!id ? ' category-badge-active' : '')} />
                 {categories.map((category) => (
-                    <CategoryBadge id={category.id} name={category.name} onClick={(event) => {navigateTo('/categories/'+category.id+'/products/'); displaySelectedComponent(event);}} key={category.id}/>
+                    <CategoryBadge id={category.id} name={category.name} onClick={(event) => {navigateTo('/categories/'+category.id+'/products/'); displaySelectedCategoryBadge(event);}} key={category.id} className={'category-badge' + (id === category.id.toString() ? ' category-badge-active' : '')} />
                 ))}
             </Stack>
-            <Row className="g-4">
+            <Row className="g-4 mb-5">
                 {products.map((product) => (
                     <Col xs={12} sm={6} md={6} lg={3}  key={product.id} >
                         <ProductCard product={product}/>

@@ -68,6 +68,10 @@ function AddProductForm() {
 
     useEffect(() => {
       fetchCategories();
+      document.body.classList.add('background-body-grey');
+      return () => {
+        document.body.classList.remove('background-body-grey');
+      }
   }, []);  
 
   // Prevent the input value change on scroll
@@ -81,19 +85,19 @@ function AddProductForm() {
 
   return (
     <Container fluid className=' py-5'>
-      <Form  onSubmit={addProduct} method='post' className='col-10 col-md-6 mx-auto d-flex flex-column my-5'>
-          <h1 className='text-center'>Ajouter un produit</h1>
-          <fieldset>
-            <p className='signup-form-title'>Description</p>
-            <Form.Group className="mb-3" controlId="title">
+      <Form  onSubmit={addProduct} method='post' className='col-12 col-md-10 col-lg-6 mx-auto d-flex flex-column'>
+          <h1 className='text-center my-4'>Ajouter un produit</h1>
+          <fieldset className='mt-2'>
+            <p className='form-title'>Description</p>
+            <Form.Group className="mb-4" controlId="title">
               <Form.Label>Nom du produit *</Form.Label>
               <Form.Control type="text" name="title" placeholder="Nom du produit" onChange={handleChange} value={product.title} required/>
             </Form.Group>            
-            <Form.Group className="mb-3" controlId="description">
+            <Form.Group className="mb-4" controlId="description">
               <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} name="description" placeholder="Description" value={product.description} onChange={handleChange} />
+              <Form.Control as="textarea" rows={5} name="description" placeholder="Description" value={product.description} onChange={handleChange} />
             </Form.Group>            
-            <Form.Group className="mb-3" controlId="price">
+            <Form.Group className="mb-4" controlId="price">
               <Form.Label>Prix (€) *</Form.Label>
               <Form.Control onWheel={numberInputOnWheelPreventChange} type="number" name="price" min="0" placeholder="Prix du produit" value={product.price} onChange={handleChange} required/>
             </Form.Group>   
@@ -105,43 +109,47 @@ function AddProductForm() {
               </InputGroup>
             </Form.Group>               
           </fieldset>     
+
           <fieldset>
-            <p className='signup-form-title mt-4'>Images</p>
+            <p className='form-title mt-5'>Images</p>
             <Form.Group controlId="image_thumbnail">
               <Form.Label>Image miniature</Form.Label>
               <Form.Control type="text"name="image_thumbnail" placeholder="Entrez l'URL de l'image miniature du produit" value={product.image_thumbnail} onChange={handleChange}/>
               <Form.Text className="text-muted">Correspond à l'image qui sera affichée dans les listes de produits et les aperçus</Form.Text>
             </Form.Group>  
-            <Form.Group controlId="image_large" className='mt-4'>
+            <Form.Group controlId="image_large" className='mt-5'>
               <Form.Label>Image grand format</Form.Label>
               <Form.Control type="text" name="image_large" placeholder="Entrez l'URL de l'image grand format du produit" value={product.image_large} onChange={handleChange}/>
               <Form.Text className="text-muted">Correspond à l'image qui sera affichée sur la page du produit</Form.Text>
             </Form.Group>  
           </fieldset>        
+
           <fieldset>
-            <p className='signup-form-title mt-4'>Catégories</p>
+            <p className='form-title mt-5'>Catégories</p>
             {categories.map((categorie) => (
-              <Form.Group className="mb-3" controlId={categorie.name} key={categorie.id}>
+              <Form.Group className="mb-4" controlId={categorie.name} key={categorie.id}>
                 <Form.Check type="checkbox" label={categorie.name} id={categorie.name} name="categorie" value={categorie.id} onChange={handleCategoryChange} />
               </Form.Group>
             ))}
           </fieldset>        
+          
           <fieldset>
-            <p className='signup-form-title mt-4'>Conseil d'entretien</p> 
-            <Form.Group controlId="care_exposure" className="mb-3">
+            <p className='form-title mt-5'>Conseil d'entretien</p> 
+            <Form.Group controlId="care_exposure" className="mb-4">
               <Form.Label>Exposition </Form.Label>
               <Form.Control as="textarea" rows={4} name="care_exposure" maxLength="500" placeholder="Décrivez les besoins en lumière du produit" value={product.care_exposure} onChange={handleChange} />
             </Form.Group>
-            <Form.Group controlId='care_watering' className="mb-3">
+            <Form.Group controlId='care_watering' className="mb-4">
               <Form.Label>Arrosage</Form.Label>
               <Form.Control as="textarea" name="care_watering" rows={4} maxLength="500" placeholder="Décrivez les besoins en arrosage du produit" value={product.care_watering} onChange={handleChange}/>
             </Form.Group>
-            <Form.Group controlId='care_temperature' className="mb-3">
+            <Form.Group controlId='care_temperature' className="mb-4">
               <Form.Label>Température</Form.Label>
               <Form.Control as="textarea" name='care_temperature' rows={4} maxLength="500" placeholder="Indiquez la plage de température idéale pour le produit" value={product.care} onChange={handleChange} />
             </Form.Group>            
           </fieldset>        
           <Button variant="primary" type="submit">Ajouter</Button>
+          <Button variant="link" onClick={() => {navigate('/products-management')}} className='py-4 text-decoration-underline'>Annuler</Button>
       </Form>
     </Container>
   )

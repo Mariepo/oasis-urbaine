@@ -33,17 +33,17 @@ function ProductCard({product, handleShowModal}) {
           <div className="img-container">
             <Card.Img variant="top" src={product.image_thumbnail}  onClick={navigateToProductDetails}/>
           </div>
-          <Card.Body  onClick={navigateToProductDetails}>
-              <Card.Title className='d-flex justify-content-between'>
+          <Card.Body  onClick={navigateToProductDetails} className='px-2'>
+              <Card.Title className='d-flex justify-content-between gap-2'>
                   <div>{product.title}</div>
                   <div>{formattedPrice}€</div>
               </Card.Title>
               <Card.Text>Taille : {product.dimension}</Card.Text>
           </Card.Body>
           {isAdmin && isOnProductsManagementPage &&
-            <Card.Footer className='d-flex justify-content-between gap-3'>
-                <Button variant="outline-primary" className='flex-fill' onClick={()=> {navigateTo(`/edit-product/${product.id}`)}}>Modifier</Button>
-                <Button variant="outline-danger" className='flex-fill' onClick={()=>{handleShowModal(product.id)}}>Supprimer</Button>
+            <Card.Footer className='d-flex justify-content-between flex-wrap gap-2 px-2'>
+                <Button variant="outline-primary"  className='flex-fill product-actions-button' onClick={()=> {navigateTo(`/edit-product/${product.id}`)}}>Modifier</Button>
+                <Button variant="outline-danger" className='flex-fill product-actions-button' onClick={()=>{handleShowModal(product.id)}}>Supprimer</Button>
             </Card.Footer>
           }
         </Card>        

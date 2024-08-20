@@ -21,6 +21,11 @@ function ProductDetailsPage(){
 
   useEffect(() => {
     fetchProductsById();
+    document.body.classList.add('background-body-orange');
+    return () => {
+      document.body.classList.remove('background-body-orange');
+    };
+
   }, []);
     // Convertir le prix en nombre, puis en format avec 2 décimales
     const price = parseFloat(product.price).toFixed(2);
@@ -31,46 +36,46 @@ function ProductDetailsPage(){
       : `${price}`;
 
   return <>
-    <Container>
-      <Row className="py-5">
+    <Container className="product-details">
+      <Row className="py-5 justify-content-center">
         <Col className="col-12 col-lg-6">
-          <div className="product-details-image-container mb-3">
+          <div className="image-container mb-3 pe-4">
             <img src={product.image_large} alt={product.title}></img>
           </div>
         </Col>
-        <Col className="col-12 col-lg-6 col-md-px-5">
+        <Col className="col-12 col-lg-5 col-md-px-5">
           <h1>{product.title}</h1>
-          <span>{formattedPrice}€</span>
-          <p>Livraison calculée à la prochaine étape</p>
+          <div className="product-price my-2">{formattedPrice}€</div>
+          <p className="product-delivery">Livraison calculée à la prochaine étape</p>
           {product.categories && product.categories.length > 0 && (
-            <ul>
-              {product.categories.map((categorie) => (
-                  <li as="li" key={categorie.id}>
-                      {categorie.name}
-                  </li>
-              ))}
-            </ul>
+              <ul className="categorie-list">
+                {product.categories.map((categorie) => <>
+                    <li as="li" key={categorie.id}>
+                        {categorie.name}
+                    </li>
+                </>)}
+              </ul>
             )}
-          <div className="d-grid gap-2">
+          <div className="d-grid gap-2 my-4">
             <Button variant="primary" onClick={() => addToCart(product, true)}>Ajouter au panier</Button>
           </div>
-          <hr className="my-4" />
+          <hr className="mt-5" />
           <div className="pt-4">
-            <h3 className="mb-3">Description</h3>
+            <h3 className="mb-3 product-care-title">Description</h3>
             <p>{product.description}</p>
           </div>
           <div className="mt-5">
-            <h3 className="mb-3">Conseils d'entretien</h3>
-            <div className="mb-5">
-              <h4>Exposition</h4>
+            <h3 className="mb-3 product-care-title">Conseils d'entretien</h3>
+            <div className="mb-4">
+              <h4 className="product-care-subtitle">Exposition</h4>
               <p>{product.care_exposure}</p>
             </div>
-            <div className="mb-5">
-              <h4>Arrosage</h4>
+            <div className="mb-4">
+              <h4 className="product-care-subtitle">Arrosage</h4>
               <p>{product.care_watering}</p>
             </div>
-            <div className="mb-5">
-              <h4>Température</h4>
+            <div className="mb-4">
+              <h4 className="product-care-subtitle">Température</h4>
               <p>{product.care_temperature}</p>
             </div>
           </div>

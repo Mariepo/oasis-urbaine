@@ -11,6 +11,10 @@ import { useNavigate } from "react-router-dom";
 function Cart() {
   const { cartItems, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
+  const navigateTo = (route) => {
+    navigate(route, { state: { from: '/cart' } });
+    window.scrollTo(0, 0);
+  }
   const id_user = UsersService.getUserId();
 
   const [deliveryMethods, setDeliveryMethods] = useState([]);
@@ -46,7 +50,7 @@ function Cart() {
 
   const addOrder = async () => {
     if(id_user === null) {
-      navigate('/login', {state: {from: '/cart'}});
+      navigateTo('/login');
       return
     } else {
       try {
@@ -61,7 +65,7 @@ function Cart() {
         };
         await OrdersService.addOrder(order);
         clearCart();
-        navigate ("/order-confirmation");
+        navigateTo("/order-confirmation");
       } catch (error) {
         console.log(error);
       }
@@ -93,15 +97,16 @@ function Cart() {
   
   return (
     <Container>
-      <main className="col-md-8 mx-auto my-5">
+      <main className="col-md-10 col-lg-8 mx-auto my-5">
           <section className="my-5">
-            <h1>Votre Panier</h1>
+            <h1>Mon panier</h1>
           </section>
-        {cartItems.map(item => (
+        {cartItems.map(item => <>
           <CartItem key={item.id} item={item}></CartItem>
-        ))}
+          {cartItems.length > 1 && (<hr />)}
+        </>)}
         <section className="my-5">
-          <h2>Mode de livraison</h2>
+          <h2 className="cart-title">Mode de livraison</h2>
           {deliveryMethods.map((deliveryMethod) => (
             <Form.Check type="radio" name="delivery" id={`delivery-${deliveryMethod.id}`} key={deliveryMethod.id} label={`${deliveryMethod.name} ${deliveryMethod.description} - ${deliveryMethod.price}€`} value={deliveryMethod.id} onChange={handleChange(setSelectedDeliveryMethodId)} checked={deliveryMethod.id === selectedDeliveryMethodId}
             />
@@ -116,18 +121,18 @@ function Cart() {
           )} 
         </section>          
         <section className="my-5">
-          <h2>Paiement</h2>
+          <h2 className="cart-title">Paiement</h2>
           {paymentMethods.map((paymentMethod) => (
             <Form.Check type="radio" name="payment" id={`payment-${paymentMethod.id}`} key={paymentMethod.id} label={paymentMethod.name} value={paymentMethod.id} onChange={handleChange(setSelectedPaymentMethodId)} checked={paymentMethod.id === selectedPaymentMethodId}
             />
           ))}
         </section>
         <section className="text-end">
-          <hr />
+          <hr className="my-4"/>
           <p>Sous-total : {subtotal}€</p>
           <p>Livraison : {selectedDeliveryMethod ? `${formatPrice(selectedDeliveryMethod.price)}€` : 'Aucune'}</p>
-          <p>Total : {total}€</p>
-          <Button variant="primary" type="submit" onClick={addOrder}>Payer maintenant</Button>
+          <p className="cart-total">Total : {total}€</p>
+          <Button variant="primary" className="my-2 px-5" type="submit" onClick={addOrder}>Payer maintenant</Button>
         </section>
       </main>
     </Container>
