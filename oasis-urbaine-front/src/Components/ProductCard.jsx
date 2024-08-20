@@ -29,21 +29,23 @@ function ProductCard({product, handleShowModal}) {
 
 
   return <>
-        <Card>
+        <Card className='cursor-pointer product-card'>
+          <div className="img-container">
             <Card.Img variant="top" src={product.image_thumbnail}  onClick={navigateToProductDetails}/>
-            <Card.Body  onClick={navigateToProductDetails}>
-                <Card.Title className='d-flex justify-content-between product-card-title'>
-                    <div>{product.title}</div>
-                    <div>{formattedPrice}€</div>
-                </Card.Title>
-                <Card.Text>Taille : {product.dimension}</Card.Text>
-            </Card.Body>
-            {isAdmin && isOnProductsManagementPage &&
-              <Card.Footer className='d-flex justify-content-between gap-3'>
-                  <Button variant="outline-primary" className='flex-fill' onClick={()=> {navigateTo(`/edit-product/${product.id}`)}}>Modifier</Button>
-                  <Button variant="outline-danger" className='flex-fill' onClick={()=>{handleShowModal(product.id)}}>Supprimer</Button>
-              </Card.Footer>
-            }
+          </div>
+          <Card.Body  onClick={navigateToProductDetails}>
+              <Card.Title className='d-flex justify-content-between'>
+                  <div>{product.title}</div>
+                  <div>{formattedPrice}€</div>
+              </Card.Title>
+              <Card.Text>Taille : {product.dimension}</Card.Text>
+          </Card.Body>
+          {isAdmin && isOnProductsManagementPage &&
+            <Card.Footer className='d-flex justify-content-between gap-3'>
+                <Button variant="outline-primary" className='flex-fill' onClick={()=> {navigateTo(`/edit-product/${product.id}`)}}>Modifier</Button>
+                <Button variant="outline-danger" className='flex-fill' onClick={()=>{handleShowModal(product.id)}}>Supprimer</Button>
+            </Card.Footer>
+          }
         </Card>        
     </>
 }

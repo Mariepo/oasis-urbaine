@@ -29,8 +29,8 @@ function NavbarComponent() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link className={`mt-2 px-lg-3 ${isActive('/') ? 'active' : ''}`} onClick={() => {navigateTo('/')}}>Accueil</Nav.Link>
-                <Nav.Link className={`mt-2 px-lg-3 ${isActive('/products') ? 'active' : ''}`} onClick={() => {navigateTo('/products')}}>Boutique</Nav.Link>
+                <Nav.Link className={`mt-2 px-3 ${isActive('/') ? 'active' : ''}`} onClick={() => {navigateTo('/')}}>Accueil</Nav.Link>
+                <Nav.Link className={`mt-2 px-3 ${isActive('/products') ? 'active' : ''}`} onClick={() => {navigateTo('/products')}}>Boutique</Nav.Link>
                 {isAdmin && 
                   <>
                     <Nav.Link className={`mt-2 px-3 ${isActive('/products-management') ? 'active' : ''}`} onClick={() => {navigateTo('/products-management')}}>Gestion des produits</Nav.Link>
@@ -41,16 +41,16 @@ function NavbarComponent() {
               <Nav>
                 {isAuthenticated ? 
                 <>
-                  <Nav.Link className={`px-lg-3 ${isActive('/account') ? 'active' : ''}`} onClick={() => {navigateTo('/account')}}>
+                  <Nav.Link className={`px-3 ${isActive('/account') ? 'active' : ''}`} onClick={() => {navigateTo('/account')}}>
                     <i className="bi bi-person-circle"></i>
                   </Nav.Link>
                 </> : 
                 <>
-                  <Nav.Link className={`px-lg-3 ${isActive('/login') ? 'active' : ''}`} onClick={() => {navigateTo('/login')}}>
+                  <Nav.Link className={`px-3 ${isActive('/login') ? 'active' : ''}`} onClick={() => {navigateTo('/login')}}>
                     <i className="bi bi-person-circle"></i>
                   </Nav.Link>
                 </>}
-                <Nav.Link className={`${isActive('/cart') ? 'active' : ''}`} onClick={() => {navigateTo('/cart')}}>
+                <Nav.Link className={`px-3 ${isActive('/cart') ? 'active' : ''}`} onClick={() => {navigateTo('/cart')}}>
                   <i className="bi bi-basket"></i> 
                   <span className='ms-2'>{cartItemsQuantity}</span>
                 </Nav.Link>

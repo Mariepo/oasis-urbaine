@@ -34,29 +34,29 @@ function HomePage() {
 
     return <>
     <HeaderHome></HeaderHome>
-    <Container className='mt-5 mb-5'>
-        <div className='d-flex justify-content-between mb-5'>
+    <Container className='mt-5 mb-3'>
+        <div className='d-flex justify-content-between mb-3'>
         <h2>Nos produits phares</h2>
         <Button variant="link" onClick={() => {navigateTo('/products')}}>Tout voir <i className="bi bi-arrow-right"></i></Button>
         </div>
 
     <Row className="g-4">
         {featuredProducts.map((product) => (
-            <Col xs={12} sm={6} md={6} lg={3} key={product.id} >
+            <Col xs={12} sm={6} md={6} lg={3} key={product.id} className='py-3'>
                 <ProductCard product={product}/>
             </Col>
         ))}
     </Row>
     </Container>
 
-    <Container className='mt-5 mb-5'>
-        <div className='d-flex justify-content-between mb-5'>
+    <Container className='mt-5 mb-3'>
+        <div className='d-flex justify-content-between mb-3'>
             <h2 className='mt-5'>Des fruits toutes l’année</h2>
             <Button variant="link" onClick={() => {navigateTo('/categories/5/products/')}}>Tout voir <i className="bi bi-arrow-right"></i></Button>
         </div>
     <Row className="g-4">
         {featuredProducts.map((product) => (
-            <Col xs={12} sm={6} md={6} lg={3} key={product.id} >
+            <Col xs={12} sm={6} md={6} lg={3} key={product.id} className='py-3' >
                 <ProductCard product={product}/>
             </Col>
         ))}

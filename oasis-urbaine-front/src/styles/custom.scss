@@ -29,6 +29,8 @@ footer {
     background-color: #e7efee;
 }
 
+
+
 /* Homepage */
 .header-home {
     background-color: $background-green;
@@ -84,12 +86,32 @@ footer {
 .selected-badge {
     border: 3px solid $primary;
 }
-.product-card-title {
-    font-family: $font-family-sans-serif;
-    color : $primary;
-    font-size: 18px;
-}
 
+/* Product card */
+/* Product card */
+.product-card {
+    overflow: hidden;
+    position: relative;
+    .card-title {
+        font-family: $font-family-sans-serif;
+        color: $primary;
+        font-size: 18px;
+    }
+    .img-container {
+        overflow: hidden; 
+        position: relative;
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            transition: transform 1s ease;
+            &:hover {
+                transform: scale(1.05); 
+            }
+        }
+    }
+    
+
+}
 
 
 /* Products details page */

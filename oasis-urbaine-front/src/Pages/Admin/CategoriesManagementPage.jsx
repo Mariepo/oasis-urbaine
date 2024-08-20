@@ -80,7 +80,7 @@ function CategoriesManagementPage() {
       setSelectedCategoryName('');
       setShowDeleteCategoryModal(false);
       fetchCategories();
-      toast.success('Catégorie modifiée avec succès !');
+      toast.success('Catégorie supprimée avec succès !');
     } catch (error) {
       console.log(error);
       toast.error('Erreur lors de la suppression de la catégorie');
