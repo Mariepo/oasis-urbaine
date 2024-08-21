@@ -7,6 +7,7 @@ import PaymentMethodsService from "../Services/PaymentMethodsService";
 import OrdersService from "../Services/OrdersService";
 import UsersService from "../Services/UsersService";
 import { useNavigate } from "react-router-dom";
+import GiftedCartItem from "../Components/GiftedCartItem";
 
 function Cart() {
   const { cartItems, clearCart } = useContext(CartContext);
@@ -105,6 +106,9 @@ function Cart() {
           <CartItem key={item.id} item={item}></CartItem>
           {cartItems.length > 1 && (<hr />)}
         </>)}
+        {cartItems.length >= 1 && (
+          <GiftedCartItem/>
+        )}
         <section className="my-5">
           <h2 className="cart-title">Mode de livraison</h2>
           {deliveryMethods.map((deliveryMethod) => (

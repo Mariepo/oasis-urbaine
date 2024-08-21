@@ -66,7 +66,7 @@ function EditUserForm() {
                     </Row>
                 </fieldset>
                 <fieldset className='mt-4 mb-2'>
-                    <p className='signup-form-title'>Adresse de livraison</p>
+                    <p className='form-title'>Adresse de livraison</p>
                     <Form.Group className="mb-4" controlId="address">
                         <Form.Label>Adresse</Form.Label>
                         <Form.Control type="text" name="address" onChange={handleChange} value={user.address}/>

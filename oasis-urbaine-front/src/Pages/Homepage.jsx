@@ -9,6 +9,7 @@ import ValueCard from '../Components/ValueCard';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
+  const [productsFruitsAllYear, setProductsFruitsAllYear] = useState([]);
 
     const fetchProducts = async () => {
         try {
@@ -19,8 +20,19 @@ function HomePage() {
         }
     }
 
+    const fetchProductsFruitsAllYear = async () => {
+        try {
+            const response = await ProductsService.fetchProductsByCategory(5);
+            setProductsFruitsAllYear(response.data.products);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    console.log(productsFruitsAllYear)
+
     useEffect(() => {
         fetchProducts();
+        fetchProductsFruitsAllYear();
     }, []);
 
     const navigate = useNavigate();
@@ -50,12 +62,12 @@ function HomePage() {
     </Container>
 
     <Container className=''>
-        <div className='d-flex justify-content-between flex-wrap pt-4 pb-2'>
+        <div className='d-flex justify-content-between align-items-center flex-wrap pt-4 pb-2'>
             <h2 className='product-container-title'>Des fruits toute l'année</h2>
             <Button variant="link" className="px-0 fs-5" onClick={() => {navigateTo('/categories/5/products/')}}>Voir tout <i className="bi bi-arrow-right"></i></Button>
         </div>
     <Row className="g-4">
-        {featuredProducts.map((product) => (
+        {productsFruitsAllYear.map((product) => (
             <Col xs={12} sm={6} md={6} lg={3} key={product.id} className='py-3' >
                 <ProductCard product={product}/>
             </Col>

@@ -11905,41 +11905,69 @@ footer {
   font-weight: 500;
 }
 
-/* Homepage */
-.header-home {
+/* Header */
+.header-home, .header-products {
   background-color: #E9FAE8;
-  height: 100%;
-  overflow-x: hidden;
 }
 @media screen and (max-width: 768px) {
-  .header-home {
+  .header-home, .header-products {
     height: 100%;
   }
 }
+.header-home img, .header-products img {
+  object-fit: cover;
+  height: 90vh;
+  width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .header-home img, .header-products img {
+    height: auto;
+  }
+}
+.header-home .header-body, .header-products .header-body {
+  padding: 2rem 6rem;
+}
+@media screen and (max-width: 992px) {
+  .header-home .header-body, .header-products .header-body {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .header-home h1, .header-home .h1, .header-products h1, .header-products .h1 {
+    font-size: 3.5rem;
+  }
+}
 
+.header-products {
+  background-image: url("../assets/images/background-header-products.png");
+  background-size: cover;
+}
+.header-products img {
+  object-fit: cover;
+  object-position: left;
+  height: 60vh;
+  min-width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .header-products img {
+    height: auto;
+  }
+}
+.header-products .header-body, .header-products h1, .header-products .h1 {
+  color: white;
+}
+@media screen and (max-width: 1200px) {
+  .header-products .header-body {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Homepage */
 .header-banner {
   background-color: #0F8277;
   color: white;
-}
-
-.header-image-container {
-  height: 100%;
-}
-@media screen and (max-width: 768px) {
-  .header-image-container {
-    height: 300px;
-  }
-}
-
-.header-image-container img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-@media screen and (max-width: 768px) {
-  .header-image-container img {
-    height: 100%;
-  }
 }
 
 .promotional-banner {
@@ -11958,20 +11986,14 @@ footer {
 .product-container-title {
   font-family: "poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 400;
-  font-size: 2.5rem;
+}
+@media screen and (min-width: 768px) {
+  .product-container-title {
+    font-size: 2.5rem;
+  }
 }
 
 /* Products page */
-.header-products {
-  background-image: url("../assets/images/header-products.png");
-  background-size: cover;
-  background-position: center right;
-  color: white;
-  min-height: 64vh;
-  display: flex;
-  align-items: center;
-}
-
 .category-badge {
   cursor: pointer;
   text-transform: uppercase;
@@ -12196,6 +12218,11 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.gifted-cart-item {
+  background-color: #ebf7f0;
+  border-radius: 12px;
 }
 
 /* Order confirmation page */

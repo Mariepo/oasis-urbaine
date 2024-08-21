@@ -56,7 +56,7 @@ function ProductsPage() {
     return <>
         <HeaderProducts></HeaderProducts>
         <Container>
-            <Stack direction="horizontal" gap={2} className='mt-2 mb-5 flex-wrap'>
+            <Stack direction="horizontal" gap={2} className='my-5 flex-wrap'>
                 <CategoryBadge name={"Tous"} onClick={(event) => {navigate('/products'); displaySelectedCategoryBadge(event);}} className={'category-badge' + (!id ? ' category-badge-active' : '')} />
                 {categories.map((category) => (
                     <CategoryBadge id={category.id} name={category.name} onClick={(event) => {navigateTo('/categories/'+category.id+'/products/'); displaySelectedCategoryBadge(event);}} key={category.id} className={'category-badge' + (id === category.id.toString() ? ' category-badge-active' : '')} />

@@ -112,7 +112,9 @@ function AccountPage() {
                                 <li>{user.postal_code} {user.city}</li>
                             </ul>
                             <ul>
-                                <li>{user.phone}</li>
+                                {user.phone && (
+                                    <li>{user.phone}</li>
+                                )}
                                 <li>{user.email}</li>
                             </ul>
                             <Button variant="link" className='edit-button' onClick={()=>{navigate('/edit-address')}}>Modifier</Button>

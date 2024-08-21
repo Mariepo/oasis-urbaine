@@ -53,32 +53,60 @@ footer {
     font-weight: 500;
 }
 
-/* Homepage */
-.header-home {
+/* Header */
+.header-home, .header-products {
     background-color: $background-green;
-    height: 100%;
-    overflow-x: hidden;
     @media screen and (max-width: 768px) {
         height: 100%;
     }
+    img {
+        object-fit: cover; 
+        height: 90vh; 
+        width:100%;
+        @media screen and (max-width : 768px){
+            height: auto; 
+        }
+    }
+    .header-body {
+        padding: 2rem 6rem;
+        @media screen and (max-width : 992px) {
+            padding-left : 2rem;
+            padding-right : 2rem;
+        }
+    }
+    h1 {
+        @media screen and (min-width : 992px) {
+            font-size: 3.5rem;
+        }
+    }
 }
+.header-products {
+    background-image: url('../assets/images/background-header-products.png');
+    background-size: cover;
+    img {
+        object-fit: cover; 
+        object-position: left;
+        height: 60vh; 
+        min-width: 100%;
+        @media screen and (max-width : 768px){
+            height: auto; 
+        }
+    }
+    .header-body, h1  {
+        color : white;
+    }
+    .header-body {
+        @media screen and (max-width : 1200px) {
+            padding-left : 2rem;
+            padding-right : 2rem;
+        }
+    }
+}
+
+/* Homepage */
 .header-banner {
     background-color: $primary;
     color: white;
-}
-.header-image-container {
-    height: 100%;
-    @media screen and (max-width: 768px) {
-        height: 300px;
-    }
-}
-.header-image-container img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    @media screen and (max-width: 768px) {
-        height: 100%;
-    }
 }
 .promotional-banner {
     background-color: $background-orange;
@@ -93,19 +121,12 @@ footer {
 .product-container-title {
     font-family: $font-family-sans-serif;
     font-weight: 400;
-    font-size: 2.5rem;
+    @media screen and (min-width : 768px){
+        font-size: 2.5rem;
+    }
 }
 
 /* Products page */
-.header-products {
-    background-image: url('../assets/images/header-products.png');
-    background-size: cover;
-    background-position: center right;
-    color: white;
-    min-height: 64vh;
-    display: flex;
-    align-items: center;
-}
 .category-badge {
     cursor: pointer;
     text-transform: uppercase;
@@ -324,6 +345,10 @@ footer {
         height: 100%;
         object-fit: cover;
     }
+}
+.gifted-cart-item {
+    background-color: #ebf7f0;
+    border-radius: $border-radius-md;
 }
 
 
