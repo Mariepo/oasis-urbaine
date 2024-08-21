@@ -9,8 +9,8 @@ function AddProductForm() {
   const [product, setProduct] = useState({
     title : "",
     description : "",
-    price : "",
-    dimension : "",
+    price : null,
+    dimension : null,
     image_thumbnail : "",
     image_large : "",
     care_exposure : "",

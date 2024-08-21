@@ -33,7 +33,9 @@ function ProductCard({product, handleShowModal}) {
                   <div>{product.title}</div>
                   <div>{formattedPrice}€</div>
               </Card.Title>
-              <Card.Text>Taille : {formattedHeight} cm</Card.Text>
+              {!isNaN(formattedHeight) && formattedHeight > 0 && (
+                <Card.Text>Taille : {formattedHeight} cm</Card.Text>
+              )}
           </Card.Body>
           {isAdmin && isOnProductsManagementPage &&
             <Card.Footer className='d-flex justify-content-between flex-wrap gap-2 px-2'>

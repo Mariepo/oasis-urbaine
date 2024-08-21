@@ -50,9 +50,14 @@ function CategoriesManagementPage() {
   }
 
   const addNewCategory = async () => {
+    if (!categoryName.trim()) {
+      toast.error('Le nom de la catégorie ne peut pas être vide');
+      return;
+    }
     try {
       await CategoriesService.addCategory(newCategory);
       setCategoryName('');
+      setNewCategory({ name: "" });
       fetchCategories();
       toast.success('Catégorie ajoutée avec succès !');
     } catch (error) {

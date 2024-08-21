@@ -1,14 +1,23 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ProductsService from "../Services/ProductsService";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import CartContext from "../Context/CartContext";
-import {formatDecimalNumber} from "../utils/formatters"
+import {formatDecimalNumber} from "../utils/formatters";
+import AuthContext from "../Context/AuthContext";
+import DeleteProductModal from "../Components/DeleteProductModal";
+import { toast } from "react-toastify";
 
 function ProductDetailsPage(){
+  const {isAdmin} = useContext(AuthContext);
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
+  const navigateTo = (route) => {
+    navigate(route);
+    window.scrollTo(0, 0);
+  }
 
   async function fetchProductsById () {
     try {
@@ -18,6 +27,25 @@ function ProductDetailsPage(){
       console.log(error);
     }
   } 
+
+  // Modal de suppression
+  const [show, setShow] = useState(false);
+  const handleCloseModal = () => setShow(false);
+  const handleShowModal = (id_product) => {
+      setShow(true);
+  }
+
+  const deleteProduct = async (event) => {
+      try {
+          event.preventDefault();
+          await ProductsService.deleteProduct(product.id);
+          toast.success('Produit supprimé avec succès !');
+          handleCloseModal();
+          navigateTo('/products-management');
+      } catch (error) {
+          console.log(error);
+      }
+  }
 
   useEffect(() => {
     fetchProductsById();
@@ -42,9 +70,11 @@ function ProductDetailsPage(){
         <Col className="col-12 col-lg-5 col-md-px-5">
           <h1>{product.title}</h1>
           <div className="product-price my-2">{formattedPrice}€</div>
-          <ul className="categorie-list">
-              <li as="li" >Taille : {formattedHeight} cm</li>
-          </ul>
+          {!isNaN(formattedHeight) && formattedHeight > 0 && (
+            <ul className="categorie-list">
+                <li as="li" >Taille : {formattedHeight} cm</li>
+            </ul>
+          ) }
           {product.categories && product.categories.length > 0 && (
             <ul className="categorie-list">
                 {product.categories.map((categorie) => <>
@@ -58,6 +88,12 @@ function ProductDetailsPage(){
           <div className="d-grid gap-2 my-4">
             <Button variant="primary" onClick={() => addToCart(product, true)}>Ajouter au panier</Button>
           </div>
+            {isAdmin && (
+              <div className='d-flex justify-content-between flex-wrap gap-2 px-2'>
+                <Button variant="outline-primary"  className='flex-fill product-actions-button' onClick={()=> {navigateTo(`/edit-product/${product.id}`)}}>Modifier</Button>
+                <Button variant="outline-danger" className='flex-fill product-actions-button' onClick={()=>{handleShowModal(product.id)}}>Supprimer</Button>
+              </div>
+            )}
           <hr className="mt-5" />
           <div className="pt-4">
             <h3 className="mb-3 product-care-title">Description</h3>
@@ -81,6 +117,8 @@ function ProductDetailsPage(){
         </Col>
       </Row>
     </Container>
+
+    <DeleteProductModal show={show} handleCloseModal={handleCloseModal} onClick={deleteProduct} />
   </>
 
 }

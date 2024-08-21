@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {Container, Nav, Navbar} from 'react-bootstrap';
 import AuthContext from '../Context/AuthContext';
 import CartContext from '../Context/CartContext';
+import logoOasisUrbaine from '../assets/images/logo-oasis-urbaine.svg'
 
 function NavbarComponent() {
   const {isAuthenticated, isAdmin} = useContext(AuthContext);
@@ -24,7 +25,7 @@ function NavbarComponent() {
         <Navbar expand="lg" sticky="top">
           <Container>
             <Navbar.Brand onClick={() => {navigateTo('/')}} className='cursor-pointer'>
-              <img src="assets/images/logo-oasis-urbaine.svg" alt="logo de la marque Oasis Urbaine" />
+              <img src={logoOasisUrbaine} alt="logo de la marque Oasis Urbaine" />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
