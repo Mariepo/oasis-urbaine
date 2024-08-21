@@ -300,6 +300,7 @@ footer {
     color: $primary;
 }
 .cart-item {
+    border-radius: $border-radius-md;
     .item-title {
         color: $primary;
         font-weight: 600;
@@ -331,6 +332,11 @@ footer {
             outline: none;
         }
     }
+}
+.not-in-stock {
+    border : 1px solid $red;
+    cursor:default;
+    opacity: 80%;
 }
 .cart-image-container {
     max-width: 110px;

@@ -31,7 +31,6 @@ import OrderConfirmationPage from './Pages/OrderConfirmationPage';
 import EditUserForm from './Pages/EditUserForm';
 import ProductsManagementPage from './Pages/Admin/ProductsManagementPage';
 import CategoriesManagementPage from './Pages/Admin/CategoriesManagementPage';
-import AddCategoryForm from './Pages/Admin/AddCategoryForm';
 import AddProductForm from './Pages/Admin/AddProductForm';
 import EditProductForm from './Pages/Admin/EditProductForm';
 
@@ -65,7 +64,6 @@ function App() {
                   <Route path='/add-product' element={<AddProductForm />} /> 
                   <Route path='/edit-product/:id' element={<EditProductForm />} /> 
                   <Route path='/categories-management' element={<CategoriesManagementPage/>} /> 
-                  <Route path='/add-category' element={<AddCategoryForm/>} /> 
                 </>}</>}
             </Routes>
             <FooterComponent></FooterComponent>

@@ -12173,6 +12173,9 @@ footer {
   color: #0F8277;
 }
 
+.cart-item {
+  border-radius: 12px;
+}
 .cart-item .item-title {
   color: #0F8277;
   font-weight: 600;
@@ -12203,6 +12206,12 @@ footer {
   background-color: #e7efee;
   border: none;
   outline: none;
+}
+
+.not-in-stock {
+  border: 1px solid #DC3545;
+  cursor: default;
+  opacity: 80%;
 }
 
 .cart-image-container {

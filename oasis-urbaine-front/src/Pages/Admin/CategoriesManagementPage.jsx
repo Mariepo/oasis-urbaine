@@ -66,6 +66,11 @@ function CategoriesManagementPage() {
     }
   }
   const editCategory = async () => {
+    if (!selectedCategoryName.trim()) {
+      toast.error('Le nom de la catégorie ne peut pas être vide');
+      return;
+    }
+
     try {
       await CategoriesService.editCategory(selectedCategoryId, {name : selectedCategoryName});
       setSelectedCategoryId(null);

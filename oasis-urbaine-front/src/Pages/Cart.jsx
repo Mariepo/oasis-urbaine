@@ -6,6 +6,7 @@ import DeliveryMethodsService from "../Services/DeliveryMethodsService";
 import PaymentMethodsService from "../Services/PaymentMethodsService";
 import OrdersService from "../Services/OrdersService";
 import UsersService from "../Services/UsersService";
+import ProductsService from "../Services/ProductsService";
 import { useNavigate } from "react-router-dom";
 import GiftedCartItem from "../Components/GiftedCartItem";
 
@@ -23,6 +24,7 @@ function Cart() {
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState(1);
   const [user, setUser] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const selectedDeliveryMethod = deliveryMethods.find(deliveryMethod => deliveryMethod.id === selectedDeliveryMethodId);
   const subtotal = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
@@ -44,10 +46,23 @@ function Cart() {
           console.log(error);
       }
   }
+
+
+  const fetchProducts = async () => {
+    try {
+        const response = await ProductsService.fetchProducts();
+        setProducts(response.data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+  console.log(products)
+  console.log("hello")
+
   useEffect( () => {
     fetchData();
+    fetchProducts();
   }, []);
-  
 
   const addOrder = async () => {
     if(id_user === null) {
@@ -59,10 +74,16 @@ function Cart() {
           id_user: id_user,
           id_delivery_method: selectedDeliveryMethodId,
           id_payment_method: selectedPaymentMethodId, 
-          items: cartItems.map((item) => ({
-            id_product: item.id,
-            quantity: item.quantity
-          })),      
+          items: cartItems.map((item) => {
+            const productInStock = products.find(product => product.id === item.id);
+            if(productInStock) {
+              return {
+                id_product: item.id,
+                quantity: item.quantity
+              }
+            }
+            return null
+          }).filter(item => item !== null),      
         };
         await OrdersService.addOrder(order);
         clearCart();
@@ -72,6 +93,8 @@ function Cart() {
       }
     }
   }
+
+
 
   const handleChange = (setter) => (event) => {
     setter(Number(event.target.value));
@@ -96,16 +119,27 @@ function Cart() {
     )
   }
   
-  return (
+  return <>
     <Container>
       <main className="col-md-10 col-lg-8 mx-auto my-5">
           <section className="my-5">
             <h1>Mon panier</h1>
           </section>
-        {cartItems.map(item => <>
-          <CartItem key={item.id} item={item}></CartItem>
-          {cartItems.length > 1 && (<hr />)}
-        </>)}
+        {cartItems.map(item => {
+          const productInStock = products.find(product => product.id === item.id);
+          return (
+            <>
+              {!productInStock ? <>
+                <CartItem key={item.id} item={item} inStock={'not-in-stock mb-1'} disableClickElement={true} ></CartItem>
+                <span className="text-danger">Cet article n'existe plus</span>
+                </> : <>
+                    <CartItem key={item.id} item={item} redirectOnClick={() => navigate(`/products/${item.id}`)}></CartItem>
+                    {cartItems.length > 1 && (<hr />)}
+                </>
+              }
+            </>
+          );
+        })}
         {cartItems.length >= 1 && (
           <GiftedCartItem/>
         )}
@@ -140,7 +174,7 @@ function Cart() {
         </section>
       </main>
     </Container>
-  );
+    </>;
 }
 
 export default Cart;

@@ -74,13 +74,13 @@ function SignupPage() {
                 <Col className='col-12 col-md-6'>
                     <Form.Group className="mb-4" controlId="firstname">
                       <Form.Label>Prénom</Form.Label>
-                      <Form.Control type="text" name="firstname" placeholder="Prénom" onChange={handleChange} value={user.firstname} />
+                      <Form.Control type="text" name="firstname" placeholder="Prénom" onChange={handleChange} value={user.firstname} required />
                     </Form.Group>            
                 </Col>
                 <Col className='col-12 col-md-6'>
                     <Form.Group className="mb-4" controlId="name">
                       <Form.Label>Nom</Form.Label>
-                      <Form.Control type="text" name="name" placeholder="Nom" onChange={handleChange} value={user.name} />
+                      <Form.Control type="text" name="name" placeholder="Nom" onChange={handleChange} value={user.name} required />
                     </Form.Group>            
                 </Col>
               </Row>
@@ -88,7 +88,7 @@ function SignupPage() {
                 <Col className='col-12 col-md-6'>
                   <Form.Group className="mb-4" controlId="email">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" name="email" placeholder="Email" onChange={handleChange} value={user.email} />
+                    <Form.Control type="email" name="email" placeholder="Email" onChange={handleChange} value={user.email} required />
                   </Form.Group>
                 </Col>
                 <Col className='col-12 col-md-6'>
@@ -102,7 +102,7 @@ function SignupPage() {
                 <Col className='col-12 col-md-6'>
                   <Form.Group className="mb-4" controlId="password">
                     <Form.Label>Mot de passe</Form.Label>
-                    <Form.Control type="password" name="password" onChange={handleChange} value={user.password} />
+                    <Form.Control type="password" name="password" onChange={handleChange} value={user.password} required />
                     <Form.Text className="text-muted">
                       Minimum 6 caractères
                     </Form.Text>
@@ -111,7 +111,7 @@ function SignupPage() {
                 <Col className='col-12 col-md-6'>
                   <Form.Group className="mb-4" controlId="confirm_password">
                     <Form.Label>Mot de passe</Form.Label>
-                    <Form.Control type="password" name="confirm_password" onChange={handleConfirmPasswordChange} value={confirmPassword} />
+                    <Form.Control type="password" name="confirm_password" onChange={handleConfirmPasswordChange} value={confirmPassword} required />
                   </Form.Group>
                 </Col>
               </Row>
@@ -120,19 +120,19 @@ function SignupPage() {
               <p className='form-title'>Adresse de livraison</p>
               <Form.Group className="mb-4" controlId="address">
                   <Form.Label>Adresse</Form.Label>
-                  <Form.Control type="text" name="address" placeholder="Adresse" onChange={handleChange} value={user.address} />
+                  <Form.Control type="text" name="address" placeholder="Adresse" onChange={handleChange} value={user.address} required />
               </Form.Group>
               <Row>
                 <Col className='col-12 col-md-6'>
                   <Form.Group className="mb-4" controlId="postal_code">
                       <Form.Label>Code postal</Form.Label>
-                      <Form.Control type="text" name="postal_code" placeholder="Code postal" onChange={handleChange} value={user.postal_code} />
+                      <Form.Control type="text" name="postal_code" placeholder="Code postal" onChange={handleChange} value={user.postal_code} required />
                   </Form.Group>            
                 </Col>
                 <Col className='col-12 col-md-6'>
                   <Form.Group className="mb-4" controlId="city">
                       <Form.Label>Ville</Form.Label>
-                      <Form.Control type="text" name="city" placeholder="Ville" onChange={handleChange} value={user.city} />
+                      <Form.Control type="text" name="city" placeholder="Ville" onChange={handleChange} value={user.city} required />
                   </Form.Group>            
                 </Col>
               </Row>

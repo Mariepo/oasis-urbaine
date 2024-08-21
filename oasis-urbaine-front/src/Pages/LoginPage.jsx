@@ -45,11 +45,11 @@ const LoginPage = () => {
                     <h1 className='text-center my-4'>Connexion</h1>
                     <Form.Group className="mb-4" controlId="email">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" name="email" placeholder="example@gmail.com" onChange={handleChange} value={user.email} />
+                        <Form.Control type="email" name="email" placeholder="example@gmail.com" onChange={handleChange} value={user.email} required />
                     </Form.Group>
                     <Form.Group className="mb-4" controlId="password">
                         <Form.Label>Mot de passe</Form.Label>
-                        <Form.Control type="password" name="password" onChange={handleChange} value={user.password}/>
+                        <Form.Control type="password" name="password" onChange={handleChange} value={user.password} required />
                     </Form.Group>
                     <Button variant="primary" type="submit">Se connecter</Button>
                     <Button variant="link" onClick={() => {navigate('/signup')}} className='py-4 text-decoration-underline'>Créer un compte</Button>

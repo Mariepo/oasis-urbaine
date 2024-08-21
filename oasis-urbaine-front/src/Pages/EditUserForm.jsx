@@ -54,7 +54,7 @@ function EditUserForm() {
                         <Col className='col-12 col-md-6'>
                             <Form.Group className="mb-4" controlId="email">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" name="email" onChange={handleChange} value={user.email} />
+                                <Form.Control type="email" name="email" onChange={handleChange} value={user.email} required />
                             </Form.Group>
                         </Col>
                         <Col className='col-12 col-md-6'>
@@ -69,19 +69,19 @@ function EditUserForm() {
                     <p className='form-title'>Adresse de livraison</p>
                     <Form.Group className="mb-4" controlId="address">
                         <Form.Label>Adresse</Form.Label>
-                        <Form.Control type="text" name="address" onChange={handleChange} value={user.address}/>
+                        <Form.Control type="text" name="address" onChange={handleChange} value={user.address} required/>
                     </Form.Group>
                     <Row>
                         <Col className='col-12 col-md-6'>
                             <Form.Group className="mb-4" controlId="postal_code">
                                 <Form.Label>Code postal</Form.Label>
-                                <Form.Control type="text" name="postal_code" onChange={handleChange} value={user.postal_code} />
+                                <Form.Control type="text" name="postal_code" onChange={handleChange} value={user.postal_code} required />
                             </Form.Group>            
                         </Col>
                         <Col className='col-12 col-md-6'>
                             <Form.Group className="mb-4" controlId="city">
                                 <Form.Label>Ville</Form.Label>
-                                <Form.Control type="text" name="city" onChange={handleChange} value={user.city} />
+                                <Form.Control type="text" name="city" onChange={handleChange} value={user.city}  required/>
                             </Form.Group>            
                         </Col>
                     </Row>
