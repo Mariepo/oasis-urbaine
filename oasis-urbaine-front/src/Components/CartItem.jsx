@@ -2,15 +2,11 @@ import React, { useContext } from 'react'
 import { Row, Col, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import CartContext from "../Context/CartContext";
+import { formatDecimalNumber } from '../utils/formatters';
 
 function CartItem({item}) {
     const navigate = useNavigate();
-    // Convertir le prix en nombre, puis en format avec 2 décimales
-    const price = parseFloat(item.price).toFixed(2);
-    // Si les centimes sont "00", ne les affichez pas
-    const formattedPrice = price.endsWith('.00') || price.endsWith('.0')
-        ? `${parseFloat(price).toFixed(0)}`
-        : `${price}`;
+    const formattedPrice = formatDecimalNumber(item.price);
     
     const {addToCart, deleteFromCart, removeFromCart} = useContext(CartContext);
     const increaseProductQuantity = () => {

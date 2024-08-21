@@ -69,7 +69,8 @@ function App() {
                 </>}</>}
             </Routes>
             <FooterComponent></FooterComponent>
-            <ToastContainer autoClose={5000} />
+            <ToastContainer autoClose={5000} position="bottom-right" pauseOnHover={false}
+ />
           </BrowserRouter>
         </CartProvider>    
     </AuthContext.Provider>

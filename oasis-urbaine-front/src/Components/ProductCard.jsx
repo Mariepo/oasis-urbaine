@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import {Card, Button} from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AuthContext from '../Context/AuthContext';
+import { formatDecimalNumber } from '../utils/formatters';
 
 
 function ProductCard({product, handleShowModal}) {
@@ -13,14 +14,8 @@ function ProductCard({product, handleShowModal}) {
   }
   const location = useLocation();
   const isOnProductsManagementPage = location.pathname === '/products-management';
-
-    // Convertir le prix en nombre, puis en format avec 2 décimales
-  const price = parseFloat(product.price).toFixed(2);
-
-  // Si les centimes sont "00", ne les affichez pas
-  const formattedPrice = price.endsWith('.00') || price.endsWith('.0')
-    ? `${parseFloat(price).toFixed(0)}` 
-    : `${price}`;
+  const formattedPrice = formatDecimalNumber(product.price);
+  const formattedHeight = formatDecimalNumber(product.dimension);
 
   const navigateToProductDetails = () => {
     navigate('/products/'+product.id);
@@ -38,7 +33,7 @@ function ProductCard({product, handleShowModal}) {
                   <div>{product.title}</div>
                   <div>{formattedPrice}€</div>
               </Card.Title>
-              <Card.Text>Taille : {product.dimension}</Card.Text>
+              <Card.Text>Taille : {formattedHeight} cm</Card.Text>
           </Card.Body>
           {isAdmin && isOnProductsManagementPage &&
             <Card.Footer className='d-flex justify-content-between flex-wrap gap-2 px-2'>

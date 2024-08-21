@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProductsService from "../Services/ProductsService";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import CartContext from "../Context/CartContext";
+import {formatDecimalNumber} from "../utils/formatters"
 
 function ProductDetailsPage(){
   const { id } = useParams();
@@ -17,7 +18,6 @@ function ProductDetailsPage(){
       console.log(error);
     }
   } 
-  console.log(product)
 
   useEffect(() => {
     fetchProductsById();
@@ -27,13 +27,9 @@ function ProductDetailsPage(){
     };
 
   }, []);
-    // Convertir le prix en nombre, puis en format avec 2 décimales
-    const price = parseFloat(product.price).toFixed(2);
 
-    // Si les centimes sont "00", ne les affichez pas
-    const formattedPrice = price.endsWith('.00') || price.endsWith('.0')
-      ? `${parseFloat(price).toFixed(0)}` 
-      : `${price}`;
+    const formattedPrice = formatDecimalNumber(product.price);
+    const formattedHeight = formatDecimalNumber(product.dimension);
 
   return <>
     <Container className="product-details">
@@ -46,9 +42,11 @@ function ProductDetailsPage(){
         <Col className="col-12 col-lg-5 col-md-px-5">
           <h1>{product.title}</h1>
           <div className="product-price my-2">{formattedPrice}€</div>
-          <p className="product-delivery">Livraison calculée à la prochaine étape</p>
+          <ul className="categorie-list">
+              <li as="li" >Taille : {formattedHeight} cm</li>
+          </ul>
           {product.categories && product.categories.length > 0 && (
-              <ul className="categorie-list">
+            <ul className="categorie-list">
                 {product.categories.map((categorie) => <>
                     <li as="li" key={categorie.id}>
                         {categorie.name}
@@ -56,6 +54,7 @@ function ProductDetailsPage(){
                 </>)}
               </ul>
             )}
+            <p className="product-delivery">Livraison calculée à la prochaine étape</p>
           <div className="d-grid gap-2 my-4">
             <Button variant="primary" onClick={() => addToCart(product, true)}>Ajouter au panier</Button>
           </div>

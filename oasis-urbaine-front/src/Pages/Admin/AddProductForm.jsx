@@ -99,12 +99,12 @@ function AddProductForm() {
             </Form.Group>            
             <Form.Group className="mb-4" controlId="price">
               <Form.Label>Prix (€) *</Form.Label>
-              <Form.Control onWheel={numberInputOnWheelPreventChange} type="number" name="price" min="0" placeholder="Prix du produit" value={product.price} onChange={handleChange} required/>
+              <Form.Control onWheel={numberInputOnWheelPreventChange} type="number" step="0.01" name="price" min="0" placeholder="Prix du produit" value={product.price} onChange={handleChange} required/>
             </Form.Group>   
             <Form.Group>
               <Form.Label htmlFor="dimension">Taille en cm</Form.Label>
                 <InputGroup className="mb-2">
-                  <Form.Control id="dimension" type="text" name="dimension" placeholder="Exemple : 40-50" value={product.dimension} onChange={handleChange} />
+                  <Form.Control onWheel={numberInputOnWheelPreventChange}  id="dimension" step="0.01" type="number" min="0" name="dimension" placeholder="Taille en cm" value={product.dimension} onChange={handleChange} />
                 <InputGroup.Text>cm</InputGroup.Text>
               </InputGroup>
             </Form.Group>               
