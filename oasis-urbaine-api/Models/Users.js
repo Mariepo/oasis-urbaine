@@ -33,20 +33,20 @@ Users.init({
     },
     phone : {
         type : DataTypes.STRING,
-        allowNull : true,
+        allowNull : false,
         unique : true
     },
     address : {
         type : DataTypes.STRING,
-        allowNull : true,
+        allowNull : false,
     },
     postal_code : {
         type : DataTypes.STRING,
-        allowNull : true,
+        allowNull : false,
     },
     city : {
         type : DataTypes.STRING,
-        allowNull : true,
+        allowNull : false,
     },
     is_admin : {
         type : DataTypes.TINYINT,

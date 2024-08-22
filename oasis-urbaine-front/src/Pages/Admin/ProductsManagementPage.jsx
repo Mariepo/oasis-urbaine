@@ -46,11 +46,18 @@ function ProductsManagementPage() {
     useEffect(() => {
         fetchProducts();
     }, [id]);
+    useEffect(() => {
+        document.body.classList.add('background-body-grey');
+        return () => {
+            document.body.classList.remove('background-body-grey');
+        };
+    }, []);
 
 
     return <>
-        <Container className='py-5'>
-            <HeaderManagement lg={12} textH1={"Gestion des produit"} textButton={"Ajouter un produit"} onClick={()=>{navigate('/add-product')}} />
+        <Container className='py-5 products-management-container'>
+            <HeaderManagement lg={12} textH1={"Gestion des produits"} textButton={"Ajouter un produit"} onClick={()=>{navigate('/add-product')}} 
+            className={"col-12 col-md-4 col-lg-3 col-xl-2"} />
             <Row className="g-4 py-4">
                 {products.map((product) => (
                     <Col xs={12} sm={6} md={6} lg={3} className='mb-5' key={product.id} >

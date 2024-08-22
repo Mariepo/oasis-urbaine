@@ -34,7 +34,7 @@ Products.init({
         allowNull : false
     },
     dimension : {
-        type : DataTypes.STRING,
+        type : DataTypes.DECIMAL,
         allowNull : true
     },
     care_exposure : {

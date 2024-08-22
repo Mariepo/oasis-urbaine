@@ -39,20 +39,22 @@ const LoginPage = () => {
 
 
     return <>
-        <Container fluid className='vh-100 d-flex align-items-center login-image-container'>
-            <Form onSubmit={loginUser} method='post' className='col-10 col-md-8 col-lg-4 mx-auto d-flex flex-column mb-5'>
-                <h1 className='text-center'>Connexion</h1>
-                <Form.Group className="mb-3" controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" name="email" placeholder="example@gmail.com" onChange={handleChange} value={user.email} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>Mot de passe</Form.Label>
-                    <Form.Control type="password" name="password" onChange={handleChange} value={user.password}/>
-                </Form.Group>
-                <Button variant="primary" type="submit">Se connecter</Button>
-                <Button variant="link" onClick={() => {navigate('/signup')}} className='py-3'>Créer un compte</Button>
-            </Form>
+        <Container fluid className='vh-100  login-image-container'>
+            <div className=' d-flex align-items-center my-5'>
+                <Form onSubmit={loginUser} method='post' className='col-12 col-md-8 col-lg-4 mx-auto d-flex flex-column login-form'>
+                    <h1 className='text-center my-4'>Connexion</h1>
+                    <Form.Group className="mb-4" controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" name="email" placeholder="example@gmail.com" onChange={handleChange} value={user.email} required />
+                    </Form.Group>
+                    <Form.Group className="mb-4" controlId="password">
+                        <Form.Label>Mot de passe</Form.Label>
+                        <Form.Control type="password" name="password" onChange={handleChange} value={user.password} required />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">Se connecter</Button>
+                    <Button variant="link" onClick={() => {navigate('/signup')}} className='py-4 text-decoration-underline'>Créer un compte</Button>
+                </Form>
+            </div>
         </Container>
     </>
 }
