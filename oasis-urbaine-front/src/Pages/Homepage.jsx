@@ -9,6 +9,7 @@ import ValueCard from '../Components/ValueCard';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
+  const [productsFruitsAllYear, setProductsFruitsAllYear] = useState([]);
 
     const fetchProducts = async () => {
         try {
@@ -19,8 +20,19 @@ function HomePage() {
         }
     }
 
+    const fetchProductsFruitsAllYear = async () => {
+        try {
+            const response = await ProductsService.fetchProductsByCategory(5);
+            setProductsFruitsAllYear(response.data.products);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    console.log(productsFruitsAllYear)
+
     useEffect(() => {
         fetchProducts();
+        fetchProductsFruitsAllYear();
     }, []);
 
     const navigate = useNavigate();
@@ -34,41 +46,41 @@ function HomePage() {
 
     return <>
     <HeaderHome></HeaderHome>
-    <Container className='mt-5 mb-5'>
-        <div className='d-flex justify-content-between mb-5'>
-        <h2>Nos produits phares</h2>
-        <Button variant="link" onClick={() => {navigateTo('/products')}}>Tout voir <i className="bi bi-arrow-right"></i></Button>
+    <Container className='py-5'>
+        <div className='d-flex justify-content-between flex-wrap pt-4 pb-2'>
+            <h2 className='product-container-title'>Nos produits phares</h2>
+            <Button variant="link" className="px-0 fs-5" onClick={() => {navigateTo('/products')}}>Voir tout <i className="bi bi-arrow-right"></i></Button>
         </div>
 
+        <Row>
+            {featuredProducts.map((product) => (
+                <Col xs={12} sm={6} md={6} lg={3} key={product.id} className='my-4'>
+                    <ProductCard product={product}/>
+                </Col>
+            ))}
+        </Row>
+    </Container>
+
+    <Container className=''>
+        <div className='d-flex justify-content-between align-items-center flex-wrap pt-4 pb-2'>
+            <h2 className='product-container-title'>Des fruits toute l'année</h2>
+            <Button variant="link" className="px-0 fs-5" onClick={() => {navigateTo('/categories/5/products/')}}>Voir tout <i className="bi bi-arrow-right"></i></Button>
+        </div>
     <Row className="g-4">
-        {featuredProducts.map((product) => (
-            <Col xs={12} sm={6} md={6} lg={3} key={product.id} >
+        {productsFruitsAllYear.map((product) => (
+            <Col xs={12} sm={6} md={6} lg={3} key={product.id} className='py-3' >
                 <ProductCard product={product}/>
             </Col>
         ))}
     </Row>
     </Container>
-
-    <Container className='mt-5 mb-5'>
-        <div className='d-flex justify-content-between mb-5'>
-            <h2 className='mt-5'>Des fruits toutes l’année</h2>
-            <Button variant="link" onClick={() => {navigateTo('/categories/5/products/')}}>Tout voir <i className="bi bi-arrow-right"></i></Button>
-        </div>
-    <Row className="g-4">
-        {featuredProducts.map((product) => (
-            <Col xs={12} sm={6} md={6} lg={3} key={product.id} >
-                <ProductCard product={product}/>
-            </Col>
-        ))}
-    </Row>
-    </Container>
-    <Container fluid className='promotional-banner d-flex justify-content-center align-items-center gap-4 py-3 my-5'>
+    <Container fluid className='promotional-banner d-flex justify-content-center align-items-center flex-wrap gap-4 py-4 mt-5'>
         <img src='assets/images/gifted-product-homepage.png' alt='illustration de plante' className='promotional-image-container'/>
-        <p className='text-center mb-0 py-2'>Un produit offert avec chaque commande</p>
-    </Container>
-    <Container className='company-values mb-5'>
-        <Row className='d-flex justify-content-between mb-5'>
-            <h2 className='mt-5 text-center'>Des plantes en bonne santé</h2>
+        <p className='text-center mb-0 py-2 promotional-banner-text'>Un produit offert avec chaque commande</p>
+    </Container> 
+    <Container className='company-values py-5'>
+        <Row className='d-flex justify-content-between mb-4'>
+            <h2 className='mt-5 product-container-title text-center'>Des plantes en bonne santé</h2>
         </Row>
         <Row className="g-4">
             <Col xs={12} sm={6} md={4} lg={4}>

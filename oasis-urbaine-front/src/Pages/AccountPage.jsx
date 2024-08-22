@@ -45,7 +45,10 @@ function AccountPage() {
     useEffect(() => {
         fetchUser();
         fetchOrder();
-        document.body.classList.add('body-account-page');
+        document.body.classList.add('background-body-grey');
+        return () => {
+            document.body.classList.remove('background-body-grey');
+        };
     }, []);
 
     const formatPrice = (price) => {
@@ -54,52 +57,54 @@ function AccountPage() {
     }
 
     return <>
-        <Container className='mt-5 mb-5'>
+        <Container className='py-5'>
             <Row>
                 <h1>Bonjour {user.firstname} ! 👋</h1>
                 <div>
-                    <Button variant="link ps-0" onClick={logout}>Deconnexion</Button>
+                    <Button variant="link" className='deconnexion-button  p-0' onClick={logout}>Deconnexion</Button>
                 </div>
             </Row>
-            <Row className='mt-5 mb-5'>
-                <Col className='col-12 col-lg-8'>
-                    <h2>Historique de commande</h2>
+            <Row className='my-5'>
+                <Col className='col-12 col-lg-8 mb-5'>
+                    <h2 className='account-title'>Historique de commande</h2>
                     {orders.length === 0 ? (
                         <p>Aucune commande disponible.</p>
                     ) : (
-                        <Table bordered>
-                            <thead>
-                                <tr>
-                                    {/* <th>Numéro<br/>de commande</th> */}
-                                    <th>Date</th>
-                                    <th>Statut</th>
-                                    <th>Articles</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {orders.map((order) => (
-                                <tr key={order.id}>
-                                    {/* <td>#{order.id}</td> */}
-                                    <td>{new Date(order.created_at).toLocaleDateString()}</td>
-                                    <td>{order.status}</td>
-                                    <td>
-                                        {order.order_items.map((item) => (
-                                            <div key={item.id}>
-                                                {`${item.product.title} (x${item.quantity})`}
-                                            </div>
-                                        ))}
-                                    </td>
-                                    <td>{formatPrice(order.total_amount)}€</td>
-                                </tr>
-                                ))}
-                            </tbody>
-                        </Table>
+                        <div className='bordered-table'>
+                            <Table className='rounded-table'>
+                                <thead>
+                                    <tr>
+                                        {/* <th>Numéro<br/>de commande</th> */}
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                        <th>Articles</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {orders.map((order) => (
+                                    <tr key={order.id}>
+                                        {/* <td>#{order.id}</td> */}
+                                        <td>{new Date(order.created_at).toLocaleDateString()}</td>
+                                        <td>{order.status}</td>
+                                        <td>
+                                            {order.order_items.map((item) => (
+                                                <div key={item.id}>
+                                                    {`${item.product.title} (x${item.quantity})`}
+                                                </div>
+                                            ))}
+                                        </td>
+                                        <td>{formatPrice(order.total_amount)}€</td>
+                                    </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </div>
                     )}
                 </Col>
                 <Col className='col-12 col-lg-4'>
-                    <h2>Coordonnées</h2>
-                    <Card>
+                    <h2 className='account-title'>Coordonnées</h2>
+                    <Card className='user-info-card'>
                         <Card.Body>
                             <ul>
                                 <li>{user.firstname} {user.name}</li>
@@ -107,10 +112,12 @@ function AccountPage() {
                                 <li>{user.postal_code} {user.city}</li>
                             </ul>
                             <ul>
-                                <li>{user.phone}</li>
+                                {user.phone && (
+                                    <li>{user.phone}</li>
+                                )}
                                 <li>{user.email}</li>
                             </ul>
-                            <Button variant="link ps-0" onClick={()=>{navigate('/edit-address')}}>Modifier</Button>
+                            <Button variant="link" className='edit-button' onClick={()=>{navigate('/edit-address')}}>Modifier</Button>
                         </Card.Body>
                     </Card>
                 </Col>

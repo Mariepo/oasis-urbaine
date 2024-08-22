@@ -50,9 +50,14 @@ function CategoriesManagementPage() {
   }
 
   const addNewCategory = async () => {
+    if (!categoryName.trim()) {
+      toast.error('Le nom de la catégorie ne peut pas être vide');
+      return;
+    }
     try {
       await CategoriesService.addCategory(newCategory);
       setCategoryName('');
+      setNewCategory({ name: "" });
       fetchCategories();
       toast.success('Catégorie ajoutée avec succès !');
     } catch (error) {
@@ -61,6 +66,11 @@ function CategoriesManagementPage() {
     }
   }
   const editCategory = async () => {
+    if (!selectedCategoryName.trim()) {
+      toast.error('Le nom de la catégorie ne peut pas être vide');
+      return;
+    }
+
     try {
       await CategoriesService.editCategory(selectedCategoryId, {name : selectedCategoryName});
       setSelectedCategoryId(null);
@@ -80,7 +90,7 @@ function CategoriesManagementPage() {
       setSelectedCategoryName('');
       setShowDeleteCategoryModal(false);
       fetchCategories();
-      toast.success('Catégorie modifiée avec succès !');
+      toast.success('Catégorie supprimée avec succès !');
     } catch (error) {
       console.log(error);
       toast.error('Erreur lors de la suppression de la catégorie');
@@ -90,11 +100,15 @@ function CategoriesManagementPage() {
 
   useEffect(() => {
     fetchCategories();
+    document.body.classList.add('background-body-grey');
+    return () => {
+        document.body.classList.remove('background-body-grey');
+    };
   }, [])
 
   return <>
   <Container className='py-5'>
-    <HeaderManagement lg={8} textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} buttonWidth={"w-100"} />
+    <HeaderManagement lg={8} textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} className={"col-12 col-md-4"} />
     <Row className='col-12 col-lg-8 mx-auto py-4'>
       {categories.map((category) => (
         <CategoryList key={category.id} name={category.name} onClickEdit={()=>{handleShowEditCategoryModal(category.id, category.name)}} onClickDelete={()=>handleShowDeleteCategoryModal(category.id, category.name)}/>

@@ -1,14 +1,14 @@
 import React from 'react'
 import Badge from 'react-bootstrap/Badge';
 
-function CategoryBadge({name, onClick, id}) {
+function CategoryBadge({name, onClick, id, className}) {
   return (
     <Badge 
       pill 
-      bg="primary" 
+      bg="" 
       onClick={onClick} 
       data-category-id={id} 
-      className='category-badge'>{name}
+      className={className}>{name}
     </Badge>
   )
 }
