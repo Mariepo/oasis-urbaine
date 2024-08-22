@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import logoOasisUrbaine from '../assets/images/logo-oasis-urbaine.svg'
 
 function FooterComponent() {
     return (
@@ -7,7 +8,7 @@ function FooterComponent() {
             <Container>
                 <div className='d-flex flex-column flex-md-row justify-content-between align-items-center flex-wrap gap-3'>
                     <div>
-                        <img src='assets/images/logo-oasis-urbaine.svg' alt='logo Oasis Urbaine' className='img-fluid' />
+                        <img src={logoOasisUrbaine} alt='logo Oasis Urbaine' className='img-fluid' />
                     </div>
                     <div className='d-flex gap-3'>
                         <a href="/help" className='text-decoration-none'>Aide</a>

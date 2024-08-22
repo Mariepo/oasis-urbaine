@@ -5,7 +5,6 @@ import CartContext from "../Context/CartContext";
 import { formatDecimalNumber } from '../utils/formatters';
 
 function CartItem({item, inStock, disableClickElement, redirectOnClick}) {
-    const navigate = useNavigate();
     const formattedPrice = formatDecimalNumber(item.price);
     
     const {addToCart, deleteFromCart, removeFromCart} = useContext(CartContext);

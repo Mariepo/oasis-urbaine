@@ -9,6 +9,8 @@ import UsersService from "../Services/UsersService";
 import ProductsService from "../Services/ProductsService";
 import { useNavigate } from "react-router-dom";
 import GiftedCartItem from "../Components/GiftedCartItem";
+import { toast } from "react-toastify";
+import { formatDecimalNumber } from "../utils/formatters";
 
 function Cart() {
   const { cartItems, clearCart } = useContext(CartContext);
@@ -25,10 +27,6 @@ function Cart() {
   const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState(1);
   const [user, setUser] = useState([]);
   const [products, setProducts] = useState([]);
-
-  const selectedDeliveryMethod = deliveryMethods.find(deliveryMethod => deliveryMethod.id === selectedDeliveryMethodId);
-  const subtotal = cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
-  const total = subtotal + (selectedDeliveryMethod ? Number(selectedDeliveryMethod.price) : 0);
 
   const fetchData = async () => {
       try {
@@ -47,7 +45,6 @@ function Cart() {
       }
   }
 
-
   const fetchProducts = async () => {
     try {
         const response = await ProductsService.fetchProducts();
@@ -56,15 +53,25 @@ function Cart() {
         console.log(error);
     }
 }
-  console.log(products)
-  console.log("hello")
-
   useEffect( () => {
     fetchData();
     fetchProducts();
   }, []);
 
+  const validCartItems = cartItems.filter(item => {
+    const productInStock = products.find(product => product.id === item.id);
+    return productInStock !== undefined;
+  });
+
+  const selectedDeliveryMethod = deliveryMethods.find(deliveryMethod => deliveryMethod.id === selectedDeliveryMethodId);
+  const subtotal = validCartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+  const total = subtotal + (selectedDeliveryMethod ? Number(selectedDeliveryMethod.price) : 0);
+
   const addOrder = async () => {
+    if (validCartItems.length === 0) {
+      toast.error('Impossible de passer la commande')
+      return;
+    }
     if(id_user === null) {
       navigateTo('/login');
       return
@@ -74,16 +81,10 @@ function Cart() {
           id_user: id_user,
           id_delivery_method: selectedDeliveryMethodId,
           id_payment_method: selectedPaymentMethodId, 
-          items: cartItems.map((item) => {
-            const productInStock = products.find(product => product.id === item.id);
-            if(productInStock) {
-              return {
+          items: validCartItems.map((item) => ({
                 id_product: item.id,
                 quantity: item.quantity
-              }
-            }
-            return null
-          }).filter(item => item !== null),      
+          }))
         };
         await OrdersService.addOrder(order);
         clearCart();
@@ -94,16 +95,8 @@ function Cart() {
     }
   }
 
-
-
   const handleChange = (setter) => (event) => {
     setter(Number(event.target.value));
-  }
-
-
-  const formatPrice = (price) => {
-    const roundedPrice = Number(price).toFixed(2);
-    return roundedPrice.endsWith(".00") ? Math.round(price) : roundedPrice;
   }
 
   if (cartItems.length === 0){
@@ -167,10 +160,10 @@ function Cart() {
         </section>
         <section className="text-end">
           <hr className="my-4"/>
-          <p>Sous-total : {subtotal}€</p>
-          <p>Livraison : {selectedDeliveryMethod ? `${formatPrice(selectedDeliveryMethod.price)}€` : 'Aucune'}</p>
-          <p className="cart-total">Total : {total}€</p>
-          <Button variant="primary" className="my-2 px-5" type="submit" onClick={addOrder}>Payer maintenant</Button>
+          <p>Sous-total : {formatDecimalNumber(subtotal)}€</p>
+          <p>Livraison : {selectedDeliveryMethod ? `${formatDecimalNumber(selectedDeliveryMethod.price)}€` : 'Aucune'}</p>
+          <p className="cart-total">Total : {formatDecimalNumber(total)}€</p>
+          <Button variant="primary" className="my-2 px-5" type="submit" onClick={addOrder} disabled={validCartItems.length === 0} >Payer maintenant</Button>
         </section>
       </main>
     </Container>
