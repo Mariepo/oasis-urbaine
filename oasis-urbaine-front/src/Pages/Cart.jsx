@@ -121,16 +121,16 @@ function Cart() {
         {cartItems.map(item => {
           const productInStock = products.find(product => product.id === item.id);
           return (
-            <>
+            <React.Fragment key={item.id}>
               {!productInStock ? <>
-                <CartItem key={item.id} item={item} inStock={'not-in-stock mb-1'} disableClickElement={true} ></CartItem>
+                <CartItem key={item.id} item={item} inStock={'not-in-stock mb-1'} disableClickElement={true}></CartItem>
                 <span className="text-danger">Cet article n'existe plus</span>
                 </> : <>
-                    <CartItem key={item.id} item={item} redirectOnClick={() => navigate(`/products/${item.id}`)}></CartItem>
-                    {cartItems.length > 1 && (<hr />)}
+                  <CartItem key={item.id} item={item} redirectOnClick={() => navigate(`/products/${item.id}`)} cursor={'cursor-pointer'}></CartItem>
+                  {cartItems.length > 1 && (<hr />)}
                 </>
               }
-            </>
+            </React.Fragment>
           );
         })}
         {cartItems.length >= 1 && (

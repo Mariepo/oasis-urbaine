@@ -6,9 +6,22 @@ import { toast } from 'react-toastify';
 
 function EditUserForm() {
     const navigate = useNavigate();
+    const navigateTo = (route) => {
+        navigate(route);
+        window.scrollTo(0, 0);
+    }
     const location = useLocation();
+    const redirectTo = location.state?.from || '/account';
+
     const id = UsersService.getUserId();
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({
+        email: '',
+        phone: '',
+        address: '',
+        postal_code: '',
+        city: ''
+    });
+    
 
     const fetchUser = async () => {
         try {
@@ -29,8 +42,7 @@ function EditUserForm() {
         try {
             await UsersService.editUser(id, user);
             toast.success('Modifications enregistrées');
-            const redirectTo = location.state?.from || '/account';
-            navigate(redirectTo)
+            navigateTo(redirectTo)
         } catch (error) {
             toast.error('Erreur lors de la modification du compte')
             console.log(error);
@@ -87,7 +99,7 @@ function EditUserForm() {
                     </Row>
                 </fieldset>
                 <Button variant="primary" type="submit">Valider les modifications</Button>
-                <Button variant="link"  className='py-4' onClick={()=>{navigate('/account')}}>Annuler</Button>
+                <Button variant="link"  className='py-4' onClick={()=>{navigate(redirectTo)}}>Annuler</Button>
             </Form>
         </Container>
     </>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CartContext from "../Context/CartContext";
 import { formatDecimalNumber } from '../utils/formatters';
 
-function CartItem({item, inStock, disableClickElement, redirectOnClick}) {
+function CartItem({item, inStock, disableClickElement, redirectOnClick, cursor}) {
     const formattedPrice = formatDecimalNumber(item.price);
     
     const {addToCart, deleteFromCart, removeFromCart} = useContext(CartContext);
@@ -23,16 +23,16 @@ function CartItem({item, inStock, disableClickElement, redirectOnClick}) {
         <Row className={`my-4 cart-item ${inStock}`}>
             <div className='d-flex align-items-start align-items-md-center justify-content-start justify-content-md-between gap-3 gap-md-5'>
                 <div className='d-flex align-items-start align-items-md-center flex-fill'>
-                    <div className="cart-image-container cursor-pointer me-2 me-md-4">
+                    <div className={`cart-image-container me-2 me-md-4 ${cursor}`}>
                         <img src={item.image_thumbnail} alt={item.title} />
                     </div>
                     <div className='d-flex flex-column flex-md-row flex-fill gap-md-5'>
-                        <div className="ps-0 d-flex flex-column justify-content-center cursor-pointer flex-md-fill"  onClick={redirectOnClick}>
+                        <div className={`ps-0 d-flex flex-column justify-content-center flex-md-fill ${cursor}`}  onClick={redirectOnClick}>
                             <p className='m-0 item-title'>{item.title}</p>
                             <p className='ms-0  item-price'>{formattedPrice}€</p>
                         </div>
                         <div className='d-flex align-items-center'>
-                            <Button variant="light" disabled={disableClickElement} onClick={decreaseProductQuantity} className='quantity-button'>-</Button>
+                            <Button variant="light" onClick={decreaseProductQuantity} className='quantity-button'>-</Button>
                             <Form.Control
                                 type="text"
                                 value={item.quantity}

@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 function ErrorPage() {
   const navigate = useNavigate();
+  const navigateTo = (route) => {
+    navigate(route);
+    window.scrollTo(0,0);
+  }
   return (
     <Container fluid >
       <Row className='error-page-container'>

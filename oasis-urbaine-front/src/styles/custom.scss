@@ -270,7 +270,7 @@ footer {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100%;
+    min-height: 100vh;
     background-color: $background-dark-grey;
     animation: zoom 10s infinite alternate;
     @media screen and (max-width: 768px){

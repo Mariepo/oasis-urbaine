@@ -38,6 +38,10 @@ function AddProductForm() {
 
 
   const navigate = useNavigate();
+  const navigateTo = (route) => {
+    navigate(route);
+    window.scrollTo(0,0);
+}
   
   const addProduct = async(event) => {
     event.preventDefault();
@@ -55,7 +59,7 @@ function AddProductForm() {
     };
       await ProductsService.addProduct(productWithCategories)
       toast.success('Produit ajouté avec succès !');
-      navigate('/products-management')
+      navigateTo('/products-management')
     } catch (error) {
       toast.error("Erreur lors de l'ajout du produit")
       console.log(error);
