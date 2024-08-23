@@ -114,7 +114,7 @@ function Cart() {
   
   return <>
     <Container>
-      <main className="col-md-10 col-lg-8 mx-auto my-5">
+      <main className="col-12 col-lg-8 mx-auto my-5">
           <section className="my-5">
             <h1>Mon panier</h1>
           </section>
@@ -139,7 +139,7 @@ function Cart() {
         <section className="my-5">
           <h2 className="cart-title">Mode de livraison</h2>
           {deliveryMethods.map((deliveryMethod) => (
-            <Form.Check type="radio" name="delivery" id={`delivery-${deliveryMethod.id}`} key={deliveryMethod.id} label={`${deliveryMethod.name} ${deliveryMethod.description} - ${deliveryMethod.price}€`} value={deliveryMethod.id} onChange={handleChange(setSelectedDeliveryMethodId)} checked={deliveryMethod.id === selectedDeliveryMethodId}
+            <Form.Check type="radio" name="delivery" id={`delivery-${deliveryMethod.id}`} key={deliveryMethod.id} label={`${deliveryMethod.name} ${deliveryMethod.description} - ${deliveryMethod.price}€`} value={deliveryMethod.id} onChange={handleChange(setSelectedDeliveryMethodId)} checked={deliveryMethod.id === selectedDeliveryMethodId} className="py-2 py-md-0"
             />
           ))}
           {id_user !== null && (
@@ -154,7 +154,7 @@ function Cart() {
         <section className="my-5">
           <h2 className="cart-title">Paiement</h2>
           {paymentMethods.map((paymentMethod) => (
-            <Form.Check type="radio" name="payment" id={`payment-${paymentMethod.id}`} key={paymentMethod.id} label={paymentMethod.name} value={paymentMethod.id} onChange={handleChange(setSelectedPaymentMethodId)} checked={paymentMethod.id === selectedPaymentMethodId}
+            <Form.Check type="radio" name="payment" id={`payment-${paymentMethod.id}`} key={paymentMethod.id} label={paymentMethod.name} value={paymentMethod.id} onChange={handleChange(setSelectedPaymentMethodId)} checked={paymentMethod.id === selectedPaymentMethodId} className="py-2 py-md-0"
             />
           ))}
         </section>
@@ -163,7 +163,7 @@ function Cart() {
           <p>Sous-total : {formatDecimalNumber(subtotal)}€</p>
           <p>Livraison : {selectedDeliveryMethod ? `${formatDecimalNumber(selectedDeliveryMethod.price)}€` : 'Aucune'}</p>
           <p className="cart-total">Total : {formatDecimalNumber(total)}€</p>
-          <Button variant="primary" className="my-2 px-5" type="submit" onClick={addOrder} disabled={validCartItems.length === 0} >Payer maintenant</Button>
+          <Button variant="primary" className="my-2 px-5 d-block d-md-inline-block" type="submit" onClick={addOrder} disabled={validCartItems.length === 0} >Payer maintenant</Button>
         </section>
       </main>
     </Container>

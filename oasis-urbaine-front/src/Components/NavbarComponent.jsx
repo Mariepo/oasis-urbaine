@@ -22,36 +22,36 @@ function NavbarComponent() {
   const isActive = (route) => location.pathname === route;
 
     return <>
-        <Navbar expand="lg" sticky="top">
+        <Navbar expand="lg" sticky="top" collapseOnSelect>
           <Container>
-            <Navbar.Brand onClick={() => {navigateTo('/')}} className='cursor-pointer'>
+            <Navbar.Brand  eventKey="1" onClick={() => {navigateTo('/')}} className='cursor-pointer'>
               <img src={logoOasisUrbaine} alt="logo de la marque Oasis Urbaine" />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link className={`mt-2 px-3 ${isActive('/') ? 'active' : ''}`} onClick={() => {navigateTo('/')}}>Accueil</Nav.Link>
-                <Nav.Link className={`mt-2 px-3 ${isActive('/products') ? 'active' : ''}`} onClick={() => {navigateTo('/products')}}>Boutique</Nav.Link>
+                <Nav.Link  eventKey="2" className={`mt-2 px-3 ${isActive('/') ? 'active' : ''}`} onClick={() => {navigateTo('/')}}>Accueil</Nav.Link>
+                <Nav.Link eventKey="3" className={`mt-2 px-3 ${isActive('/products') ? 'active' : ''}`} onClick={() => {navigateTo('/products')}}>Boutique</Nav.Link>
                 {isAdmin && 
                   <>
-                    <Nav.Link className={`mt-2 px-3 ${isActive('/products-management') ? 'active' : ''}`} onClick={() => {navigateTo('/products-management')}}>Gestion des produits</Nav.Link>
-                    <Nav.Link className={`mt-2 px-3 ${isActive('/categories-management') ? 'active' : ''}`} onClick={() => {navigateTo('/categories-management')}}>Gestion des categories</Nav.Link>
+                    <Nav.Link eventKey="4" className={`mt-2 px-3 ${isActive('/products-management') ? 'active' : ''}`} onClick={() => {navigateTo('/products-management')}}>Gestion des produits</Nav.Link>
+                    <Nav.Link eventKey="5" className={`mt-2 px-3 ${isActive('/categories-management') ? 'active' : ''}`} onClick={() => {navigateTo('/categories-management')}}>Gestion des categories</Nav.Link>
                   </>
                 }
               </Nav>
               <Nav>
                 {isAuthenticated ? 
                 <>
-                  <Nav.Link className={`px-3 ${isActive('/account') ? 'active' : ''}`} onClick={() => {navigateTo('/account')}}>
+                  <Nav.Link eventKey="6" className={`px-3 ${isActive('/account') ? 'active' : ''}`} onClick={() => {navigateTo('/account')}}>
                     <i className="bi bi-person-circle"></i>
                   </Nav.Link>
                 </> : 
                 <>
-                  <Nav.Link className={`px-3 ${isActive('/login') ? 'active' : ''}`} onClick={() => {navigateTo('/login')}}>
+                  <Nav.Link eventKey="7" className={`px-3 ${isActive('/login') ? 'active' : ''}`} onClick={() => {navigateTo('/login')}}>
                     <i className="bi bi-person-circle"></i>
                   </Nav.Link>
                 </>}
-                <Nav.Link className={`px-3 ${isActive('/cart') ? 'active' : ''}`} onClick={() => {navigateTo('/cart')}}>
+                <Nav.Link eventKey="8" className={`px-3 ${isActive('/cart') ? 'active' : ''}`} onClick={() => {navigateTo('/cart')}}>
                   <i className="bi bi-basket"></i> 
                   <span className='ms-2'>{cartItemsQuantity}</span>
                 </Nav.Link>
