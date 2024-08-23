@@ -21,12 +21,13 @@ function ProductCard({product, handleShowModal}) {
     navigate('/products/'+product.id);
     window.scrollTo(0, 0);
   }
+  const imageSrc = `${process.env.PUBLIC_URL}/${product.image_thumbnail}`;
 
 
   return <>
         <Card className='cursor-pointer product-card'>
           <div className="img-container">
-            <Card.Img variant="top" src={product.image_thumbnail}  onClick={navigateToProductDetails}/>
+            <Card.Img variant="top" src={imageSrc}  onClick={navigateToProductDetails}/>
           </div>
           <Card.Body  onClick={navigateToProductDetails} className='px-2'>
               <Card.Title className='d-flex justify-content-between gap-2'>

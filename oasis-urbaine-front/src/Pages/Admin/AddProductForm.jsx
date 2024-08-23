@@ -43,11 +43,16 @@ function AddProductForm() {
     event.preventDefault();
     try {
       // inclure les catégories à l'objet product
-      const productWithCategories = {...product, 
-        categories: selectedCategoriesId.map((id_category)=> ({
-          id_category: id_category
+      const productWithCategories = {
+        ...product,
+        image_thumbnail: product.image_thumbnail || undefined,
+        image_large: product.image_large || undefined,
+        price: parseFloat(product.price), 
+        dimension: product.dimension ? parseFloat(product.dimension) : null, 
+        categories: selectedCategoriesId.map((id_category) => ({
+            id_category: id_category
         }))
-      }
+    };
       await ProductsService.addProduct(productWithCategories)
       toast.success('Produit ajouté avec succès !');
       navigate('/products-management')
