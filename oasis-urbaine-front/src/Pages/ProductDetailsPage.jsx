@@ -78,11 +78,11 @@ function ProductDetailsPage(){
           ) }
           {product.categories && product.categories.length > 0 && (
             <ul className="categorie-list">
-                {product.categories.map((categorie) => <>
+                {product.categories.map((categorie) => (
                     <li as="li" key={categorie.id}>
                         {categorie.name}
                     </li>
-                </>)}
+                ))}
               </ul>
             )}
             <p className="product-delivery">Livraison calculée à la prochaine étape</p>

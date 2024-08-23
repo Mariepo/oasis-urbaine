@@ -10,6 +10,10 @@ const LoginPage = () => {
     const [user, setUser] = useState({ email: '', password: '' });   
     const {setIsAuthenticated, setToken, setIsAdmin} = useContext(AuthContext);
     const navigate = useNavigate();
+    const navigateTo = (route) => {
+        navigate(route);
+        window.scrollTo(0,0);
+    }
     const location = useLocation();
 
     const handleChange = (event) => {
@@ -29,7 +33,7 @@ const LoginPage = () => {
                 setIsAdmin(UsersService.isAdmin()); 
                 toast.success("Vous êtes bien connecté");
                 const redirectTo = location.state?.from || '/';
-                navigate(redirectTo);
+                navigateTo(redirectTo);
             } 
         } catch (error) {
             toast.error("Identifiants incorrects");
@@ -52,7 +56,7 @@ const LoginPage = () => {
                         <Form.Control type="password" name="password" onChange={handleChange} value={user.password} required />
                     </Form.Group>
                     <Button variant="primary" type="submit">Se connecter</Button>
-                    <Button variant="link" onClick={() => {navigate('/signup')}} className='py-4 text-decoration-underline'>Créer un compte</Button>
+                    <Button variant="link" onClick={() => {navigateTo('/signup')}} className='py-4 text-decoration-underline'>Créer un compte</Button>
                 </Form>
             </div>
         </Container>
