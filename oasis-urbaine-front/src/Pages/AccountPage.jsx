@@ -8,6 +8,10 @@ import { Container, Row, Col, Button, Card, Table } from 'react-bootstrap';
 
 function AccountPage() {
     const navigate = useNavigate();
+    const navigateTo = (route) => {
+      navigate(route);
+      window.scrollTo(0, 0);
+    }
     const {setIsAuthenticated, setToken, setIsAdmin} = useContext(AuthContext);
     const [user, setUser] = useState([]);
     const [orders, setOrders] = useState([]);
@@ -19,7 +23,7 @@ function AccountPage() {
         setIsAdmin(false);
         setToken(null);
         UsersService.logout();
-        navigate('/login');
+        navigateTo('/login');
         toast.success("Vous êtes déconnecté")
     }
 
@@ -71,7 +75,7 @@ function AccountPage() {
                         <p>Aucune commande disponible.</p>
                     ) : (
                         <div className='bordered-table'>
-                            <Table className='rounded-table'>
+                            <Table className='rounded-table' responsive>
                                 <thead>
                                     <tr>
                                         {/* <th>Numéro<br/>de commande</th> */}
@@ -117,7 +121,7 @@ function AccountPage() {
                                 )}
                                 <li>{user.email}</li>
                             </ul>
-                            <Button variant="link" className='edit-button' onClick={()=>{navigate('/edit-address')}}>Modifier</Button>
+                            <Button variant="link" className='edit-button' onClick={()=>{navigateTo('/edit-address')}}>Modifier</Button>
                         </Card.Body>
                     </Card>
                 </Col>

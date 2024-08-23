@@ -47,7 +47,7 @@ function EditUserForm() {
 
     return <>
         <Container fluid className='py-5'>
-            <Form onSubmit={editUser} method='post' className='col-10 col-md-6 mx-auto d-flex flex-column my-4'>
+            <Form onSubmit={editUser} method='post' className='col-12 col-md-6 mx-auto d-flex flex-column my-4'>
                 <h1 className='text-center mb-4'>Modification</h1>
                 <fieldset>
                     <Row>

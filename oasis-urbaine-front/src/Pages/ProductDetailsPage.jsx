@@ -64,7 +64,7 @@ function ProductDetailsPage(){
     <Container className="product-details">
       <Row className="py-5 justify-content-center">
         <Col className="col-12 col-lg-6">
-          <div className="image-container mb-3 pe-4">
+          <div className="image-container mb-3 pe-lg-4">
             <img src={imageSrc} alt={product.title}></img>
           </div>
         </Col>

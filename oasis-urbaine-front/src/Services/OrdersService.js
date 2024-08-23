@@ -1,12 +1,13 @@
 import axios from "axios";
+import URL from "./config";
 
 class OrdersService {
     static fetchOrdersById(id) {
-        return axios.get('http://127.0.0.1:3001/orders/user/'+id);
+        return axios.get(`${URL}/orders/user/${id}`);
     }
 
     static addOrder(order) {
-        return axios.post('http://127.0.0.1:3001/orders/', order);
+        return axios.post(`${URL}/orders/`, order);
     }
 }
 
