@@ -12,6 +12,10 @@ function ProductsManagementPage() {
     const [products, setProducts] = useState([]);
     const [selectedProductId, setSelectedProductId] = useState();
     const navigate = useNavigate();
+    const navigateTo = (route) => {
+        navigate(route);
+        window.scrollTo(0,0);
+    }
 
     const fetchProducts = async () => {
         try {
@@ -38,7 +42,7 @@ function ProductsManagementPage() {
             toast.success('Produit supprimé avec succès !');
             handleCloseModal();
             fetchProducts();
-            navigate('/products-management');
+            navigateTo('/products-management');
         } catch (error) {
             console.log(error);
         }
