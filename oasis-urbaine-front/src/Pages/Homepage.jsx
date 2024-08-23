@@ -42,7 +42,7 @@ function HomePage() {
     }
 
     const featuredProducts = products.slice(0, 8);
-
+    const highlitedProducts = productsFruitsAllYear.slice(0, 4);
 
     return <>
     <HeaderHome></HeaderHome>
@@ -67,7 +67,7 @@ function HomePage() {
             <Button variant="link" className="px-0 fs-5" onClick={() => {navigateTo('/categories/5/products/')}}>Voir tout <i className="bi bi-arrow-right"></i></Button>
         </div>
     <Row className="g-4">
-        {productsFruitsAllYear.map((product) => (
+        {highlitedProducts.map((product) => (
             <Col xs={12} sm={6} md={6} lg={3} key={product.id} className='py-3' >
                 <ProductCard product={product}/>
             </Col>

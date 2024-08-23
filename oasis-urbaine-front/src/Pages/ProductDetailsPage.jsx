@@ -58,13 +58,14 @@ function ProductDetailsPage(){
 
     const formattedPrice = formatDecimalNumber(product.price);
     const formattedHeight = formatDecimalNumber(product.dimension);
+    const imageSrc = `${process.env.PUBLIC_URL}/${product.image_large}`;
 
   return <>
     <Container className="product-details">
       <Row className="py-5 justify-content-center">
         <Col className="col-12 col-lg-6">
           <div className="image-container mb-3 pe-4">
-            <img src={product.image_large} alt={product.title}></img>
+            <img src={imageSrc} alt={product.title}></img>
           </div>
         </Col>
         <Col className="col-12 col-lg-5 col-md-px-5">
