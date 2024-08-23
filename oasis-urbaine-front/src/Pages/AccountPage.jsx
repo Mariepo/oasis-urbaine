@@ -75,7 +75,7 @@ function AccountPage() {
                         <p>Aucune commande disponible.</p>
                     ) : (
                         <div className='bordered-table'>
-                            <Table className='rounded-table'>
+                            <Table className='rounded-table' responsive>
                                 <thead>
                                     <tr>
                                         {/* <th>Numéro<br/>de commande</th> */}

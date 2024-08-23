@@ -339,8 +339,9 @@ footer {
     opacity: 80%;
 }
 .cart-image-container {
-    max-width: 110px;
-    max-height: 110px;
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -348,8 +349,12 @@ footer {
     border-radius: $border-radius-md;    
     img {
         width: 100%;
-        height: 100%;
+        height: 110px;
         object-fit: cover;
+    }
+    @media screen and (max-width: 576px) {
+        width: 60px;
+        height: 100%;
     }
 }
 .gifted-cart-item {
