@@ -28,7 +28,6 @@ function HomePage() {
             console.log(error);
         }
     }
-    console.log(productsFruitsAllYear)
 
     useEffect(() => {
         fetchProducts();

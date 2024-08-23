@@ -1,8 +1,9 @@
 import axios from "axios";
+import URL from "./config";
 
 class DeliveryMethodsService {
     static fetchDeliveryMethods () {
-        return axios.get('http://127.0.0.1:3001/delivery');
+        return axios.get(`${URL}/delivery`);
     }
 }
 

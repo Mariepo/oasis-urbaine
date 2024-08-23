@@ -66,8 +66,8 @@ function SignupPage() {
   return <>
     <Container fluid className='login-image-container'>
       <div className=' d-flex align-items-center my-5'>
-        <Form onSubmit={signup} method='post' className='col-12 col-md-10 col-lg-6 mx-auto d-flex flex-column my-5 signup-form'>
-            <h1 className='text-center mb-5'>Inscription</h1>
+        <Form onSubmit={signup} method='post' className='col-12 col-md-10 col-lg-6 mx-auto d-flex flex-column signup-form'>
+            <h1 className='text-center my-4 mb-5'>Inscription</h1>
             <fieldset>
               <p className='form-title'>Coordonnées</p>
               <Row>
