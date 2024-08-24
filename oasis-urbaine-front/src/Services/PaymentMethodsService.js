@@ -1,10 +1,10 @@
 import axios from "axios";
-import URL from "./config";
+import SERVER_URL from "./config";
 
 class PaymentMethodsService {
 
     static fetchPaymentMethods() {
-        return axios.get(`${URL}/payments`)
+        return axios.get(`${SERVER_URL}/payments`)
     }
 
 }
