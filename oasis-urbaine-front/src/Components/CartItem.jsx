@@ -23,7 +23,7 @@ function CartItem({item, inStock, disableClickElement, redirectOnClick, cursor})
         <Row className={`my-4 cart-item ${inStock}`}>
             <div className='d-flex align-items-start align-items-md-center justify-content-start justify-content-md-between gap-3 gap-md-5'>
                 <div className='d-flex align-items-start align-items-md-center flex-fill'>
-                    <div className={`cart-image-container me-2 me-md-4 ${cursor}`}>
+                    <div className={`cart-image-container me-2 me-md-4 ${cursor}`} onClick={redirectOnClick}>
                         <img src={item.image_thumbnail} alt={item.title} />
                     </div>
                     <div className='d-flex flex-column flex-md-row flex-fill gap-md-5'>

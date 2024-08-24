@@ -13,7 +13,6 @@ function ProductsPage() {
     const { id } = useParams();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [categoriesWithProducts, setCategoriesWithProducts] = useState([]);
     const navigate = useNavigate();
 
     const navigateTo = (route) => {
@@ -28,20 +27,15 @@ function ProductsPage() {
             const response = id ? await ProductsService.fetchProductsByCategory(id) : await ProductsService.fetchProducts();
             const productsData = id ? response.data.products : response.data;
             setProducts(productsData);
-            fetchCategories(productsData);
         } catch (error) {
             console.log(error);
         }
     }
 
-    const fetchCategories = async (productsData = []) => {
+    const fetchCategories = async () => {
         try {
             const response = await CategoriesService.fetchCategories();
-            const allCategories = response.data;
-            const categoryIdsWithProducts = new Set(productsData.flatMap(product => product.categories.map(category => category.id)));
-            const filteredCategories = allCategories.filter(category => categoryIdsWithProducts.has(category.id));
-            setCategoriesWithProducts(filteredCategories);
-            setCategories(allCategories);
+            setCategories(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -49,6 +43,7 @@ function ProductsPage() {
 
     useEffect(() => {
         fetchProducts();
+        fetchCategories();
     }, [id]);
 
     function displaySelectedCategoryBadge(event) {
@@ -66,7 +61,7 @@ function ProductsPage() {
                         onClick={(event) => {navigate('/products'); displaySelectedCategoryBadge(event);}} 
                         className={'category-badge' + (!id ? ' category-badge-active' : '')} 
                     />
-                    {categoriesWithProducts.map((category) => (
+                    {categories.map((category) => (
                         <CategoryBadge 
                             id={category.id} 
                             name={category.name} 

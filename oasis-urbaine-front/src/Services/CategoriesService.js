@@ -1,21 +1,21 @@
 import axios from "axios";
-import URL from "./config";
+import SERVER_URL from "./config";
 
 class CategoriesService {
     static fetchCategories() {
-        return axios.get(`${URL}/categories`);
+        return axios.get(`${SERVER_URL}/categories`);
     }
 
     static addCategory(category) {
-        return axios.post(`${URL}/categories`, category)
+        return axios.post(`${SERVER_URL}/categories`, category)
     }
 
     static editCategory(id, category) {
-        return axios.patch(`${URL}/categories/${id}`, category)
+        return axios.patch(`${SERVER_URL}/categories/${id}`, category)
     }
 
     static deleteCategory(id){
-        return axios.delete(`${URL}/categories/${id}`)
+        return axios.delete(`${SERVER_URL}/categories/${id}`)
     }
 }
 
