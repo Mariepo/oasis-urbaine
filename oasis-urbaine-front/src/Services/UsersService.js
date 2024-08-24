@@ -1,19 +1,19 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import URL from './config';
+import SERVER_URL from './config';
 
 class UsersService {
 
     static loginUser(user){
-        return axios.post(`${URL}/users/login`, user);
+        return axios.post(`${SERVER_URL}/users/login`, user);
     }
 
     static signupUser(user){
-        return axios.post(`${URL}/users/signup`, user)
+        return axios.post(`${SERVER_URL}/users/signup`, user)
     }
 
     static editUser(id, user){
-        return axios.patch(`${URL}/users/${id}`, user)
+        return axios.patch(`${SERVER_URL}/users/${id}`, user)
     }    
     static getUserId() {
         const token = window.localStorage.getItem("authToken");
@@ -30,7 +30,7 @@ class UsersService {
     }
 
     static getUserById(id){
-        return axios.get(`${URL}/users/${id}`)
+        return axios.get(`${SERVER_URL}/users/${id}`)
     }
 
     static setAxiosToken(token) {

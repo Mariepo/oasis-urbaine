@@ -1,9 +1,9 @@
 import axios from "axios";
-import URL from "./config";
+import SERVER_URL from "./config";
 
 class DeliveryMethodsService {
     static fetchDeliveryMethods () {
-        return axios.get(`${URL}/delivery`);
+        return axios.get(`${SERVER_URL}/delivery`);
     }
 }
 
