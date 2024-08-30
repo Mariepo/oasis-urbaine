@@ -6,14 +6,6 @@ class ProductCategoryService {
         return await ProductCategory.create({ id_product, id_category });
     }
 
-    async getCategoriesByProductId(id) {
-        return await ProductCategory.findAll({
-            where: { 
-                id : id 
-            }
-        });
-    }
-
     async deleteProductCategoryByProductId(id) {
         return await ProductCategory.destroy({
             where: { 

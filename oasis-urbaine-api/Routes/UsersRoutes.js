@@ -9,6 +9,6 @@ router.get("/:id", AuthenticateController.authenticateToken, (request, result) =
 router.post("/signup", (request, result) => {UsersController.addUser(request, result)});
 router.post("/login", (request, result) => {UsersController.loginUser(request, result)});
 router.patch("/:id", AuthenticateController.authenticateToken, (request, result) => {UsersController.updateUser(request, result)});
-router.delete("/:id", AuthenticateController.authenticateToken, (request, result) => {UsersController.deleteUser(request, result)});
+router.delete("/:id", AuthenticateController.authenticateToken, AuthenticateController.authenticateAdmin, (request, result) => {UsersController.deleteUser(request, result)});
 
 module.exports = router;
