@@ -12,16 +12,6 @@ class CategoriesController {
         }
     }
 
-    async getCategoryById(request, result){
-        try {
-            const categorie = await CategoriesService.getCategoryById(request.params.id);
-            result.json(categorie);
-        } catch (error) {
-            result.status(500);
-            result.json({error : "Une erreur est survenue lors de la récupération de la catégorie"});
-        }              
-    }
-
     async addCategory(request, result){
         try {
             const categorie = await CategoriesService.addCategory(request.body);
@@ -62,15 +52,6 @@ class CategoriesController {
         }
     }
 
-    async getCategoryByProductId(request, result) {
-        try {
-            const categorie = await ProductCategoryService.getCategoriesByProductId(request.params.id);
-            result.json(categorie);
-        } catch (error) {
-            result.status(500);
-            result.json({ error: "Une erreur est survenue lors de la récupération des catégories du produit" });
-        }        
-    }
 }
 
 module.exports = new CategoriesController();

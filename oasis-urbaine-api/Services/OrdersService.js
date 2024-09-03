@@ -3,11 +3,6 @@ const OrderItems = require('../Models/OrderItems');
 const Products = require('../Models/Products');
 
 class OrdersService {
-    async getOrderById(id) {
-        return await Orders.findByPk(id, {
-            include: ['order_items']
-        });
-    }
 
     async getOrdersByUserId(id) {
         return await Orders.findAll({

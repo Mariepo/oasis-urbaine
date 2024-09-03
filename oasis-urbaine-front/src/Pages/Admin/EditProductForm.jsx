@@ -48,7 +48,7 @@ function EditProductForm() {
       // Ajouter l'ID de la catégorie aux sélectionnées
       setSelectedCategoriesId([...selectedCategoriesId, parseInt(value)]);
     } else {
-      // Supprimer l'ID de la catégorie des sélectionnées
+      // Supprimer l'ID de la catégorie desélectionnée
       setSelectedCategoriesId(selectedCategoriesId.filter(id => id !== parseInt(value)));
     }
   };

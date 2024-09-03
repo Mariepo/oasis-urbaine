@@ -1,16 +1,16 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
 function HeaderHome() {
     const navigate = useNavigate();
     const navigateTo = (route) => {
-      navigate(route);
-      window.scrollTo(0, 0);
+        navigate(route);
+        window.scrollTo(0, 0);
     }
 
-  return <>
+    return <>
         <header className='header-home d-flex flex-wrap'>
             <div className='col-12 col-md-6 order-2 order-md-1 my-auto header-body'>
                 <h1>Une oasis de verdure et de sérénité</h1>

@@ -63,12 +63,17 @@ function Cart() {
     return productInStock !== undefined;
   });
 
+  const inValidCartItems = cartItems.filter(item => {
+    const productInStock = products.find(product => product.id === item.id);
+    return productInStock === undefined;
+  });
+
   const selectedDeliveryMethod = deliveryMethods.find(deliveryMethod => deliveryMethod.id === selectedDeliveryMethodId);
   const subtotal = validCartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
   const total = subtotal + (selectedDeliveryMethod ? Number(selectedDeliveryMethod.price) : 0);
 
   const addOrder = async () => {
-    if (validCartItems.length === 0) {
+    if (inValidCartItems.length > 0) {
       toast.error('Impossible de passer la commande')
       return;
     }
@@ -122,10 +127,12 @@ function Cart() {
           const productInStock = products.find(product => product.id === item.id);
           return (
             <React.Fragment key={item.id}>
-              {!productInStock ? <>
-                <CartItem key={item.id} item={item} inStock={'not-in-stock mb-1'} disableClickElement={true}></CartItem>
-                <span className="text-danger">Cet article n'existe plus</span>
-                </> : <>
+              {!productInStock ? 
+                <>
+                  <CartItem key={item.id} item={item} inStock={'not-in-stock mb-1'} disableClickElement={true}></CartItem>
+                  <span className="text-danger">Cet article n'existe plus</span>
+                </> : 
+                <>
                   <CartItem key={item.id} item={item} redirectOnClick={() => navigate(`/products/${item.id}`)} cursor={'cursor-pointer'}></CartItem>
                   {cartItems.length > 1 && (<hr />)}
                 </>
@@ -163,7 +170,7 @@ function Cart() {
           <p>Sous-total : {formatDecimalNumber(subtotal)}€</p>
           <p>Livraison : {selectedDeliveryMethod ? `${formatDecimalNumber(selectedDeliveryMethod.price)}€` : 'Aucune'}</p>
           <p className="cart-total">Total : {formatDecimalNumber(total)}€</p>
-          <Button variant="primary" className="my-2 px-5 d-block d-md-inline-block" type="submit" onClick={addOrder} disabled={validCartItems.length === 0} >Payer maintenant</Button>
+          <Button variant="primary" className="my-2 px-5 d-block d-md-inline-block" type="submit" onClick={addOrder}  disabled={inValidCartItems.length > 0} >Payer maintenant</Button>
         </section>
       </main>
     </Container>

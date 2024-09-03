@@ -37,20 +37,6 @@ class UsersService {
         axios.defaults.headers["Authorization"] = "Bearer " + token;
     }
 
-    static checkToken() {
-        const token = window.localStorage.getItem("authToken");
-        if (token) {
-            const {exp: expiration} = jwtDecode(token);
-            if(expiration * 1000 > new Date().getTime()) {
-                UsersService.setAxiosToken(token);
-            } else {
-                UsersService.logout();
-            }
-        } else {
-            UsersService.logout();
-        }
-    }  
-
     static isAuthenticated() {
         const token = window.localStorage.getItem("authToken");
         if (token) {
@@ -65,15 +51,20 @@ class UsersService {
         }
     }
     
+    static checkToken() {
+        if (UsersService.isAuthenticated()) {
+            const token = window.localStorage.getItem("authToken");
+            UsersService.setAxiosToken(token);
+        } else {
+            UsersService.logout();
+        }
+    }  
+
     static isAdmin(){
-        const token = window.localStorage.getItem("authToken");
-        if(token) {
+        if (UsersService.isAuthenticated()) {
+            const token = window.localStorage.getItem("authToken");
             const { is_admin } = jwtDecode(token);
-            if (is_admin === 1) {
-                return true
-            } else {
-                return false
-            }
+            return is_admin === 1;
         } else {
             return false;
         }
