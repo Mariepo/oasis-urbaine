@@ -41,7 +41,7 @@ function App() {
   const [token, setToken] = useState(window.localStorage.getItem('authToken') ? window.localStorage.getItem('authToken') : null);
   return <>
     <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, token, setToken, isAdmin, setIsAdmin}}>
-        <CartProvider>
+      <CartProvider>
           <BrowserRouter> 
             <Headerbanner></Headerbanner>
             <NavbarComponent></NavbarComponent>
@@ -67,8 +67,7 @@ function App() {
                 </>}</>}
             </Routes>
             <FooterComponent></FooterComponent>
-            <ToastContainer autoClose={5000} position="bottom-right" pauseOnHover={false}
- />
+            <ToastContainer autoClose={5000} position="bottom-right" pauseOnHover={false}/>
           </BrowserRouter>
         </CartProvider>    
     </AuthContext.Provider>

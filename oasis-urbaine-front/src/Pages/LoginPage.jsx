@@ -40,8 +40,6 @@ const LoginPage = () => {
             console.log(error);
         }
     }
-
-
     return <>
         <Container fluid className='vh-100  login-image-container'>
             <div className=' d-flex align-items-center my-5'>

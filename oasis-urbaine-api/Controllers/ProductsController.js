@@ -24,7 +24,7 @@ class ProductsController {
         }
     }
 
-    // Commentaire : on ajoute les catégorie dans le corps de la requête
+    // ajout les catégorie dans le corps de la requête
     async addProduct(request, result){
         try {
             const product = await ProductsService.addProduct(request.body);

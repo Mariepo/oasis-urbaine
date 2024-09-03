@@ -29,7 +29,7 @@ class CategoriesService {
             }
         })
     }
-    
+  
     async getProductsByCategoryId(id) {
         return await Categories.findByPk(id, {
             include: [{

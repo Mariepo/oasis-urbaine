@@ -24,7 +24,6 @@ app.use('/users', usersRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/delivery', deliverMethodsRoutes);
 app.use('/payments', paymentMethodsRoutes);
-// app.use('/users', AuthenticateController.authenticateToken, usersRoutes);
 
 app.listen(port, () => {
     console.log("Votre serveur est lancé sur http://127.0.0.1:"+port);

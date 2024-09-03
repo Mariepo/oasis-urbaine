@@ -1,14 +1,12 @@
 // CUSTOM VARIABLES
-// color
 $background-green: #E9FAE8;
 $background-orange: #FAF4E8;
 $background-grey: #F8F8F8;
 $background-dark-grey: #F3F3F3;
 $text-primary: #18221D;
 $text-secondary: #6C757D;
+$btn-light-hover : #e7efee;
 $border-radius-md: 12px;
-
-
 
 // BOOTSTRAP VARIABLES
 // color
@@ -36,9 +34,6 @@ $font-family-sans-serif: 'poppins', system-ui, -apple-system, "Segoe UI", Roboto
 // input
 $input-btn-padding-y: 10px; 
 $input-btn-padding-x: 16px;
-
-
-
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
