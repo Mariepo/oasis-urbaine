@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 
 function DeleteProductModal({show, handleCloseModal, onClick}) {
-  return (
+return (
         <Modal show={show} onHide={handleCloseModal} backdrop="static" centered>
             <Modal.Header closeButton>
                 <Modal.Title>Supprimer le produit</Modal.Title>

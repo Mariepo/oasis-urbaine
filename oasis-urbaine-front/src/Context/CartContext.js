@@ -21,6 +21,7 @@ export const CartProvider = ({ children }) => {
         setCartItems((previousItems) => {
             const existingItem = previousItems.find((item) => item.id === product.id);
             if (existingItem) {
+                // Mise à jour de la quantité
                 const updatedCart = previousItems.map((item) =>
                     item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
                 );
@@ -42,7 +43,6 @@ export const CartProvider = ({ children }) => {
         setCartItems((previousItems) => {
             // Recherchez l'article dans le panier
             const existingItem = previousItems.find((item) => item.id === productId);
-            
             if (existingItem) {
                 if (existingItem.quantity === 1) {
                     // Si la quantité est 1, supprimez l'article

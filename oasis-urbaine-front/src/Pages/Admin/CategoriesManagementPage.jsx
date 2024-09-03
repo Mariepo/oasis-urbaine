@@ -106,7 +106,7 @@ function CategoriesManagementPage() {
     };
   }, [])
 
-  return <>
+return <>
   <Container className='py-5'>
     <HeaderManagement lg={8} textH1={"Gestion des catégories"} textButton={"Ajouter une catégorie"} onChange={handleChange} onClick={addNewCategory} value={categoryName} className={"col-12 col-md-4"} />
     <Row className='col-12 col-lg-8 mx-auto py-4'>

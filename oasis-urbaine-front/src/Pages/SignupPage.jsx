@@ -51,11 +51,11 @@ function SignupPage() {
     try {
       await UsersService.signupUser(user);
       const token = await UsersService.loginUser(user);
-      toast.success(`Compte créé avec succès ! Bienvenue ${user.firstname} 🌿`);
       window.localStorage.setItem('authToken', token.data.token);
       setIsAuthenticated(true);
       setToken(token.data.token);
       setIsAdmin(UsersService.isAdmin()); 
+      toast.success(`Compte créé avec succès ! Bienvenue ${user.firstname} 🌿`);
       navigateTo('/');
     } catch (error) {
       toast.error('Erreur lors de la création du compte')
