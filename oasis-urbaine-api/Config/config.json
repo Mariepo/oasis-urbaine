@@ -2,7 +2,9 @@
     "database" : "oasis_urbaine",
     "username" : "oasis_admin",
     "password" : "gNlqfo8Utf3Or!D",
-    "host" : "127.0.0.1",
+    "host" : "host.docker.internal",
     "port" : "3306",
     "SECRET" : "maclesecrete"
 }
+
+
