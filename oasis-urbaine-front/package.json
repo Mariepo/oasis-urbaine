@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "build-css": "sass src/styles/custom.scss src/styles/custom.css",
     "watch-css": "sass --watch src/styles/custom.scss src/styles/custom.css",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "jest": "^27.5.1"
   }
 }
