@@ -2,7 +2,7 @@ const ProductsService = require("../Services/ProductsService");
 // const Products = require("../Models/Products")
 
 
-it("should add a product", async () => {
+test("add product", async () => {
     // arrange
     const productData = { title: "velo", price: 500 };
     const products = await ProductsService.getAllProducts();
@@ -21,7 +21,7 @@ it("should add a product", async () => {
     expect(newProducts.length).toBe(productsQuantity + 1);
 })
 
-it("should get all products", async () => {
+test("get products", async () => {
     // act
     const products = await ProductsService.getAllProducts();
 
